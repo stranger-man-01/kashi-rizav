@@ -1,1394 +1,494 @@
-# Node.js Changelog
-
-Select a Node.js version below to view the changelog history:
-
-* [Node.js 22](doc/changelogs/CHANGELOG_V22.md) **Long Term Support**
-* [Node.js 21](doc/changelogs/CHANGELOG_V21.md) **Current**
-* [Node.js 20](doc/changelogs/CHANGELOG_V20.md) Long Term Support
-* [Node.js 19](doc/changelogs/CHANGELOG_V19.md) End-of-Life
-* [Node.js 18](doc/changelogs/CHANGELOG_V18.md) Long Term Support
-* [Node.js 17](doc/changelogs/CHANGELOG_V17.md) End-of-Life
-* [Node.js 16](doc/changelogs/CHANGELOG_V16.md) End-of-Life
-* [Node.js 15](doc/changelogs/CHANGELOG_V15.md) End-of-Life
-* [Node.js 14](doc/changelogs/CHANGELOG_V14.md) End-of-Life
-* [Node.js 13](doc/changelogs/CHANGELOG_V13.md) End-of-Life
-* [Node.js 12](doc/changelogs/CHANGELOG_V12.md) End-of-Life
-* [Node.js 11](doc/changelogs/CHANGELOG_V11.md) End-of-Life
-* [Node.js 10](doc/changelogs/CHANGELOG_V10.md) End-of-Life
-* [Node.js 9](doc/changelogs/CHANGELOG_V9.md) End-of-Life
-* [Node.js 8](doc/changelogs/CHANGELOG_V8.md) End-of-Life
-* [Node.js 7](doc/changelogs/CHANGELOG_V7.md) End-of-Life
-* [Node.js 6](doc/changelogs/CHANGELOG_V6.md) End-of-Life
-* [Node.js 5](doc/changelogs/CHANGELOG_V5.md) End-of-Life
-* [Node.js 4](doc/changelogs/CHANGELOG_V4.md) End-of-Life
-* [io.js](doc/changelogs/CHANGELOG_IOJS.md) End-of-Life
-* [Node.js 0.12](doc/changelogs/CHANGELOG_V012.md) End-of-Life
-* [Node.js 0.10](doc/changelogs/CHANGELOG_V010.md) End-of-Life
-* [Archive](doc/changelogs/CHANGELOG_ARCHIVE.md)
-
-Please use the following table to find the changelog for a specific Node.js
-release.
-
-<table>
-<tr>
-  <th title="LTS Until 2027-04"><a href="doc/changelogs/CHANGELOG_V22.md">22</a> (LTS)</th>
-  <th title="Current"><a href="doc/changelogs/CHANGELOG_V21.md">21</a> (Current)</th>
-  <th title="LTS Until 2026-04"><a href="doc/changelogs/CHANGELOG_V20.md">20</a> (LTS)</th>
-  <th title="LTS Until 2025-04"><a href="doc/changelogs/CHANGELOG_V18.md">18</a> (LTS)</th>
-</tr>
-<tr>
-  <td valign="top">
-<b><a href="doc/changelogs/CHANGELOG_V22.md#22.14.0">22.14.0</a></b><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.13.1">22.13.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.13.0">22.13.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.12.0">22.12.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.11.0">22.11.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.10.0">22.10.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.9.0">22.9.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.8.0">22.8.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.7.0">22.7.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.6.0">22.6.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.5.1">22.5.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.5.0">22.5.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.4.1">22.4.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.4.0">22.4.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.3.0">22.3.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.2.0">22.2.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.1.0">22.1.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V22.md#22.0.0">22.0.0</a><br/>
-  </td>
-  <td valign="top">
-<b><a href="doc/changelogs/CHANGELOG_V21.md#21.7.3">21.7.3</a></b><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.7.2">21.7.2</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.7.1">21.7.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.7.0">21.7.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.6.2">21.6.2</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.6.1">21.6.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.6.0">21.6.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.5.0">21.5.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.4.0">21.4.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.3.0">21.3.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.2.0">21.2.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.1.0">21.1.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V21.md#21.0.0">21.0.0</a><br/>
-  </td>
-  <td valign="top">
-<b><a href="doc/changelogs/CHANGELOG_V20.md#20.12.2">20.12.2</a></b><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.12.1">20.12.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.12.0">20.12.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.11.1">20.11.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.11.0">20.11.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.10.0">20.10.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.9.0">20.9.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.8.1">20.8.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.8.0">20.8.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.7.0">20.7.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.6.1">20.6.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.6.0">20.6.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.5.1">20.5.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.5.0">20.5.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.4.0">20.4.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.3.1">20.3.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.3.0">20.3.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.2.0">20.2.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.1.0">20.1.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V20.md#20.0.0">20.0.0</a><br/>
-  </td>
-  <td valign="top">
-<b><a href="doc/changelogs/CHANGELOG_V18.md#18.20.2">18.20.2</a></b><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.20.1">18.20.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.20.0">18.20.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.19.1">18.19.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.19.0">18.19.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.18.2">18.18.2</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.18.1">18.18.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.18.0">18.18.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.17.1">18.17.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.17.0">18.17.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.16.1">18.16.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.16.0">18.16.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.15.0">18.15.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.14.2">18.14.2</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.14.1">18.14.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.14.0">18.14.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.13.0">18.13.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.12.1">18.12.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.12.0">18.12.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.11.0">18.11.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.10.0">18.10.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.9.1">18.9.1</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.9.0">18.9.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.8.0">18.8.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.7.0">18.7.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.6.0">18.6.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.5.0">18.5.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.4.0">18.4.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.3.0">18.3.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.2.0">18.2.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.1.0">18.1.0</a><br/>
-<a href="doc/changelogs/CHANGELOG_V18.md#18.0.0">18.0.0</a><br/>
-  </td>
-</tr>
-</table>
+# Changelog
 
-## Notes
+## [0.31.0](https://github.com/nodejs/corepack/compare/v0.30.0...v0.31.0) (2025-01-27)
 
-* The [Node.js Long Term Support plan](https://github.com/nodejs/Release) covers
-  LTS releases.
-* Release versions in **bold** text are the most recent supported releases.
 
-***
+### ⚠ BREAKING CHANGES
 
-***
+* drop support for Node.js 21.x ([#594](https://github.com/nodejs/corepack/issues/594))
 
-## 2016-05-06, Version 0.12.14 (Maintenance), @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.14">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.14</a>.
+* update package manager versions ([#595](https://github.com/nodejs/corepack/issues/595)) ([c7a9bde](https://github.com/nodejs/corepack/commit/c7a9bde16dcbbb7e6ef03fef740656cde7ade360))
 
-## 2016-05-06, Version 0.10.45 (Maintenance), @rvagg
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.45">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.45</a>.
+### Bug Fixes
 
-## 2016-05-05, Version 6.1.0 (Current), @Fishrock123
+* only print message for `UsageError`s ([#602](https://github.com/nodejs/corepack/issues/602)) ([72a588c](https://github.com/nodejs/corepack/commit/72a588c2370c17e415b24fe389efdafb3c84e90b))
+* update npm registry keys ([#614](https://github.com/nodejs/corepack/issues/614)) ([8c90caa](https://github.com/nodejs/corepack/commit/8c90caab7f1c5c9b89f1de113bc1dfc441bf25d2))
 
-<a href="doc/changelogs/CHANGELOG_V6.md#6.1.0">Moved to doc/changelogs/CHANGELOG\_V6.md#6.1.0</a>.
 
-## 2016-05-05, Version 5.11.1 (Stable), @evanlucas
+### Miscellaneous Chores
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.11.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.11.1</a>.
+* drop support for Node.js 21.x ([#594](https://github.com/nodejs/corepack/issues/594)) ([8bebc0c](https://github.com/nodejs/corepack/commit/8bebc0c0a5cbcdeec41673dcbaf581e6e1c1be11))
 
-## 2016-05-05, Version 4.4.4 'Argon' (LTS), @thealphanerd
+## [0.30.0](https://github.com/nodejs/corepack/compare/v0.29.4...v0.30.0) (2024-11-23)
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.4.4">Moved to doc/changelogs/CHANGELOG\_V4.md#4.4.4</a>.
 
-## 2016-04-26, Version 6.0.0 (Current), @jasnell
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V6.md#6.0.0">Moved to doc/changelogs/CHANGELOG\_V6.md#6.0.0</a>.
+* update package manager versions ([#578](https://github.com/nodejs/corepack/issues/578)) ([a286c8f](https://github.com/nodejs/corepack/commit/a286c8f5537ea9ecf9b6ff53c7bc3e8da4e3c8bb))
 
-## 2016-04-20, Version 5.11.0 (Stable), @thealphanerd
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.11.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.11.0</a>.
+### Performance Improvements
 
-## 2016-04-05, Version 5.10.1 (Stable), @thealphanerd
+* prefer `module.enableCompileCache` over `v8-compile-cache` ([#574](https://github.com/nodejs/corepack/issues/574)) ([cba6905](https://github.com/nodejs/corepack/commit/cba690575bd606faeee54bd512ccb8797d49055f))
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.10.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.10.1</a>.
+## [0.29.4](https://github.com/nodejs/corepack/compare/v0.29.3...v0.29.4) (2024-09-07)
 
-## 2016-03-31, Version 0.10.44 (Maintenance), @rvagg
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.44">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.44</a>.
+### Features
 
-## 2016-03-31, Version 5.10.0 (Stable), @evanlucas
+* update package manager versions ([#543](https://github.com/nodejs/corepack/issues/543)) ([b819e40](https://github.com/nodejs/corepack/commit/b819e404dbb23c4ae3d5dbe55e21de74d714ee9c))
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.10.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.10.0</a>.
+## [0.29.3](https://github.com/nodejs/corepack/compare/v0.29.2...v0.29.3) (2024-07-21)
 
-## 2016-03-31, Version 4.4.2 'Argon' (LTS), @thealphanerd
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.4.2">Moved to doc/changelogs/CHANGELOG\_V4.md#4.4.2</a>.
+### Bug Fixes
 
-## 2016-03-31, Version 0.12.13 (LTS), @rvagg
+* fallback to `shasum` when `integrity` is not defined ([#542](https://github.com/nodejs/corepack/issues/542)) ([eb63873](https://github.com/nodejs/corepack/commit/eb63873c6c617a2f8ac7106e26ccfe8aa3ae1fb9))
+* make `DEBUG=corepack` more useful ([#538](https://github.com/nodejs/corepack/issues/538)) ([6019d7b](https://github.com/nodejs/corepack/commit/6019d7b56e85bd8b7b58a1a487922c707e70e30e))
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.13">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.13</a>.
+## [0.29.2](https://github.com/nodejs/corepack/compare/v0.29.1...v0.29.2) (2024-07-13)
 
-## 2016-03-23, Version 5.9.1 (Stable), @Fishrock123
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.9.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.9.1</a>.
+### Bug Fixes
 
-## 2016-03-22, Version 4.4.1 'Argon' (LTS), @thealphanerd
+* trigger release after 0.29.1 failed to publish ([18e29ce](https://github.com/nodejs/corepack/commit/18e29ce3c465b64d48ccf3feef7cd1be94da70b0))
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.4.1">Moved to doc/changelogs/CHANGELOG\_V4.md#4.4.1</a>.
+## [0.29.1](https://github.com/nodejs/corepack/compare/v0.29.0...v0.29.1) (2024-07-13)
 
-## 2016-03-16, Version 5.9.0 (Stable), @evanlucas
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.9.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.9.0</a>.
+### Bug Fixes
 
-## 2016-03-08, Version 5.8.0 (Stable), @Fishrock123
+* trigger release after 0.29.0 failed to publish ([e6ba066](https://github.com/nodejs/corepack/commit/e6ba06657b0985c112f288932ca39c0562129566))
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.8.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.8.0</a>.
+## [0.29.0](https://github.com/nodejs/corepack/compare/v0.28.2...v0.29.0) (2024-07-12)
 
-## 2016-03-08, Version 4.4.0 'Argon' (LTS), @thealphanerd
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.4.0">Moved to doc/changelogs/CHANGELOG\_V4.md#4.4.0</a>.
+### Features
 
-## 2016-03-08, Version 0.12.12 (LTS), @rvagg
+* parallelize linking, unlinking and installing ([#524](https://github.com/nodejs/corepack/issues/524)) ([f0734e6](https://github.com/nodejs/corepack/commit/f0734e6e8023ff361dac179c0d8656740d550c27))
+* update package manager versions ([#492](https://github.com/nodejs/corepack/issues/492)) ([3e3b046](https://github.com/nodejs/corepack/commit/3e3b04619cb4a91f207a72fb450f6fc4e2f01aec))
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.12">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.12</a>.
 
-## 2016-03-03, Version 0.12.11 (LTS), @rvagg
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.11">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.11</a>.
+* replace npm registry domain in tarball URL ([#502](https://github.com/nodejs/corepack/issues/502)) ([db6fae5](https://github.com/nodejs/corepack/commit/db6fae50cf44884d1e9a6f7e99402e7e807ba3ca))
+* selectively import required semver functions ([#511](https://github.com/nodejs/corepack/issues/511)) ([e7ad533](https://github.com/nodejs/corepack/commit/e7ad533d43dc9495493f0d883c3cbbb94caa1d41))
 
-## 2016-03-02, Version 5.7.1 (Stable), @Fishrock123
+## [0.28.2](https://github.com/nodejs/corepack/compare/v0.28.1...v0.28.2) (2024-05-31)
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.7.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.7.1</a>.
 
-## 2016-03-02, Version 4.3.2 'Argon' (LTS), @thealphanerd
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.3.2">Moved to doc/changelogs/CHANGELOG\_V4.md#4.3.2</a>.
+* update package manager versions ([#481](https://github.com/nodejs/corepack/issues/481)) ([e1abb83](https://github.com/nodejs/corepack/commit/e1abb832416a793b490b2b51b4082fe822fc932c))
 
-## 2016-02-23, Version 5.7.0 (Stable), @rvagg
+## [0.28.1](https://github.com/nodejs/corepack/compare/v0.28.0...v0.28.1) (2024-05-10)
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.7.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.7.0</a>.
 
-## 2016-02-16, Version 4.3.1 'Argon' (LTS), @thealphanerd
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.3.1">Moved to doc/changelogs/CHANGELOG\_V4.md#4.3.1</a>.
+* add support for `COREPACK_INTEGRITY_KEYS=0` ([#470](https://github.com/nodejs/corepack/issues/470)) ([f15ebc2](https://github.com/nodejs/corepack/commit/f15ebc289ebcd6a86580f15ae3c4ef0e1be37c4b))
+* update package manager versions ([#469](https://github.com/nodejs/corepack/issues/469)) ([985895b](https://github.com/nodejs/corepack/commit/985895bccb5ec68b3645c540d8500c572e1ccadb))
 
-## 2016-02-09, Version 5.6.0 (Stable), @jasnell
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.6.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.6.0</a>.
+### Bug Fixes
 
-## 2016-02-09, Version 4.3.0 'Argon' (LTS), @jasnell
+* COREPACK_NPM_REGISTRY should allow for username/password auth ([#466](https://github.com/nodejs/corepack/issues/466)) ([6efa349](https://github.com/nodejs/corepack/commit/6efa34988229918debe6e881d45ba6715282f283))
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.3.0">Moved to doc/changelogs/CHANGELOG\_V4.md#4.3.0</a>.
+## [0.28.0](https://github.com/nodejs/corepack/compare/v0.27.0...v0.28.0) (2024-04-20)
 
-## 2016-02-09, Version 0.12.10 (LTS), @jasnell
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.10">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.10</a>.
+### ⚠ BREAKING CHANGES
 
-## 2016-02-09, Version 0.10.42 (Maintenance), @jasnell
+* call `executePackageManagerRequest` directly ([#430](https://github.com/nodejs/corepack/issues/430))
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.42">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.42</a>.
+### Bug Fixes
 
-## 2016-01-21, Version 4.2.6 'Argon' (LTS), @TheAlphaNerd
+* call `executePackageManagerRequest` directly ([#430](https://github.com/nodejs/corepack/issues/430)) ([0f9b748](https://github.com/nodejs/corepack/commit/0f9b74864048d5dc150a63cc582966af0c5f363f))
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.6">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.6</a>.
+## [0.27.0](https://github.com/nodejs/corepack/compare/v0.26.0...v0.27.0) (2024-04-19)
 
-## 2016-01-20, Version 5.5.0 (Stable), @evanlucas
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.5.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.5.0</a>.
+### ⚠ BREAKING CHANGES
 
-## 2016-01-20, Version 4.2.5 'Argon' (LTS), @TheAlphaNerd
+* attempting to download a version from the npm registry (or a mirror) that was published using the now deprecated PGP signature without providing a hash will trigger an error. Users can disable the signature verification using a environment variable.
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.5">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.5</a>.
+### Features
 
-## 2016-01-12, Version 5.4.1 (Stable), @TheAlphaNerd
+* separate read and write operations on lastKnownGood.json ([#446](https://github.com/nodejs/corepack/issues/446)) ([c449adc](https://github.com/nodejs/corepack/commit/c449adc81822a604ee8f00ae2b53fc411535f96d))
+* update package manager versions ([#425](https://github.com/nodejs/corepack/issues/425)) ([1423190](https://github.com/nodejs/corepack/commit/142319056424b1e0da2bdbe801c52c5910023707))
+* update package manager versions ([#462](https://github.com/nodejs/corepack/issues/462)) ([56816c2](https://github.com/nodejs/corepack/commit/56816c2b7ebc9926f07048b0ec4ff6025bb4e293))
+* verify integrity signature when downloading from npm registry ([#432](https://github.com/nodejs/corepack/issues/432)) ([e561dd0](https://github.com/nodejs/corepack/commit/e561dd00bbacc5bc15a492fc36574fa0e37bff7b))
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.4.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.4.1</a>.
 
-## 2016-01-06, Version 5.4.0 (Stable), @Fishrock123
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.4.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.4.0</a>.
+* add path to `package.json` in error message ([#456](https://github.com/nodejs/corepack/issues/456)) ([32a93ea](https://github.com/nodejs/corepack/commit/32a93ea4f51eb7db7dc95a16c5719695edf4b53e))
+* correctly set `Dispatcher` prototype for `ProxyAgent` ([#451](https://github.com/nodejs/corepack/issues/451)) ([73d9a1e](https://github.com/nodejs/corepack/commit/73d9a1e2d2f84906bf01952f1dca8adab576b7bf))
+* download fewer metadata from npm registry ([#436](https://github.com/nodejs/corepack/issues/436)) ([082fabf](https://github.com/nodejs/corepack/commit/082fabf8b15658e69e4fb62bb854fe9aace78b70))
+* hash check when downloading Yarn Berry from npm ([#439](https://github.com/nodejs/corepack/issues/439)) ([4672162](https://github.com/nodejs/corepack/commit/467216281e1719a739d0eeea370b335adfb37b8d))
+* Incorrect authorization prefix for basic auth, and undocumented env var ([#454](https://github.com/nodejs/corepack/issues/454)) ([2d63536](https://github.com/nodejs/corepack/commit/2d63536413971d43f570deb035845aa0bd5202f0))
+* re-add support for custom registries with auth ([#397](https://github.com/nodejs/corepack/issues/397)) ([d267753](https://github.com/nodejs/corepack/commit/d2677538cdb613fcab6d2a45bb07f349bdc65c2b))
 
-## 2015-12-23, Version 4.2.4 'Argon' (LTS), @jasnell
+## [0.26.0](https://github.com/nodejs/corepack/compare/v0.25.2...v0.26.0) (2024-03-08)
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.4">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.4</a>.
 
-## 2015-12-16, Version 5.3.0 (Stable), @cjihrig
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.3.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.3.0</a>.
+* Pins the package manager as it's used for the first time ([#413](https://github.com/nodejs/corepack/issues/413)) ([8b6c6d4](https://github.com/nodejs/corepack/commit/8b6c6d4b2b7a9d61ae6c33c07e12354bd5afc2ba))
+* update package manager versions ([#415](https://github.com/nodejs/corepack/issues/415)) ([e8edba7](https://github.com/nodejs/corepack/commit/e8edba771bca6fb10c855c04eee8102ffa792d58))
 
-## 2015-12-09, Version 5.2.0 (Stable), @rvagg
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.2.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.2.0</a>.
+### Bug Fixes
 
-## 2015-12-04, Version 5.1.1 (Stable), @rvagg
+* group the download prompt together ([#391](https://github.com/nodejs/corepack/issues/391)) ([00506b2](https://github.com/nodejs/corepack/commit/00506b2a15dd87ec03240578077a35b7980e00c1))
+* ignore `EROFS` errors ([#421](https://github.com/nodejs/corepack/issues/421)) ([b7ec137](https://github.com/nodejs/corepack/commit/b7ec137210efd35c3461321b6434e3e13a87d42f))
+* improve support for `COREPACK_NPM_REGISTRY` with Yarn Berry ([#396](https://github.com/nodejs/corepack/issues/396)) ([47be27c](https://github.com/nodejs/corepack/commit/47be27c9db988e10f651d23b3f53bcf55318a894))
+* Windows malicious file analysis waiting problem ([#398](https://github.com/nodejs/corepack/issues/398)) ([295a1cd](https://github.com/nodejs/corepack/commit/295a1cdb9cbbbce8434e8d82b96eb63e57c46c1a))
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.1.1">Moved to doc/changelogs/CHANGELOG\_V5.md#5.1.1</a>.
+## [0.25.2](https://github.com/nodejs/corepack/compare/v0.25.1...v0.25.2) (2024-02-21)
 
-## 2015-12-04, Version 4.2.3 'Argon' (LTS), @rvagg
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.3">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.3</a>.
+### Features
 
-## 2015-12-04, Version 0.12.9 (LTS), @rvagg
+* update package manager versions ([#362](https://github.com/nodejs/corepack/issues/362)) ([1423312](https://github.com/nodejs/corepack/commit/1423312a0eb7844dcdd43ae8a63cf12dcacedb2b))
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.9">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.9</a>.
 
-## 2015-12-04, Version 0.10.41 (Maintenance), @rvagg
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.41">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.41</a>.
+* do not hard fail if Corepack home folder cannot be created ([#382](https://github.com/nodejs/corepack/issues/382)) ([9834f57](https://github.com/nodejs/corepack/commit/9834f5790a99ce2c6c283321bb38b02e5561b7ca))
+* do not show download prompt when downloading JSON ([#383](https://github.com/nodejs/corepack/issues/383)) ([bc137a0](https://github.com/nodejs/corepack/commit/bc137a0073c3343ce2d552b6e13bfd2a48f08351))
 
-## 2015.11.25, Version 0.12.8 (LTS), @rvagg
+## [0.25.1](https://github.com/nodejs/corepack/compare/v0.25.0...v0.25.1) (2024-02-20)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.8">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.8</a>.
 
-## 2015-11-17, Version 5.1.0 (Stable), @Fishrock123
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.1.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.1.0</a>.
+* use valid semver range for `engines.node` ([#378](https://github.com/nodejs/corepack/issues/378)) ([f2185fe](https://github.com/nodejs/corepack/commit/f2185fefa145cc75fca082acc169f8aaef637ca2))
 
-## 2015-11-03, Version 4.2.2 'Argon' (LTS), @jasnell
+## [0.25.0](https://github.com/nodejs/corepack/compare/v0.24.1...v0.25.0) (2024-02-20)
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.2">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.2</a>.
 
-## 2015-10-29, Version 5.0.0 (Stable), @rvagg
+### ⚠ BREAKING CHANGES
 
-<a href="doc/changelogs/CHANGELOG_V5.md#5.0.0">Moved to doc/changelogs/CHANGELOG\_V5.md#5.0.0</a>.
+* remove `--all` flag ([#351](https://github.com/nodejs/corepack/issues/351))
+* remove Node.js 19.x from the range of supported versions ([#375](https://github.com/nodejs/corepack/issues/375))
+* use `fetch` ([#365](https://github.com/nodejs/corepack/issues/365))
+* remove old install folder migration ([#373](https://github.com/nodejs/corepack/issues/373))
+* prompt user before downloading software ([#360](https://github.com/nodejs/corepack/issues/360))
 
-## 2015-10-13, Version 4.2.1 'Argon' (LTS), @jasnell
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.1">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.1</a>.
+* add `corepack cache` command ([#363](https://github.com/nodejs/corepack/issues/363)) ([f442366](https://github.com/nodejs/corepack/commit/f442366c1c00d0c3f388b757c3797504f9a6b62e))
+* add support for URL in `"packageManager"` ([#359](https://github.com/nodejs/corepack/issues/359)) ([4a8ce6d](https://github.com/nodejs/corepack/commit/4a8ce6d42f081047a341f36067696346c9f3e1ea))
+* bump Known Good Release when downloading new version ([#364](https://github.com/nodejs/corepack/issues/364)) ([a56c13b](https://github.com/nodejs/corepack/commit/a56c13bd0b1c11e50361b8b4b6f8a53571e3981a))
+* prompt user before downloading software ([#360](https://github.com/nodejs/corepack/issues/360)) ([6b8d87f](https://github.com/nodejs/corepack/commit/6b8d87f2374f79855b24d659f2a2579d6b39f54f))
+* remove `--all` flag ([#351](https://github.com/nodejs/corepack/issues/351)) ([d9c70b9](https://github.com/nodejs/corepack/commit/d9c70b91f698787d693406626a73dc95cb18bc1d))
+* remove old install folder migration ([#373](https://github.com/nodejs/corepack/issues/373)) ([54e9510](https://github.com/nodejs/corepack/commit/54e9510cdaf6ed08c9dea1ed3999fa65116cb4c7))
+* use `fetch` ([#365](https://github.com/nodejs/corepack/issues/365)) ([fe6a307](https://github.com/nodejs/corepack/commit/fe6a3072f64efa810b90e4ee52e0b3ff14c63184))
 
-## 2015-10-07, Version 4.2.0 'Argon' (LTS), @jasnell
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.2.0">Moved to doc/changelogs/CHANGELOG\_V4.md#4.2.0</a>.
+### Bug Fixes
 
-## 2015-10-05, Version 4.1.2 (Stable), @rvagg
+* remove unsafe remove of install folder ([#372](https://github.com/nodejs/corepack/issues/372)) ([65880ca](https://github.com/nodejs/corepack/commit/65880cafed5f4195f8e7656ca9af4cbcbb7682d3))
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.1.2">Moved to doc/changelogs/CHANGELOG\_V4.md#4.1.2</a>.
 
-## 2015-09-22, Version 4.1.1 (Stable), @rvagg
+### Miscellaneous Chores
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.1.1">Moved to doc/changelogs/CHANGELOG\_V4.md#4.1.1</a>.
+* remove Node.js 19.x from the range of supported versions ([#375](https://github.com/nodejs/corepack/issues/375)) ([9a1cb38](https://github.com/nodejs/corepack/commit/9a1cb385bba9ade8e9fbf5517c2bdff60295f9ed))
 
-## 2015-09-17, Version 4.1.0 (Stable), @Fishrock123
+## [0.24.1](https://github.com/nodejs/corepack/compare/v0.24.0...v0.24.1) (2024-01-13)
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.1.0">Moved to doc/changelogs/CHANGELOG\_V4.md#4.1.0</a>.
 
-## 2015-09-15, io.js Version 3.3.1 @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#3.3.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#3.3.1</a>.
+* update package manager versions ([#348](https://github.com/nodejs/corepack/issues/348)) ([cc3ada7](https://github.com/nodejs/corepack/commit/cc3ada73bccd0a5b0ff16834e518efa521c9eea4))
 
-## 2015-09-08, Version 4.0.0 (Stable), @rvagg
 
-<a href="doc/changelogs/CHANGELOG_V4.md#4.0.0">Moved to doc/changelogs/CHANGELOG\_V6.md#6.0.0</a>.
+### Bug Fixes
 
-## 2015-09-02, Version 3.3.0, @rvagg
+* **use:** create `package.json` when calling `corepack use` on empty dir ([#350](https://github.com/nodejs/corepack/issues/350)) ([2950a8a](https://github.com/nodejs/corepack/commit/2950a8a30b64b4598abc354e45400e83d56e541b))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#3.3.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#3.3.0</a>.
+## [0.24.0](https://github.com/nodejs/corepack/compare/v0.23.0...v0.24.0) (2023-12-29)
 
-## 2015-08-25, Version 3.2.0, @rvagg
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#3.2.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#3.2.0</a>.
+### Features
 
-## 2015-08-18, Version 3.1.0, @Fishrock123
+* add support for HTTP redirect ([#341](https://github.com/nodejs/corepack/issues/341)) ([6df5063](https://github.com/nodejs/corepack/commit/6df5063b14868ff21499a051e5122fa7211be6ed))
+* add support for rangeless commands ([#338](https://github.com/nodejs/corepack/issues/338)) ([9bee415](https://github.com/nodejs/corepack/commit/9bee4150815113d97f0bd77d62c8d999cfd68ad3))
+* update package manager versions ([#330](https://github.com/nodejs/corepack/issues/330)) ([cfcc280](https://github.com/nodejs/corepack/commit/cfcc28047a788daeef2c0b15ee35a8b1a8149bb6))
+* **yarn:** fallback to npm when `COREPACK_NPM_REGISTRY` is set ([#339](https://github.com/nodejs/corepack/issues/339)) ([0717c6a](https://github.com/nodejs/corepack/commit/0717c6af898e075f57c5694d699a3c51e79a024c))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#3.1.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#3.1.0</a>.
 
-## 2015-08-04, Version 3.0.0, @rvagg
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#3.0.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#3.0.0</a>.
+* clarify `EACCES` errors ([#343](https://github.com/nodejs/corepack/issues/343)) ([518bed8](https://github.com/nodejs/corepack/commit/518bed8b7d7c313163c79d31cb9bbc023dba6560))
 
-## 2015-07-28, Version 2.5.0, @cjihrig
+## [0.23.0](https://github.com/nodejs/corepack/compare/v0.22.0...v0.23.0) (2023-11-05)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.5.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.5.0</a>.
 
-## 2015-07-17, Version 2.4.0, @Fishrock123
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.4.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.4.0</a>.
+* update package manager versions ([#325](https://github.com/nodejs/corepack/issues/325)) ([450cd33](https://github.com/nodejs/corepack/commit/450cd332d00d3428f49ed09a4235bd12139931c9))
 
-## 2015-07-09, Version 2.3.4, @Fishrock123
+## [0.22.0](https://github.com/nodejs/corepack/compare/v0.21.0...v0.22.0) (2023-10-21)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.3.4">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.3.4</a>.
 
-## 2015-07-09, Version 1.8.4, @Fishrock123
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.8.4">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.8.4</a>.
+* allow fallback to application/json for custom registries ([#314](https://github.com/nodejs/corepack/issues/314)) ([92f8e71](https://github.com/nodejs/corepack/commit/92f8e71f8c97c44f404ce9b7df8787a4292e6830))
+* update package manager versions ([#318](https://github.com/nodejs/corepack/issues/318)) ([0bd2577](https://github.com/nodejs/corepack/commit/0bd2577bb4c6c3a5a33ecdb3b6ca2ff244c54f28))
 
-## 2015-07-09, Version 0.12.7 (Stable)
+## [0.21.0](https://github.com/nodejs/corepack/compare/v0.20.0...v0.21.0) (2023-10-08)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.7">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.7</a>.
 
-## 2015-07-04, Version 2.3.3, @Fishrock123
+### ⚠ BREAKING CHANGES
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.3.3">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.3.3</a>.
+* remove support for Node.js 16.x
 
-## 2015-07-04, Version 1.8.3, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.8.3">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.8.3</a>.
+* update package manager versions ([#297](https://github.com/nodejs/corepack/issues/297)) ([503e135](https://github.com/nodejs/corepack/commit/503e135878935cc881ebd94b48d5eca94ec4c27b))
 
-## 2015-07-03, Version 0.12.6 (Stable)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.6">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.6</a>.
+### Miscellaneous Chores
 
-## 2015-07-01, Version 2.3.2, @rvagg
+* update supported Node.js versions ([#309](https://github.com/nodejs/corepack/issues/309)) ([787e24d](https://github.com/nodejs/corepack/commit/787e24df609513702eafcd8c6a5f03544d7d45cc))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.3.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.3.2</a>.
+## [0.20.0](https://github.com/nodejs/corepack/compare/v0.19.0...v0.20.0) (2023-08-29)
 
-## 2015-06-23, Version 2.3.1, @rvagg
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.3.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.3.1</a>.
+### Features
 
-## 2015-06-22, Version 0.12.5 (Stable)
+* refactor the CLI interface ([#291](https://github.com/nodejs/corepack/issues/291)) ([fe3e5cd](https://github.com/nodejs/corepack/commit/fe3e5cd86c45db0d87c7fdea87d57d59b0bdcb78))
+* update package manager versions ([#292](https://github.com/nodejs/corepack/issues/292)) ([be9c286](https://github.com/nodejs/corepack/commit/be9c286846443ff03081e736fdf4a0ff031fbd38))
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.5">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.5</a>.
+## [0.19.0](https://github.com/nodejs/corepack/compare/v0.18.1...v0.19.0) (2023-06-24)
 
-## 2015-06-18, Version 0.10.39 (Maintenance)
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.39">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.39</a>.
+### Features
 
-## 2015-06-13, Version 2.3.0, @rvagg
+* support ESM ([#270](https://github.com/nodejs/corepack/issues/270)) ([be2489c](https://github.com/nodejs/corepack/commit/be2489cd0aaabf26a019e1c089a3c8bcc329e94a))
+* update package manager versions ([#280](https://github.com/nodejs/corepack/issues/280)) ([4188f2b](https://github.com/nodejs/corepack/commit/4188f2b4671228339fe16f9f566e7bac0c2c4f6d))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.3.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.3.0</a>.
+## [0.18.1](https://github.com/nodejs/corepack/compare/v0.18.0...v0.18.1) (2023-06-13)
 
-## 2015-06-01, Version 2.2.1, @rvagg
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.2.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.2.1</a>.
+### Features
 
-## 2015-05-31, Version 2.2.0, @rvagg
+* update package manager versions ([#272](https://github.com/nodejs/corepack/issues/272)) ([5345774](https://github.com/nodejs/corepack/commit/53457747a26a5de3debbd0d9282b338186bbd7c3))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.2.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.2.0</a>.
 
-## 2015-05-24, Version 2.1.0, @rvagg
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.1.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.1.0</a>.
+* disable `v8-compile-cache` when using `npm@&gt;=9.7.0` ([#276](https://github.com/nodejs/corepack/issues/276)) ([2f3678c](https://github.com/nodejs/corepack/commit/2f3678cd7915978f4e2ce7a32cbe5db58e9d0b8d))
+* don't override `process.exitCode` ([#268](https://github.com/nodejs/corepack/issues/268)) ([17d1f3d](https://github.com/nodejs/corepack/commit/17d1f3dd41ef6127228d427fd5cca373d6c97f0f))
 
-## 2015-05-22, Version 0.12.4 (Stable)
+## [0.18.0](https://github.com/nodejs/corepack/compare/v0.17.2...v0.18.0) (2023-05-19)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.4">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.4</a>.
 
-## 2015-05-17, Version 1.8.2, @rvagg
+### ⚠ BREAKING CHANGES
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.8.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.8.2</a>.
+* remove support for Node.js 14.x
 
-## 2015-05-15, Version 2.0.2, @Fishrock123
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.0.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.0.2</a>.
+* update package manager versions ([#256](https://github.com/nodejs/corepack/issues/256)) ([7b61ff6](https://github.com/nodejs/corepack/commit/7b61ff6bc797ec4ed50c2ba1e1f1689264cbf4fc))
 
-## 2015-05-13, Version 0.12.3 (Stable)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.3">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.3</a>.
+### Bug Fixes
 
-## 2015-05-07, Version 2.0.1, @rvagg
+* **doc:** add a note about troubleshooting network errors ([#259](https://github.com/nodejs/corepack/issues/259)) ([aa3cbdb](https://github.com/nodejs/corepack/commit/aa3cbdb54fb21b8e0adde96dc781cdf750932843))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.0.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.0.1</a>.
 
-## 2015-05-04, Version 2.0.0, @rvagg
+### Miscellaneous Chores
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#2.0.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#2.0.0</a>.
+* update supported Node.js versions ([#258](https://github.com/nodejs/corepack/issues/258)) ([74f679d](https://github.com/nodejs/corepack/commit/74f679d8a72cc10a3720fc679b95e9bd086d95be))
 
-## 2015-04-20, Version 1.8.1, @chrisdickinson
+## [0.17.2](https://github.com/nodejs/corepack/compare/v0.17.1...v0.17.2) (2023-04-07)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.8.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.8.1</a>.
 
-## 2015-04-14, Version 1.7.1, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.7.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.7.1</a>.
+* update package manager versions ([#249](https://github.com/nodejs/corepack/issues/249)) ([2507e9b](https://github.com/nodejs/corepack/commit/2507e9b317eacdeb939aee086de5711218ebd794))
 
-## 2015-04-14, Version 1.7.0, @rvagg
+## [0.17.1](https://github.com/nodejs/corepack/compare/v0.17.0...v0.17.1) (2023-03-17)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.7.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.7.0</a>.
 
-## 2015-04-06, Version 1.6.4, @Fishrock123
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.6.4">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.6.4</a>.
+* update package manager versions ([#245](https://github.com/nodejs/corepack/issues/245)) ([673f3b7](https://github.com/nodejs/corepack/commit/673f3b7f18421a49da1e2c55656666a74ce94474))
 
-## 2015-03-31, Version 1.6.3, @rvagg
+## [0.17.0](https://github.com/nodejs/corepack/compare/v0.16.0...v0.17.0) (2023-02-24)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.6.3">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.6.3</a>.
 
-## 2015-03-31, Version 0.12.2 (Stable)
+### ⚠ BREAKING CHANGES
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.2">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.2</a>.
+* add `"exports"` to the `package.json` ([#239](https://github.com/nodejs/corepack/issues/239))
 
-## 2015-03-23, Version 1.6.2, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.6.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.6.2</a>.
+* update package manager versions ([#242](https://github.com/nodejs/corepack/issues/242)) ([5141639](https://github.com/nodejs/corepack/commit/5141639af8198a343105be1e98a74f7c9e152472))
 
-## 2015-03-23, Version 0.12.1 (Stable)
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.1">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.1</a>.
+### Bug Fixes
 
-## 2015-03-23, Version 0.10.38 (Maintenance)
+* add `"exports"` to the `package.json` ([#239](https://github.com/nodejs/corepack/issues/239)) ([8e12d08](https://github.com/nodejs/corepack/commit/8e12d088dec171c03e90f623895a1fbf867130e6))
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.38">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.38</a>.
+## [0.16.0](https://github.com/nodejs/corepack/compare/v0.15.3...v0.16.0) (2023-02-17)
 
-## 2015-03-20, Version 1.6.1, @rvagg
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.6.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.6.1</a>.
+### Features
 
-## 2015-03-19, Version 1.6.0, @chrisdickinson
+* update package manager versions ([#228](https://github.com/nodejs/corepack/issues/228)) ([bb000f9](https://github.com/nodejs/corepack/commit/bb000f9c10a1fbd85f2c15a90218d90b42473130))
+* build: migrate to ESBuild ([#229](https://github.com/nodejs/corepack/pull/229)) ([15ceb83](https://github.com/nodejs/corepack/commit/15ceb832a34a223efbe3d3f9cb792d9101a7022a))
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.6.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.6.0</a>.
 
-## 2015-03-11, Version 0.10.37 (Maintenance)
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.37">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.37</a>.
+* npm registry override ([#219](https://github.com/nodejs/corepack/issues/219)) ([1b35362](https://github.com/nodejs/corepack/commit/1b353624e644874d9ef6c9acaf6d1254bff3015a))
 
-## 2015-03-09, Version 1.5.1, @rvagg
+## [0.15.3](https://github.com/nodejs/corepack/compare/v0.15.2...v0.15.3) (2022-12-30)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.5.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.5.1</a>.
 
-## 2015-03-06, Version 1.5.0, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.5.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.5.0</a>.
+* update package manager versions ([#215](https://github.com/nodejs/corepack/issues/215)) ([f84cfcb](https://github.com/nodejs/corepack/commit/f84cfcb00ffb985d44b6aa0b563b2b4056a8f0d0))
 
-## 2015-03-02, Version 1.4.3, @rvagg
+## [0.15.2](https://github.com/nodejs/corepack/compare/v0.15.1...v0.15.2) (2022-11-25)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.4.3">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.4.3</a>.
 
-## 2015-02-28, Version 1.4.2, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.4.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.4.2</a>.
+* update package manager versions ([#211](https://github.com/nodejs/corepack/issues/211)) ([c536c0c](https://github.com/nodejs/corepack/commit/c536c0c27c137c87a14487a2c2a63a1fe6bf88ec))
 
-## 2015-02-26, Version 1.4.1, @rvagg
+## [0.15.1](https://github.com/nodejs/corepack/compare/v0.15.0...v0.15.1) (2022-11-04)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.4.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.4.1</a>.
 
-## 2015-02-20, Version 1.3.0, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.3.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.3.0</a>.
+* update package manager versions ([#205](https://github.com/nodejs/corepack/issues/205)) ([5bfac11](https://github.com/nodejs/corepack/commit/5bfac11715474a4318c67fc806fd1ff4252c683a))
 
-## 2015-02-10, Version 1.2.0, @rvagg
+## [0.15.0](https://github.com/nodejs/corepack/compare/v0.14.2...v0.15.0) (2022-10-28)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.2.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.2.0</a>.
 
-## 2015-02-06, Version 0.12.0 (Stable)
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V012.md#0.12.0">Moved to doc/changelogs/CHANGELOG\_V012.md#0.12.0</a>.
+* add support for configurable registries and applicable auth options ([#186](https://github.com/nodejs/corepack/issues/186)) ([662ae90](https://github.com/nodejs/corepack/commit/662ae9057c7360cb05e9476914e611a9bf0074db))
+* update package manager versions ([#193](https://github.com/nodejs/corepack/issues/193)) ([0ec3a73](https://github.com/nodejs/corepack/commit/0ec3a7384729c5cf4ac566d91f1a4bb74e08a64f))
+* when strict checking is off, treat like transparent ([#197](https://github.com/nodejs/corepack/issues/197)) ([5eadc50](https://github.com/nodejs/corepack/commit/5eadc50192e205c60bfb1cad91854e9014a747b8))
 
-## 2015-02-03, Version 1.1.0, @chrisdickinson
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.1.0">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.1.0</a>.
+### Bug Fixes
 
-## 2015-01-26, Version 0.10.36 (Stable)
+* **doc:** add package configuration instruction to readme ([#188](https://github.com/nodejs/corepack/issues/188)) ([0b7abb9](https://github.com/nodejs/corepack/commit/0b7abb9833d332bad97902260d31652482c274a0))
+* recreate cache folder if necessary ([#200](https://github.com/nodejs/corepack/issues/200)) ([7b5f2f9](https://github.com/nodejs/corepack/commit/7b5f2f9fcb24fe3fe517a96deaac7f32854f3124))
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.36">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.36</a>.
+## [0.14.2](https://github.com/nodejs/corepack/compare/v0.14.1...v0.14.2) (2022-09-24)
 
-## 2015-01-24, Version 1.0.4, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.0.4">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.0.4</a>.
+* update package manager versions ([#184](https://github.com/nodejs/corepack/issues/184)) ([84ae313](https://github.com/nodejs/corepack/commit/84ae3139e4b9a86d97465e36b50beb9201fda732))
 
-## 2015-01-20, Version 1.0.3, @rvagg
+## [0.14.1](https://github.com/nodejs/corepack/compare/v0.14.0...v0.14.1) (2022-09-16)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.0.3">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.0.3</a>.
 
-## 2015-01-16, Version 1.0.2, @rvagg
+### Features
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.0.2">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.0.2</a>.
+* update package manager versions ([#179](https://github.com/nodejs/corepack/issues/179)) ([0b88dcb](https://github.com/nodejs/corepack/commit/0b88dcbaaf190117c6f407b6632a4b3b10da8ad9))
 
-## 2015-01-14, Version 1.0.1, @rvagg
+## [0.14.0](https://github.com/nodejs/corepack/compare/v0.13.0...v0.14.0) (2022-09-02)
 
-<a href="doc/changelogs/CHANGELOG_IOJS.md#1.0.1">Moved to doc/changelogs/CHANGELOG\_IOJS.md#1.0.1</a>.
 
-## 2014.09.24, Version 0.11.14 (Unstable)
+### Features
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.14">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.14</a>.
+* add `COREPACK_ENABLE_STRICT` env variable ([#167](https://github.com/nodejs/corepack/issues/167)) ([92b52f6](https://github.com/nodejs/corepack/commit/92b52f6b4918aff968c0942b89fc722ebf57bce2))
+* update package manager versions ([#170](https://github.com/nodejs/corepack/issues/170)) ([6f70bfc](https://github.com/nodejs/corepack/commit/6f70bfc4b6a8a57cccb1ff9cbf2f49240648f1ed))
 
-## 2014.05.01, Version 0.11.13 (Unstable)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.13">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.13</a>.
+### Bug Fixes
 
-## 2014.03.11, Version 0.11.12 (Unstable)
+* handle tags including numbers in `prepare` command ([#165](https://github.com/nodejs/corepack/issues/165)) ([5a0727b](https://github.com/nodejs/corepack/commit/5a0727b43976e0dc299151876c0dde2c4a85174d))
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.12</a>.
+## [0.13.0](https://github.com/nodejs/corepack/compare/v0.12.3...v0.13.0) (2022-08-19)
 
-## 2014.01.29, Version 0.11.11 (Unstable)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.11</a>.
+### Features
 
-## 2013.12.31, Version 0.11.10 (Unstable)
+* do not use `~/.node` as default value for `COREPACK_HOME` ([#152](https://github.com/nodejs/corepack/issues/152)) ([09e24cf](https://github.com/nodejs/corepack/commit/09e24cf497de27fe92668cf0a8e555f2c7e2530d))
+* download the latest version instead of a pinned one ([#134](https://github.com/nodejs/corepack/issues/134)) ([055b928](https://github.com/nodejs/corepack/commit/055b92807f711b5c8c8be6e62b8d3ce83e1ff002))
+* update package manager versions ([#163](https://github.com/nodejs/corepack/issues/163)) ([af38d5a](https://github.com/nodejs/corepack/commit/af38d5afbbc10d61265b2f4687c5cc498b059b41))
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.10</a>.
+## [0.12.3](https://github.com/nodejs/corepack/compare/v0.12.2...v0.12.3) (2022-08-12)
 
-## 2013.11.20, Version 0.11.9 (Unstable)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.9</a>.
+### Features
 
-## 2013.10.30, Version 0.11.8 (Unstable)
+* update package manager versions ([#160](https://github.com/nodejs/corepack/issues/160)) ([ad092a7](https://github.com/nodejs/corepack/commit/ad092a7fb4296143fa5224c04dbd628451b3c158))
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.8</a>.
+## [0.12.2](https://github.com/nodejs/corepack/compare/v0.12.1...v0.12.2) (2022-08-05)
 
-## 2013.08.21, Version 0.11.7 (Unstable)
+### Features
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.7</a>.
+* update package manager versions ([#154](https://github.com/nodejs/corepack/issues/154)) ([4b95fd3](https://github.com/nodejs/corepack/commit/4b95fd3b926659855970a887c893c10db0b98e5d))
 
-## 2013.08.21, Version 0.11.6 (Unstable)
+## [0.12.1](https://github.com/nodejs/corepack/compare/v0.12.0...v0.12.1) (2022-07-21)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.6</a>.
 
-## 2013.08.06, Version 0.11.5 (Unstable)
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.5</a>.
+* **doc:** update DESIGN.md s/engines.pm/packageManager/ ([#141](https://github.com/nodejs/corepack/issues/141)) ([d6039c5](https://github.com/nodejs/corepack/commit/d6039c5b16cdddb33069b9aa864854ed16d17e4e))
+* update package manager versions ([#146](https://github.com/nodejs/corepack/issues/146)) ([fdb187a](https://github.com/nodejs/corepack/commit/fdb187a640de77df9b3688623ba510bdafda8702))
 
-## 2013.07.12, Version 0.11.4 (Unstable)
+## [0.12.0](https://github.com/nodejs/corepack/compare/v0.11.2...v0.12.0) (2022-07-09)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.4</a>.
 
-## 2013.06.26, Version 0.11.3 (Unstable)
+### Features
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.3</a>.
+* add support for hash checking ([#133](https://github.com/nodejs/corepack/issues/133)) ([6a480a7](https://github.com/nodejs/corepack/commit/6a480a72c2e9fc6725f2ab6dfaf4c52e4d3d2ade))
+* add support for tags and ranges in `prepare` command ([#136](https://github.com/nodejs/corepack/issues/136)) ([29da06c](https://github.com/nodejs/corepack/commit/29da06c515e917829e5ffbedb34284a6597e9d56))
+* update package manager versions ([#129](https://github.com/nodejs/corepack/issues/129)) ([2470f58](https://github.com/nodejs/corepack/commit/2470f58b74491a1301221df643c55be5adf1d349))
+* update package manager versions ([#139](https://github.com/nodejs/corepack/issues/139)) ([cd0dcad](https://github.com/nodejs/corepack/commit/cd0dcade85621199048d7ca30dfc3efce11e1f37))
 
-## 2013.05.13, Version 0.11.2 (Unstable)
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.2</a>.
+### Bug Fixes
 
-## 2013.04.19, Version 0.11.1 (Unstable)
+* streamline the cache exploration ([#135](https://github.com/nodejs/corepack/issues/135)) ([185da44](https://github.com/nodejs/corepack/commit/185da44078fd1ca34aec2e4e6f8a52ecffcf3c11))
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.1</a>.
+## [0.11.2](https://github.com/nodejs/corepack/compare/v0.11.1...v0.11.2) (2022-06-13)
 
-## 2013.03.28, Version 0.11.0 (Unstable)
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.11.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.11.0</a>.
+* only set bins on pack ([#127](https://github.com/nodejs/corepack/issues/127)) ([7ae489a](https://github.com/nodejs/corepack/commit/7ae489a86c3fe584b9915f4ec57deb7c316c1a25))
 
-## 2014.12.22, Version 0.10.35 (Stable)
+## [0.11.1](https://github.com/nodejs/corepack/compare/v0.11.0...v0.11.1) (2022-06-12)
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.35">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.35</a>.
 
-## 2014.12.17, Version 0.10.34 (Stable)
+### Bug Fixes
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.34">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.34</a>.
+* **ci:** YAML formatting in publish workflow ([#124](https://github.com/nodejs/corepack/issues/124)) ([01c7d63](https://github.com/nodejs/corepack/commit/01c7d638b04a1340b3939a7985e24b586e344995))
 
-## 2014.10.20, Version 0.10.33 (Stable)
+## 0.11.0 (2022-06-12)
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.33">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.33</a>.
 
-## 2014.09.16, Version 0.10.32 (Stable)
+### Features
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.32">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.32</a>.
+* auto setup proxy for http requests ([#69](https://github.com/nodejs/corepack/issues/69)) ([876ce02](https://github.com/nodejs/corepack/commit/876ce02fe7385ea5bc896b2dc93d1fb320361c64))
 
-## 2014.08.19, Version 0.10.31 (Stable)
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.31">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.31</a>.
+### Bug Fixes
 
-## 2014.07.31, Version 0.10.30 (Stable)
+* avoid symlinks to work on Windows ([#13](https://github.com/nodejs/corepack/issues/13)) ([b56df30](https://github.com/nodejs/corepack/commit/b56df30796da9c7cb0ba5e1bb7152c81582abba6))
+* avoid using eval to get the corepack version ([#45](https://github.com/nodejs/corepack/issues/45)) ([78d94eb](https://github.com/nodejs/corepack/commit/78d94eb297444d7558e8b4395f0108c97117f8ab))
+* bin file name for pnpm >=6.0 ([#35](https://github.com/nodejs/corepack/issues/35)) ([8ff2499](https://github.com/nodejs/corepack/commit/8ff2499e831c8cf2dea604ea985d830afc8a479e))
+* generate cmd shim files ([a900b4d](https://github.com/nodejs/corepack/commit/a900b4db12fcd4d99c0a4d011b426cdc6485d323))
+* handle package managers with a bin array correctly ([#20](https://github.com/nodejs/corepack/issues/20)) ([1836d17](https://github.com/nodejs/corepack/commit/1836d17b4fc4c0164df2fe1ccaca4d2f16f6f2d1))
+* handle parallel installs ([#84](https://github.com/nodejs/corepack/issues/84)) ([5cfc6c9](https://github.com/nodejs/corepack/commit/5cfc6c9df0dbec8e4de4324be37aa0a54a300552))
+* handle prereleases ([#32](https://github.com/nodejs/corepack/issues/32)) ([2a46b6d](https://github.com/nodejs/corepack/commit/2a46b6d13adae139141012254ef670d6ddcb5d11))
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.30">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.30</a>.
 
-## 2014.06.05, Version 0.10.29 (Stable)
+### Performance Improvements
 
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.29">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.29</a>.
-
-## 2014.05.01, Version 0.10.28 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.28">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.28</a>.
-
-## 2014.05.01, Version 0.10.27 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.27">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.27</a>.
-
-## 2014.02.18, Version 0.10.26 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.26">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.26</a>.
-
-## 2014.01.23, Version 0.10.25 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.25">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.25</a>.
-
-## 2013.12.18, Version 0.10.24 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.24">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.24</a>.
-
-## 2013.12.12, Version 0.10.23 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.23">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.23</a>.
-
-## 2013.11.12, Version 0.10.22 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.22">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.22</a>.
-
-## 2013.10.18, Version 0.10.21 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.21">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.21</a>.
-
-## 2013.09.30, Version 0.10.20 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.20">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.20</a>.
-
-## 2013.09.24, Version 0.10.19 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.19">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.19</a>.
-
-## 2013.09.04, Version 0.10.18 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.18">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.18</a>.
-
-## 2013.08.21, Version 0.10.17 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.17">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.17</a>.
-
-## 2013.08.16, Version 0.10.16 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.16">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.16</a>.
-
-## 2013.07.25, Version 0.10.15 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.15">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.15</a>.
-
-## 2013.07.25, Version 0.10.14 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.14">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.14</a>.
-
-## 2013.07.09, Version 0.10.13 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.13">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.13</a>.
-
-## 2013.06.18, Version 0.10.12 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.12">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.12</a>.
-
-## 2013.06.13, Version 0.10.11 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.11">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.11</a>.
-
-## 2013.06.04, Version 0.10.10 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.10">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.10</a>.
-
-## 2013.05.30, Version 0.10.9 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.9">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.9</a>.
-
-## 2013.05.24, Version 0.10.8 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.8">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.8</a>.
-
-## 2013.05.17, Version 0.10.7 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.7">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.7</a>.
-
-## 2013.05.14, Version 0.10.6 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.6">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.6</a>.
-
-## 2013.04.23, Version 0.10.5 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.5">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.5</a>.
-
-## 2013.04.11, Version 0.10.4 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.4">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.4</a>.
-
-## 2013.04.03, Version 0.10.3 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.3">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.3</a>.
-
-## 2013.03.28, Version 0.10.2 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.2">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.2</a>.
-
-## 2013.03.21, Version 0.10.1 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.1">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.1</a>.
-
-## 2013.03.11, Version 0.10.0 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_V010.md#0.10.0">Moved to doc/changelogs/CHANGELOG\_V010.md#0.10.0</a>.
-
-## 2013.03.06, Version 0.9.12 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.12</a>.
-
-## 2013.03.01, Version 0.9.11 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.11</a>.
-
-## 2013.02.19, Version 0.9.10 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.10</a>.
-
-## 2013.02.07, Version 0.9.9 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.9</a>.
-
-## 2013.01.24, Version 0.9.8 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.8</a>.
-
-## 2013.01.18, Version 0.9.7 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.7</a>.
-
-## 2013.01.11, Version 0.9.6 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.6</a>.
-
-## 2012.12.30, Version 0.9.5 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.5</a>.
-
-## 2012.12.21, Version 0.9.4 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.4</a>.
-
-## 2012.10.24, Version 0.9.3 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.3</a>.
-
-## 2012.09.17, Version 0.9.2 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.2</a>.
-
-## 2012.08.28, Version 0.9.1 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.1</a>.
-
-## 2012.07.20, Version 0.9.0 (Unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.9.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.9.0</a>.
-
-## 2013.06.13, Version 0.8.25 (maintenance)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.25">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.25</a>.
-
-## 2013.06.04, Version 0.8.24 (maintenance)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.24">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.24</a>.
-
-## 2013.04.09, Version 0.8.23 (maintenance)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.23">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.23</a>.
-
-## 2013.03.07, Version 0.8.22 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.22">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.22</a>.
-
-## 2013.02.25, Version 0.8.21 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.21">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.21</a>.
-
-## 2013.02.15, Version 0.8.20 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.20">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.20</a>.
-
-## 2013.02.06, Version 0.8.19 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.19">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.19</a>.
-
-## 2013.01.18, Version 0.8.18 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.18">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.18</a>.
-
-## 2013.01.09, Version 0.8.17 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.17">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.17</a>.
-
-## 2012.12.13, Version 0.8.16 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.16">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.16</a>.
-
-## 2012.11.26, Version 0.8.15 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.15">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.15</a>.
-
-## 2012.10.25, Version 0.8.14 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.14">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.14</a>.
-
-## 2012.10.25, Version 0.8.13 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.13">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.13</a>.
-
-## 2012.10.12, Version 0.8.12 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.12</a>.
-
-## 2012.09.27, Version 0.8.11 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.11</a>.
-
-## 2012.09.25, Version 0.8.10 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.10</a>.
-
-## 2012.09.11, Version 0.8.9 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.9</a>.
-
-## 2012.08.22, Version 0.8.8 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.8</a>.
-
-## 2012.08.15, Version 0.8.7 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.7</a>.
-
-## 2012.08.07, Version 0.8.6 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.6</a>.
-
-## 2012.08.02, Version 0.8.5 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.5</a>.
-
-## 2012.07.25, Version 0.8.4 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.4</a>.
-
-## 2012.07.19, Version 0.8.3 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.3</a>.
-
-## 2012.07.09, Version 0.8.2 (Stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.2</a>.
-
-## 2012.06.29, Version 0.8.1 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.1</a>.
-
-## 2012.06.25, Version 0.8.0 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.8.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.8.0</a>.
-
-## 2012.06.19, Version 0.7.12 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.12</a>.
-
-## 2012.06.15, Version 0.7.11 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.11</a>.
-
-## 2012.06.11, Version 0.7.10 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.10</a>.
-
-## 2012.05.28, Version 0.7.9 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.9</a>.
-
-## 2012.04.18, Version 0.7.8 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.8</a>.
-
-## 2012.03.30, Version 0.7.7 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.7</a>.
-
-## 2012.03.13, Version 0.7.6 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.6</a>.
-
-## 2012.02.23, Version 0.7.5 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.5</a>.
-
-## 2012.02.14, Version 0.7.4 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.4</a>.
-
-## 2012.02.07, Version 0.7.3 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.3</a>.
-
-## 2012.02.01, Version 0.7.2 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.2</a>.
-
-## 2012.01.23, Version 0.7.1 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.1</a>.
-
-## 2012.01.16, Version 0.7.0 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.7.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.7.0</a>.
-
-## 2012.07.10 Version 0.6.20 (maintenance)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.20">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.20</a>.
-
-## 2012.06.06 Version 0.6.19 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.19">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.19</a>.
-
-## 2012.05.15 Version 0.6.18 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.18">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.18</a>.
-
-## 2012.05.04 Version 0.6.17 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.17">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.17</a>.
-
-## 2012.04.30 Version 0.6.16 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.16">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.16</a>.
-
-## 2012.04.09 Version 0.6.15 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.15">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.15</a>.
-
-## 2012.03.22 Version 0.6.14 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.14">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.14</a>.
-
-## 2012.03.15 Version 0.6.13 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.13">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.13</a>.
-
-## 2012.03.02 Version 0.6.12 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.12</a>.
-
-## 2012.02.17 Version 0.6.11 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.11</a>.
-
-## 2012.02.02, Version 0.6.10 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.10</a>.
-
-## 2012.01.27, Version 0.6.9 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.9</a>.
-
-## 2012.01.19, Version 0.6.8 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.8</a>.
-
-## 2012.01.06, Version 0.6.7 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.7</a>.
-
-## 2011.12.14, Version 0.6.6 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.6</a>.
-
-## 2011.12.04, Version 0.6.5 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.5</a>.
-
-## 2011.12.02, Version 0.6.4 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.4</a>.
-
-## 2011.11.25, Version 0.6.3 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.3</a>.
-
-## 2011.11.18, Version 0.6.2 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.2</a>.
-
-## 2011.11.11, Version 0.6.1 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.1</a>.
-
-## 2011.11.04, Version 0.6.0 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.6.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.6.0</a>.
-
-## 2011.10.21, Version 0.5.10 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.10</a>.
-
-## 2011.10.10, Version 0.5.9 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.9</a>.
-
-## 2011.09.30, Version 0.5.8 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.8</a>.
-
-## 2011.09.16, Version 0.5.7 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.7</a>.
-
-## 2011.09.08, Version 0.5.6 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.6</a>.
-
-## 2011.08.26, Version 0.5.5 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.5</a>.
-
-## 2011.08.12, Version 0.5.4 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.4</a>.
-
-## 2011.08.01, Version 0.5.3 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.3</a>.
-
-## 2011.07.22, Version 0.5.2 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.2</a>.
-
-## 2011.07.14, Version 0.5.1 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.1</a>.
-
-## 2011.07.05, Version 0.5.0 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.5.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.5.0</a>.
-
-## 2011.09.15, Version 0.4.12 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.12</a>.
-
-## 2011.08.17, Version 0.4.11 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.11</a>.
-
-## 2011.07.19, Version 0.4.10 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.10</a>.
-
-## 2011.06.29, Version 0.4.9 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.9</a>.
-
-## 2011.05.20, Version 0.4.8 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.8</a>.
-
-## 2011.04.22, Version 0.4.7 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.7</a>.
-
-## 2011.04.13, Version 0.4.6 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.6</a>.
-
-## 2011.04.01, Version 0.4.5 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.5</a>.
-
-## 2011.03.26, Version 0.4.4 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.4</a>.
-
-## 2011.03.18, Version 0.4.3 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.3</a>.
-
-## 2011.03.02, Version 0.4.2 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.2</a>.
-
-## 2011.02.19, Version 0.4.1 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.1</a>.
-
-## 2011.02.10, Version 0.4.0 (stable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.4.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.4.0</a>.
-
-## 2011.02.04, Version 0.3.8 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.8</a>.
-
-## 2011.01.27, Version 0.3.7 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.7</a>.
-
-## 2011.01.21, Version 0.3.6 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.6</a>.
-
-## 2011.01.16, Version 0.3.5 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.5</a>.
-
-## 2011.01.08, Version 0.3.4 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.4</a>.
-
-## 2011.01.02, Version 0.3.3 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.3</a>.
-
-## 2010.12.16, Version 0.3.2 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.2</a>.
-
-## 2010.11.16, Version 0.3.1 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.1</a>.
-
-## 2010.10.23, Version 0.3.0 (unstable)
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.3.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.3.0</a>.
-
-## 2010.08.20, Version 0.2.0
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.2.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.2.0</a>.
-
-## 2010.08.13, Version 0.1.104
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.104">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.104</a>.
-
-## 2010.08.04, Version 0.1.103
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.103">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.103</a>.
-
-## 2010.07.25, Version 0.1.102
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.102">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.102</a>.
-
-## 2010.07.16, Version 0.1.101
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.101">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.101</a>.
-
-## 2010.07.03, Version 0.1.100
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.100">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.100</a>.
-
-## 2010.06.21, Version 0.1.99
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.99">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.99</a>.
-
-## 2010.06.11, Version 0.1.98
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.98">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.98</a>.
-
-## 2010.05.29, Version 0.1.97
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.97">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.97</a>.
-
-## 2010.05.21, Version 0.1.96
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.96">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.96</a>.
-
-## 2010.05.13, Version 0.1.95
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.95">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.95</a>.
-
-## 2010.05.06, Version 0.1.94
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.94">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.94</a>.
-
-## 2010.04.29, Version 0.1.93
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.93">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.93</a>.
-
-## 2010.04.23, Version 0.1.92
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.92">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.92</a>.
-
-## 2010.04.15, Version 0.1.91
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.91">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.91</a>.
-
-## 2010.04.09, Version 0.1.90
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.90">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.90</a>.
-
-## 2010.03.19, Version 0.1.33
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.33">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.33</a>.
-
-## 2010.03.12, Version 0.1.32
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.32">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.32</a>.
-
-## 2010.03.05, Version 0.1.31
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.31">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.31</a>.
-
-## 2010.02.22, Version 0.1.30
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.30">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.30</a>.
-
-## 2010.02.17, Version 0.1.29
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.29">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.29</a>.
-
-## 2010.02.09, Version 0.1.28
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.28">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.28</a>.
-
-## 2010.02.03, Version 0.1.27
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.27">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.27</a>.
-
-## 2010.01.20, Version 0.1.26
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.26">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.26</a>.
-
-## 2010.01.09, Version 0.1.25
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.25">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.25</a>.
-
-## 2009.12.31, Version 0.1.24
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.24">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.24</a>.
-
-## 2009.12.22, Version 0.1.23
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.23">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.23</a>.
-
-## 2009.12.19, Version 0.1.22
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.22">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.22</a>.
-
-## 2009.12.06, Version 0.1.21
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.21">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.21</a>.
-
-## 2009.11.28, Version 0.1.20
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.20">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.20</a>.
-
-## 2009.11.28, Version 0.1.19
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.19">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.19</a>.
-
-## 2009.11.17, Version 0.1.18
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.18">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.18</a>.
-
-## 2009.11.07, Version 0.1.17
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.17">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.17</a>.
-
-## 2009.11.03, Version 0.1.16
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.16">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.16</a>.
-
-## 2009.10.28, Version 0.1.15
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.15">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.15</a>.
-
-## 2009.10.09, Version 0.1.14
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.14">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.14</a>.
-
-## 2009.09.30, Version 0.1.13
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.13">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.13</a>.
-
-## 2009.09.24, Version 0.1.12
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.12">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.12</a>.
-
-## 2009.09.18, Version 0.1.11
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.11">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.11</a>.
-
-## 2009.09.11, Version 0.1.10
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.10">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.10</a>.
-
-## 2009.09.05, Version 0.1.9
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.9">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.9</a>.
-
-## 2009.09.04, Version 0.1.8
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.8">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.8</a>.
-
-## 2009.08.27, Version 0.1.7
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.7">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.7</a>.
-
-## 2009.08.22, Version 0.1.6
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.6</a>.
-
-## 2009.08.21, Version 0.1.5
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.5">Moved to doc/changelogs/CHANGELOG\_V6.md#6.0.0</a>.
-
-## 2009.08.13, Version 0.1.4
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.4</a>.
-
-## 2009.08.06, Version 0.1.3
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.3</a>.
-
-## 2009.08.01, Version 0.1.2
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.2">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.2</a>.
-
-## 2009.07.27, Version 0.1.1
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.1">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.1</a>.
-
-## 2009.06.30, Version 0.1.0
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.1.0">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.1.0</a>.
-
-## 2009.06.24, Version 0.0.6
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.0.6">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.0.6</a>.
-
-## 2009.06.18, Version 0.0.5
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.0.5">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.0.5</a>.
-
-## 2009.06.13, Version 0.0.4
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.0.4">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.0.4</a>.
-
-## 2009.06.11, Version 0.0.3
-
-<a href="doc/changelogs/CHANGELOG_ARCHIVE.md#0.0.3">Moved to doc/changelogs/CHANGELOG\_ARCHIVE.md#0.0.3</a>.
+* load binaries in the same process ([#97](https://github.com/nodejs/corepack/issues/97)) ([5ff6e82](https://github.com/nodejs/corepack/commit/5ff6e82028e58448ba5ba986854b61ecdc69885b))
