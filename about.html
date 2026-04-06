@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Kashi Rivaz | Premium Banarasi Sarees</title>
+    <meta name="description"
+        content="Discover the story of Kashi Rivaz — handwoven Banarasi sarees crafted by master artisans of Varanasi with centuries of heritage.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0008;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        .kr-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 3%;
+            background: rgba(10, 0, 8, 0.0);
+            transition: background 0.4s, box-shadow 0.4s;
+        }
+
+        .kr-nav.scrolled {
+            background: rgba(10, 0, 8, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .kr-nav__logo img {
+            height: 48px;
+            width: auto;
+        }
+
+        .kr-nav__links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .kr-nav__links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .kr-nav__links a:hover,
+        .kr-nav__links a.active {
+            color: #d4af37;
+        }
+
+        .kr-nav__cart {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #d4af37;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .kr-nav__cart:hover {
+            background: rgba(212, 175, 55, 0.3);
+        }
+
+        /* ── HERO: FULL-VIEWPORT VIDEO ── */
+        .kr-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 640px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .kr-hero__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
+            z-index: 0;
+        }
+
+        /* Multi-layer overlay: bottom fade + subtle colour tint */
+        .kr-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(10, 0, 8, 0.92) 0%, rgba(10, 0, 8, 0.3) 45%, transparent 75%),
+                linear-gradient(to right, rgba(10, 0, 8, 0.55) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        /* Scroll-down chevron */
+        .kr-hero__scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            animation: chevronBob 1.6s ease-in-out infinite;
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        @keyframes chevronBob {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+                opacity: 1;
+            }
+        }
+
+        /* Hero text content */
+        .kr-hero__content {
+            position: relative;
+            z-index: 5;
+            padding: 0 5% 5rem;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .kr-hero__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            color: #d4af37;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            margin-bottom: 1.25rem;
+        }
+
+        .kr-hero__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.05;
+            text-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .kr-hero__title em {
+            display: block;
+            font-style: italic;
+            color: #f4e4b0;
+        }
+
+        .kr-hero__sub {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.75;
+            max-width: 520px;
+            margin-bottom: 2rem;
+        }
+
+        .kr-hero__btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, #d4af37, #f4e4b0);
+            color: #1a0a10;
+            font-size: 0.88rem;
+            font-weight: 800;
+            padding: 0.75rem 2rem;
+            border-radius: 999px;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.45);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kr-hero__btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.55);
+        }
+
+        /* Video play/pause corner control */
+        .kr-hero__control {
+            position: absolute;
+            bottom: 5rem;
+            right: 3%;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .kr-hero__control:hover {
+            background: rgba(212, 175, 55, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* ── ABOUT SECTIONS ── */
+        .about-wrap {
+            background: #0a0008;
+            padding: 5rem 5%;
+        }
+
+        .about-wrap>*+* {
+            margin-top: 5rem;
+        }
+
+        /* Section label */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #d4af37;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1.5px;
+            background: #d4af37;
+        }
+
+        /* Two-column layout for alternating blocks */
+        .about-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-row.reverse {
+            direction: rtl;
+        }
+
+        .about-row.reverse>* {
+            direction: ltr;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .about-text h2 em {
+            color: #f4e4b0;
+            font-style: italic;
+        }
+
+        .about-text p {
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.85;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Decorative quote pull */
+        .about-quote {
+            border-left: 3px solid #d4af37;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #f4e4b0;
+            line-height: 1.6;
+        }
+
+        /* Image / visual card */
+        .about-visual {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #1a0512;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 6s ease;
+        }
+
+        .about-visual:hover img {
+            transform: scale(1.06);
+        }
+
+        .about-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        /* Why choose us — icon grid */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .why-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .why-card i {
+            font-size: 1.4rem;
+            color: #d4af37;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .why-card strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .why-card small {
+            font-size: 0.79rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* Contact info strip */
+        .contact-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            background: rgba(212, 175, 55, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            font-size: 1.1rem;
+            color: #d4af37;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .contact-item span {
+            font-size: 0.84rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ── FOOTER ── */
+        .kr-footer {
+            background: #060004;
+            border-top: 1px solid rgba(212, 175, 55, 0.12);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .kr-footer p {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .kr-footer a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .kr-nav__links {
+                display: none;
+            }
+
+            .about-row,
+            .about-row.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+                gap: 2rem;
+            }
+
+            .about-wrap {
+                padding: 3rem 5%;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav class="kr-nav" id="krNav">
+        <div class="kr-nav__logo">
+            <a href="index.html"><img src="images/kashi rivaz.png" alt="Kashi Rivaz"></a>
+        </div>
+        <ul class="kr-nav__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="cart.html" class="kr-nav__cart">
+            <i class="fas fa-shopping-bag"></i> Cart
+            <span id="cart-count" style="margin-left:2px;"></span>
+        </a>
+    </nav>
+
+    <!-- ════════════════════════════════════════════
+         HERO: FULL-SCREEN BRAND REEL
+    ════════════════════════════════════════════ -->
+    <section class="kr-hero" id="kr-hero">
+
+        <!-- Background reel video -->
+        <video class="kr-hero__video" id="krHeroVid" src="videos/Saree_Reel_Creation_For_Kashi_Rivaz.mp4" autoplay muted loop
+            playsinline preload="auto">
+        </video>
+
+        <!-- Colour overlays -->
+        <div class="kr-hero__overlay"></div>
+
+        <!-- Text content -->
+        <div class="kr-hero__content">
+            <div class="kr-hero__eyebrow">
+                <i class="fas fa-gem"></i>&nbsp;Est. in Varanasi · Since the Ages
+            </div>
+            <h1 class="kr-hero__title">
+                Our Story<br>
+                <em>Woven in Silk</em>
+            </h1>
+            <p class="kr-hero__sub">
+                Kashi Rivaz was born from a love for Banarasi tradition — where every thread carries
+                the weight of centuries and every drape tells a story of artistry, heritage, and soul.
+            </p>
+            <a href="shop.html?cat=silk" class="kr-hero__btn">
+                <i class="fas fa-shopping-bag"></i> Explore the Collection
+            </a>
+        </div>
+
+        <!-- Play / Pause -->
+        <button class="kr-hero__control" id="krHeroBtn" onclick="toggleHeroVid()" aria-label="Toggle video">
+            <i class="fas fa-pause" id="krHeroIcon"></i>
+        </button>
+
+        <!-- Scroll arrow -->
+        <div class="kr-hero__scroll"
+            onclick="document.getElementById('about-content').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ABOUT SECTIONS
+    ════════════════════════════════════════════ -->
+    <div class="about-wrap" id="about-content">
+
+        <!-- 1. Who we are -->
+        <div class="about-row">
+            <div class="about-text">
+                <div class="section-label"><i class="fas fa-feather-alt"></i> Who We Are</div>
+                <h2>Weavers of <em>Heritage</em></h2>
+                <p>
+                    Kashi Rivaz is Varanasi's trusted destination for handwoven Banarasi sarees. For over
+                    a decade, we have walked alongside master weavers in the narrow lanes of Banaras —
+                    preserving techniques that trace back to the Mughal era.
+                </p>
+                <p>
+                    Every saree that leaves our looms carries the fingerprint of an artisan — the invisible
+                    signature of someone who has devoted their life to an art form older than most nations.
+                </p>
+                <div class="about-quote">
+                    "A Banarasi saree is not cloth — it is poetry in silk."
+                </div>
+            </div>
+            <div class="about-visual">
+                <img src="images/kashi-rivaz-teal-saree.jpg" alt="Kashi Rivaz saree close-up">
+            </div>
+        </div>
+
+        <!-- 2. Our Mission -->
+        <div class="about-row reverse">
+            <div class="about-text">
+                <div class="section-label"><i class="fas fa-bullseye"></i> Our Mission</div>
+                <h2>Craft Preserved, <em>Culture Shared</em></h2>
+                <p>
+                    Our mission is simple: bring authentic Banarasi weaves to every home — across India
+                    and beyond. We believe that luxury should be honest, and tradition should be accessible.
+                </p>
+                <p>
+                    We work directly with weavers, cutting out middlemen to ensure fair wages, dignified
+                    working conditions, and a sustainable livelihood for every artisan family.
+                </p>
+            </div>
+            <div class="about-visual">
+                <img src="images/ima2.jpg" alt="Kashi Rivaz collection">
+            </div>
+        </div>
+
+        <!-- 3. Why Choose Us -->
+        <div>
+            <div class="section-label" style="margin-bottom:1rem;"><i class="fas fa-star"></i> Why Choose Us</div>
+            <h2
+                style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:#fff;margin-bottom:2rem;">
+                The Kashi Rivaz <em style="color:#f4e4b0;font-style:italic;">Promise</em>
+            </h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <i class="fas fa-certificate"></i>
+                    <strong>100% Authenticity</strong>
+                    <small>Every saree is handwoven using techniques passed down through generations — no
+                        compromises.</small>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-gem"></i>
+                    <strong>Finest Materials</strong>
+                    <small>Pure Banarasi silk, authentic zari gold threads, and natural dyes sourced ethically.</small>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-truck"></i>
+                    <strong>Free Pan-India Delivery</strong>
+                    <small>Doorstep delivery across India with careful packaging that honours each weave.</small>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-undo-alt"></i>
+                    <strong>7-Day Easy Returns</strong>
+                    <small>Not satisfied? We make returns simple, quick, and hassle-free — no questions asked.</small>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <strong>Artisan Fair Trade</strong>
+                    <small>Weavers receive competitive wages. Buying from us directly uplifts artisan families.</small>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-headset"></i>
+                    <strong>24/7 Support</strong>
+                    <small>Our dedicated team is always available to help you choose the perfect saree.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Contact Strip -->
+        <div>
+            <div class="section-label" style="margin-bottom:1.5rem;"><i class="fas fa-map-marker-alt"></i> Find Us</div>
+            <div class="contact-strip">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>
+                        <strong>Email</strong>
+                        <a href="mailto:kashirivaz@gmail.com?subject=Inquiry%20from%20Kashi%20Rivaz%20Website"
+                            style="color:inherit;text-decoration:none;">kashirivaz@gmail.com</a>
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>
+                        <strong>Phone</strong>
+                        <a href="tel:+918081429100" style="color:inherit;text-decoration:none;">+91 80814 29100</a>
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-pin"></i>
+                    <span>
+                        <strong>Address</strong>
+                        Varanasi, Uttar Pradesh, India
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>
+                        <strong>Hours</strong>
+                        Mon–Sun · 9:00 AM – 6:00 PM IST
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /about-wrap -->
+
+    <!-- ── FOOTER ── -->
+    <footer class="kr-footer">
+        <p>© 2026 <a href="index.html">Kashi Rivaz</a>. All rights reserved. Crafted with love in Varanasi.</p>
+    </footer>
+
+    <script src="js/userData.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        // Sticky nav on scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('krNav').classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+
+        // Hero video: play / pause toggle
+        function toggleHeroVid() {
+            const vid = document.getElementById('krHeroVid');
+            const icon = document.getElementById('krHeroIcon');
+            if (!vid) return;
+            if (vid.paused) {
+                vid.play();
+                icon.className = 'fas fa-pause';
+            } else {
+                vid.pause();
+                icon.className = 'fas fa-play';
+            }
+        }
+    </script>
+
+    <!-- CMS Bar (Admin Live Editing) -->
+    <script src="js/cms-bar.js"></script>
+</body>
+
+</html>

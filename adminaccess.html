@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Restricted</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--border:#2a2a3d;
+  --text:#e8e8f0;--muted:#6b6b8a;--accent:#a855f7;--accentd:#7c3aed;
+  --gold:#f0c040;--red:#ef4444;--green:#22c55e;--blue:#3b82f6;
+  --card:#161622;--upload:#1a1a2e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── LOGIN ── */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 0%,#1a0a2e 0%,#0a0a0f 70%);
+  position:relative;overflow:hidden;
+}
+#login-screen::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a855f7' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.login-glow{
+  position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;background:radial-gradient(circle,rgba(168,85,247,0.15),transparent 70%);
+  pointer-events:none;
+}
+.login-box{
+  background:rgba(19,19,26,0.95);border:1px solid var(--border);
+  border-radius:24px;padding:2.5rem;width:100%;max-width:420px;
+  position:relative;z-index:1;backdrop-filter:blur(20px);
+  box-shadow:0 0 80px rgba(168,85,247,0.1),0 32px 64px rgba(0,0,0,0.5);
+}
+.login-logo{
+  width:64px;height:64px;border-radius:16px;margin:0 auto 1.25rem;
+  background:linear-gradient(135deg,var(--accent),var(--accentd));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.75rem;box-shadow:0 8px 32px rgba(168,85,247,0.4);
+}
+.login-title{font-size:1.6rem;font-weight:800;text-align:center;color:var(--text);}
+.login-sub{font-size:0.82rem;color:var(--muted);text-align:center;margin:0.35rem 0 2rem;}
+.lock-badge{
+  display:flex;align-items:center;justify-content:center;gap:0.4rem;
+  background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);
+  color:var(--accent);border-radius:999px;padding:0.3rem 1rem;
+  font-size:0.75rem;font-weight:700;margin:0 auto 1.75rem;width:fit-content;
+}
+.inp-wrap{position:relative;margin-bottom:1rem;}
+.inp-wrap i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.9rem;}
+.inp-wrap input{
+  width:100%;padding:0.85rem 1rem 0.85rem 2.75rem;
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:12px;color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;
+  transition:.2s;
+}
+.inp-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,85,247,0.1);}
+.inp-wrap input::placeholder{color:var(--muted);}
+.login-btn{
+  width:100%;padding:0.9rem;margin-top:0.5rem;
+  background:linear-gradient(135deg,var(--accent),var(--accentd));
+  color:#fff;border:none;border-radius:12px;font-size:0.95rem;
+  font-weight:700;cursor:pointer;font-family:inherit;transition:.3s;
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,0.4);}
+.login-btn:disabled{opacity:.5;transform:none;cursor:not-allowed;}
+.login-err{
+  color:#f87171;font-size:0.82rem;text-align:center;margin-top:0.75rem;
+  padding:0.6rem 1rem;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);
+  border-radius:8px;display:none;
+}
+.lockout-timer{
+  display:none;text-align:center;margin-top:1rem;
+  font-size:0.82rem;color:var(--muted);
+}
+.lockout-timer span{color:var(--red);font-weight:700;}
+
+/* ── DASHBOARD ── */
+#dashboard{display:none;}
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:240px;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+}
+.sb-logo{padding:1.5rem;border-bottom:1px solid var(--border);}
+.sb-logo h2{
+  font-size:1rem;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sb-logo p{font-size:0.72rem;color:var(--muted);margin-top:0.15rem;}
+.sb-badge{
+  display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.5rem;
+  background:rgba(168,85,247,0.12);color:var(--accent);
+  padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:700;
+  border:1px solid rgba(168,85,247,0.2);
+}
+.sb-nav{flex:1;padding:1rem 0;overflow-y:auto;}
+.sb-item{
+  display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1.5rem;
+  color:var(--muted);font-size:0.85rem;font-weight:500;cursor:pointer;
+  transition:.2s;border-left:3px solid transparent;
+}
+.sb-item:hover,.sb-item.active{
+  color:var(--text);background:rgba(168,85,247,0.07);border-left-color:var(--accent);
+}
+.sb-item i{width:18px;text-align:center;}
+.sb-foot{padding:1rem 1.5rem;border-top:1px solid var(--border);}
+.logout-btn{
+  display:flex;align-items:center;gap:0.5rem;color:var(--muted);
+  font-size:0.82rem;cursor:pointer;background:none;border:none;font-family:inherit;transition:.2s;
+}
+.logout-btn:hover{color:var(--red);}
+.inactivity-bar{
+  position:fixed;top:0;left:240px;right:0;height:3px;background:rgba(168,85,247,0.15);z-index:999;
+}
+.inactivity-bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));
+  transition:width 1s linear;
+}
+.main{margin-left:240px;min-height:100vh;}
+.topbar{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.topbar h1{font-size:1.1rem;font-weight:700;color:var(--text);}
+.topbar-right{display:flex;align-items:center;gap:1rem;}
+.tb-stat{
+  display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;
+  color:var(--muted);background:var(--surface2);padding:0.4rem 0.8rem;border-radius:8px;
+}
+.tb-stat span{color:var(--text);font-weight:600;}
+.section{display:none;padding:2rem;}
+.section.active{display:block;}
+
+/* ── STATS BAR ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-box{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:.2s;
+}
+.stat-box:hover{border-color:var(--accent);transform:translateY(-2px);}
+.stat-ic{
+  width:46px;height:46px;border-radius:12px;display:flex;
+  align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;
+}
+.ic-p{background:rgba(168,85,247,0.15);color:var(--accent);}
+.ic-g{background:rgba(34,197,94,0.15);color:var(--green);}
+.ic-b{background:rgba(59,130,246,0.15);color:var(--blue);}
+.ic-o{background:rgba(240,192,64,0.15);color:var(--gold);}
+.stat-val{font-size:1.75rem;font-weight:800;color:var(--text);line-height:1;}
+.stat-lbl{font-size:0.73rem;color:var(--muted);margin-top:0.15rem;}
+
+/* ── INSTAGRAM GRID ── */
+.ig-toolbar{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;
+}
+.ig-title{font-size:1rem;font-weight:700;color:var(--text);}
+.ig-filters{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.filter-chip{
+  padding:0.35rem 0.85rem;border-radius:999px;font-size:0.78rem;font-weight:600;
+  border:1px solid var(--border);background:transparent;color:var(--muted);
+  cursor:pointer;transition:.2s;font-family:inherit;
+}
+.filter-chip.active,.filter-chip:hover{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+}
+.ig-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1rem;
+}
+.ig-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;transition:.25s;position:relative;
+}
+.ig-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 32px rgba(168,85,247,0.15);}
+.ig-card.hidden-prod{opacity:.5;}
+.ig-card.hidden-prod::after{
+  content:'HIDDEN';position:absolute;top:10px;right:10px;
+  background:rgba(0,0,0,0.8);color:var(--muted);font-size:0.65rem;
+  font-weight:800;padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:1px;
+}
+.ig-thumb{
+  width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--surface2);
+}
+.ig-thumb-video{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#000;}
+.ig-thumb-wrap{position:relative;overflow:hidden;}
+.ig-play-icon{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.3);pointer-events:none;
+}
+.ig-play-icon i{font-size:2rem;color:rgba(255,255,255,0.85);}
+.ig-card-body{padding:0.85rem;}
+.ig-card-title{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ig-card-price{font-size:1rem;font-weight:800;color:var(--gold);}
+.ig-card-meta{display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;}
+.ig-card-date{font-size:0.7rem;color:var(--muted);}
+.ig-card-cat{
+  font-size:0.68rem;font-weight:700;padding:0.15rem 0.5rem;
+  border-radius:999px;background:rgba(168,85,247,0.15);color:var(--accent);
+}
+.ig-card-stock{
+  font-size:0.7rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-top:0.35rem;
+  display:inline-block;
+}
+.in-stock{background:rgba(34,197,94,0.12);color:var(--green);}
+.out-stock{background:rgba(239,68,68,0.12);color:var(--red);}
+.ig-actions{
+  display:flex;align-items:center;gap:0.4rem;padding:0.65rem 0.85rem;
+  border-top:1px solid var(--border);
+}
+.act-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:0.3rem;
+  padding:0.45rem;border-radius:8px;font-size:0.73rem;font-weight:600;
+  border:none;cursor:pointer;font-family:inherit;transition:.2s;
+}
+.act-edit{background:rgba(59,130,246,0.12);color:var(--blue);}
+.act-edit:hover{background:rgba(59,130,246,0.25);}
+.act-hide{background:rgba(240,192,64,0.12);color:var(--gold);}
+.act-hide:hover{background:rgba(240,192,64,0.25);}
+.act-del{background:rgba(239,68,68,0.12);color:var(--red);}
+.act-del:hover{background:rgba(239,68,68,0.3);}
+
+/* ── UPLOAD SECTION ── */
+.upload-wrap{max-width:860px;}
+.upload-zone{
+  border:2px dashed var(--border);border-radius:16px;padding:3rem;
+  text-align:center;cursor:pointer;transition:.2s;background:var(--upload);
+  margin-bottom:1.5rem;
+}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(168,85,247,0.05);}
+.upload-zone i{font-size:3rem;color:var(--muted);display:block;margin-bottom:0.75rem;}
+.upload-zone p{color:var(--muted);font-size:0.9rem;}
+.upload-zone span{color:var(--accent);font-weight:700;}
+#upload-input{display:none;}
+.preview-box{
+  display:none;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;
+}
+.preview-media{max-width:100%;max-height:320px;border-radius:12px;object-fit:contain;display:block;margin-bottom:1rem;}
+.progress-wrap{
+  display:none;background:var(--surface2);border-radius:999px;
+  overflow:hidden;height:8px;margin-bottom:0.75rem;
+}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.form-inp{
+  padding:0.7rem 1rem;background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:10px;color:var(--text);font-size:0.88rem;font-family:inherit;outline:none;transition:.2s;
+}
+.form-inp:focus{border-color:var(--accent);}
+.form-inp::placeholder{color:var(--muted);}
+select.form-inp option{background:var(--surface);}
+textarea.form-inp{min-height:90px;resize:vertical;}
+.btn{
+  display:inline-flex;align-items:center;gap:0.45rem;padding:0.65rem 1.25rem;
+  border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;
+  border:none;font-family:inherit;transition:.2s;
+}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accentd));color:#fff;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(168,85,247,0.35);}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--accent);}
+.btn-danger{background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.btn-danger:hover{background:rgba(239,68,68,0.3);}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:2rem;max-width:560px;width:92%;max-height:90vh;overflow-y:auto;
+  box-shadow:0 32px 80px rgba(0,0,0,0.6);
+}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.modal-head h3{font-size:1.1rem;font-weight:800;color:var(--text);}
+.modal-close{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;padding:0.25rem;}
+.modal-close:hover{color:var(--text);}
+.modal-preview{max-width:100%;max-height:200px;border-radius:10px;object-fit:contain;margin-bottom:1rem;display:block;}
+.modal-actions{display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem;}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:2rem;right:2rem;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);padding:0.875rem 1.5rem;border-radius:12px;
+  font-size:0.875rem;font-weight:500;z-index:9999;display:none;
+  box-shadow:0 16px 48px rgba(0,0,0,0.4);max-width:360px;
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+#toast.success{border-left:4px solid var(--green);}
+#toast.error{border-left:4px solid var(--red);}
+#toast.info{border-left:4px solid var(--accent);}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:4rem;color:var(--muted);
+}
+.empty-state i{font-size:3rem;display:block;margin-bottom:1rem;opacity:.4;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .sidebar{width:56px;}
+  .sb-logo h2,.sb-logo p,.sb-badge,.sb-item span,.sb-foot span{display:none;}
+  .sb-logo{padding:1rem;}
+  .sb-item{padding:.75rem;justify-content:center;}
+  .main{margin-left:56px;}
+  .inactivity-bar{left:56px;}
+  .form-grid{grid-template-columns:1fr;}
+  .ig-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-glow"></div>
+  <div class="login-box">
+    <div class="login-logo">🛍️</div>
+    <h1 class="login-title">Kashi Rivaz</h1>
+    <p class="login-sub">Admin Portal — Authorised Access Only</p>
+    <div class="lock-badge"><i class="fas fa-shield-halved"></i> Secure Portal</div>
+    <div class="inp-wrap">
+      <i class="fas fa-user"></i>
+      <input type="text" id="l-user" placeholder="Username" autocomplete="username">
+    </div>
+    <div class="inp-wrap">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="l-pass" placeholder="Password" autocomplete="current-password">
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">
+      <i class="fas fa-right-to-bracket"></i> Access Dashboard
+    </button>
+    <div class="login-err" id="login-err"></div>
+    <div class="lockout-timer" id="lockout-msg">
+      🔒 Account locked. Try again in <span id="lockout-countdown">5:00</span>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="inactivity-bar"><div class="inactivity-bar-fill" id="inactivity-bar-fill" style="width:100%"></div></div>
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <h2>🛍 Kashi Rivaz</h2>
+      <p>Admin Dashboard</p>
+      <div class="sb-badge"><i class="fas fa-crown"></i> <span>Admin</span></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-item active" onclick="nav('overview')" id="nav-overview"><i class="fas fa-chart-line"></i><span>Overview</span></div>
+      <div class="sb-item" onclick="nav('products')" id="nav-products"><i class="fas fa-grip"></i><span>Products</span></div>
+      <div class="sb-item" onclick="nav('upload')" id="nav-upload"><i class="fas fa-cloud-upload-alt"></i><span>Upload</span></div>
+    </nav>
+    <div class="sb-foot">
+      <a href="index.html" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:.5rem;color:#22c55e;font-size:.82rem;
+                font-weight:700;text-decoration:none;padding:.45rem 0;margin-bottom:.6rem;transition:.2s;"
+         title="Open Kashi Rivaz Website"
+         onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+        <i class="fas fa-globe" style="font-size:1rem;"></i>
+        <span>Visit Website</span>
+      </a>
+      <a href="https://t.me/+2VjqUrs0o_k2OGY1" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:.5rem;color:#229ED9;font-size:.82rem;
+                font-weight:600;text-decoration:none;padding:.45rem 0;margin-bottom:.6rem;transition:.2s;"
+         title="Open Admin Telegram Channel"
+         onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+        <i class="fab fa-telegram" style="font-size:1rem;"></i>
+        <span>Order Channel</span>
+      </a>
+      <button class="logout-btn" onclick="doLogout()"><i class="fas fa-right-from-bracket"></i><span> Logout</span></button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <h1 id="tb-title"><i class="fas fa-chart-line" style="color:var(--accent);margin-right:.5rem"></i>Overview</h1>
+      <div class="topbar-right">
+        <div class="tb-stat"><i class="fas fa-clock"></i> Session: <span id="session-timer">30:00</span></div>
+        <div class="tb-stat"><i class="fas fa-circle" style="color:var(--green);font-size:.6rem"></i> <span>Live</span></div>
+        <div class="tb-stat" id="last-updated">Updated: —</div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="section active" id="section-overview">
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-ic ic-p"><i class="fas fa-box"></i></div><div><div class="stat-val" id="st-prod">0</div><div class="stat-lbl">Total Products</div></div></div>
+        <div class="stat-box"><div class="stat-ic ic-g"><i class="fas fa-eye"></i></div><div><div class="stat-val" id="st-pub">0</div><div class="stat-lbl">Published</div></div></div>
+        <div class="stat-box"><div class="stat-ic ic-o"><i class="fas fa-eye-slash"></i></div><div><div class="stat-val" id="st-hid">0</div><div class="stat-lbl">Hidden</div></div></div>
+        <div class="stat-box"><div class="stat-ic ic-b"><i class="fas fa-video"></i></div><div><div class="stat-val" id="st-vid">0</div><div class="stat-lbl">With Video</div></div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;">
+        <h2 style="font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;"><i class="fas fa-clock" style="color:var(--accent)"></i>Recent Uploads</h2>
+        <div class="ig-grid" id="recent-grid"></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="section" id="section-products">
+      <div class="ig-toolbar">
+        <div>
+          <h2 class="ig-title">All Products</h2>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:.2rem">Real-time • Firebase Firestore</p>
+        </div>
+        <div class="ig-filters">
+          <button class="filter-chip active" data-filter="all" onclick="filterGrid(this)">All</button>
+          <button class="filter-chip" data-filter="silk" onclick="filterGrid(this)">Silk</button>
+          <button class="filter-chip" data-filter="georgette" onclick="filterGrid(this)">Georgette</button>
+          <button class="filter-chip" data-filter="suit" onclick="filterGrid(this)">Suit</button>
+          <button class="filter-chip" data-filter="hidden" onclick="filterGrid(this)">Hidden</button>
+        </div>
+      </div>
+      <div class="ig-grid" id="products-grid">
+        <div class="empty-state"><i class="fas fa-spinner fa-spin"></i>Loading products...</div>
+      </div>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="section" id="section-upload">
+      <div class="upload-wrap">
+        <h2 style="font-size:1rem;font-weight:700;margin-bottom:1.5rem;color:var(--text);">
+          <i class="fas fa-cloud-arrow-up" style="color:var(--accent);margin-right:.5rem"></i>Upload New Product
+        </h2>
+        <div class="upload-zone" id="upload-zone"
+             onclick="document.getElementById('upload-input').click()"
+             ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+          <i class="fas fa-photo-film"></i>
+          <p>Drag & drop photo or video here, or <span>click to browse</span></p>
+          <p style="font-size:.75rem;margin-top:.5rem">JPG, PNG, WebP, MP4, MOV — max 50MB</p>
+        </div>
+        <input type="file" id="upload-input" accept="image/*,video/*" onchange="onFileSelect(event)">
+
+        <div class="preview-box" id="preview-box">
+          <div id="preview-wrap"></div>
+          <div class="progress-wrap" id="prog-wrap"><div class="progress-bar" id="prog-bar" style="width:0%"></div></div>
+          <div id="prog-label" style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;display:none;"></div>
+
+          <div class="form-grid">
+            <div class="form-group"><label>Product Title *</label><input class="form-inp" id="f-title" placeholder="e.g. Pure Katan Silk Saree"></div>
+            <div class="form-group"><label>Price (₹) *</label><input class="form-inp" id="f-price" type="number" placeholder="e.g. 3500"></div>
+            <div class="form-group"><label>Category</label>
+              <select class="form-inp" id="f-cat">
+                <option value="silk">Silk Saree</option>
+                <option value="georgette">Georgette</option>
+                <option value="suit">Suit</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Stock Status</label>
+              <select class="form-inp" id="f-stock">
+                <option value="instock">In Stock</option>
+                <option value="outofstock">Out of Stock</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Tags (comma separated)</label><input class="form-inp" id="f-tags" placeholder="e.g. bridal, new, trending"></div>
+            <div class="form-group"><label>Badge</label>
+              <select class="form-inp" id="f-badge">
+                <option value="">None</option>
+                <option value="New">New</option>
+                <option value="Hot">Hot</option>
+                <option value="Trending">Trending</option>
+                <option value="Sale">Sale</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Description / Caption</label><textarea class="form-inp" id="f-desc" placeholder="Describe the product..."></textarea></div>
+          </div>
+
+          <div style="display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap;">
+            <button class="btn btn-primary" id="publish-btn" onclick="publishProduct()"><i class="fas fa-rocket"></i> Publish Live</button>
+            <button class="btn btn-secondary" onclick="cancelUpload()"><i class="fas fa-times"></i> Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-pen" style="color:var(--accent);margin-right:.5rem"></i>Edit Product</h3>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="edit-preview-wrap"></div>
+    <div class="form-grid">
+      <div class="form-group"><label>Title</label><input class="form-inp" id="e-title"></div>
+      <div class="form-group"><label>Price (₹)</label><input class="form-inp" id="e-price" type="number"></div>
+      <div class="form-group"><label>Category</label>
+        <select class="form-inp" id="e-cat">
+          <option value="silk">Silk Saree</option>
+          <option value="georgette">Georgette</option>
+          <option value="suit">Suit</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Stock</label>
+        <select class="form-inp" id="e-stock">
+          <option value="instock">In Stock</option>
+          <option value="outofstock">Out of Stock</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Badge</label>
+        <select class="form-inp" id="e-badge">
+          <option value="">None</option>
+          <option value="New">New</option>
+          <option value="Hot">Hot</option>
+          <option value="Trending">Trending</option>
+          <option value="Sale">Sale</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Tags</label><input class="form-inp" id="e-tags"></div>
+      <div class="form-group full"><label>Description</label><textarea class="form-inp" id="e-desc"></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEdit()"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+    <script>
+    // Auto-clear expired lockout on page load
+    (function() {
+        var lockout = parseInt(localStorage.getItem('kr_admin_lockout') || '0');
+        if (lockout && Date.now() >= lockout) {
+            localStorage.removeItem('kr_admin_lockout');
+            localStorage.removeItem('kr_admin_attempts');
+        }
+    })();
+    </script>`n    <script src="js/firebase-config.js"></script>
+
+<script>
+// ============================================================
+// FIREBASE INIT
+// ============================================================
+let db, storage;
+try {
+  firebase.initializeApp(window.FIREBASE_CONFIG);
+  db      = firebase.firestore();
+  storage = firebase.storage();
+} catch(e) {
+  console.error('Firebase init failed — check firebase-config.js', e);
+}
+
+// ============================================================
+// LOGIN SYSTEM — 3 attempts → 5 min lockout
+// ============================================================
+let loginAttempts = parseInt(localStorage.getItem('kr_admin_attempts') || '0');
+let lockoutUntil  = parseInt(localStorage.getItem('kr_admin_lockout') || '0');
+const MAX_ATTEMPTS = 3;
+const LOCKOUT_MS   = 5 * 60 * 1000;
+
+function checkLockout() {
+  if (Date.now() < lockoutUntil) {
+    showLockoutTimer();
+    return true;
+  }
+  return false;
+}
+
+function showLockoutTimer() {
+  const msg = document.getElementById('lockout-msg');
+  const cd  = document.getElementById('lockout-countdown');
+  msg.style.display = 'block';
+  document.getElementById('login-btn').disabled = true;
+  const tick = () => {
+    const left = lockoutUntil - Date.now();
+    if (left <= 0) {
+      msg.style.display = 'none';
+      document.getElementById('login-btn').disabled = false;
+      loginAttempts = 0;
+      localStorage.removeItem('kr_admin_attempts');
+      localStorage.removeItem('kr_admin_lockout');
+      return;
+    }
+    const m = String(Math.floor(left / 60000)).padStart(2,'0');
+    const s = String(Math.floor((left % 60000) / 1000)).padStart(2,'0');
+    cd.textContent = `${m}:${s}`;
+    setTimeout(tick, 1000);
+  };
+  tick();
+}
+
+function doLogin() {
+  if (checkLockout()) return;
+  const user = document.getElementById('l-user').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  const btn  = document.getElementById('login-btn');
+  const err  = document.getElementById('login-err');
+
+  if (!user || !pass) { showLoginErr('Enter username and password.'); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+
+  const validUser = window.ADMIN_USERNAME || 'admin';
+  const validPass = window.ADMIN_PASSWORD || 'admin123';
+
+  setTimeout(() => {
+    if (user === validUser && pass === validPass) {
+      loginAttempts = 0;
+      localStorage.removeItem('kr_admin_attempts');
+      localStorage.removeItem('kr_admin_lockout');
+      sessionStorage.setItem('kr_admin_logged', '1');
+      sessionStorage.setItem('kr_admin_time', Date.now().toString());
+      showDashboard();
+    } else {
+      loginAttempts++;
+      localStorage.setItem('kr_admin_attempts', loginAttempts);
+      const left = MAX_ATTEMPTS - loginAttempts;
+      if (loginAttempts >= MAX_ATTEMPTS) {
+        lockoutUntil = Date.now() + LOCKOUT_MS;
+        localStorage.setItem('kr_admin_lockout', lockoutUntil);
+        showLoginErr('Too many attempts. Account locked for 5 minutes.');
+        showLockoutTimer();
+      } else {
+        showLoginErr(`Wrong credentials. ${left} attempt${left>1?'s':''} remaining.`);
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-right-to-bracket"></i> Access Dashboard';
+    }
+  }, 600);
+}
+
+function showLoginErr(msg) {
+  const el = document.getElementById('login-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 5000);
+}
+
+// Auto-login if session valid
+(function checkSession() {
+  if (checkLockout()) return;
+  const logged = sessionStorage.getItem('kr_admin_logged');
+  const time   = parseInt(sessionStorage.getItem('kr_admin_time') || '0');
+  if (logged === '1' && (Date.now() - time) < 30 * 60 * 1000) {
+    showDashboard();
+  }
+})();
+
+document.getElementById('l-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('l-user').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+// ============================================================
+// SESSION INACTIVITY — 30 minute auto-logout
+// ============================================================
+const SESSION_DURATION = 30 * 60 * 1000;
+let sessionStart = Date.now();
+let inactivityTimer;
+
+function resetInactivity() {
+  sessionStart = Date.now();
+  sessionStorage.setItem('kr_admin_time', sessionStart);
+}
+
+function tickSession() {
+  const elapsed = Date.now() - sessionStart;
+  const left    = SESSION_DURATION - elapsed;
+  if (left <= 0) {
+    doLogout();
+    return;
+  }
+  const pct = ((left / SESSION_DURATION) * 100).toFixed(1);
+  const bar = document.getElementById('inactivity-bar-fill');
+  if (bar) bar.style.width = pct + '%';
+  const m = String(Math.floor(left / 60000)).padStart(2,'0');
+  const s = String(Math.floor((left % 60000) / 1000)).padStart(2,'0');
+  const el = document.getElementById('session-timer');
+  if (el) el.textContent = `${m}:${s}`;
+}
+
+document.addEventListener('mousemove', resetInactivity);
+document.addEventListener('keydown', resetInactivity);
+document.addEventListener('click', resetInactivity);
+
+// ============================================================
+// DASHBOARD INIT
+// ============================================================
+let allProducts = [];
+let currentFilter = 'all';
+let editingId = null;
+let uploadFile = null;
+let unsubscribe = null;
+
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  inactivityTimer = setInterval(tickSession, 1000);
+  startRealtimeListener();
+}
+
+function doLogout() {
+  clearInterval(inactivityTimer);
+  if (unsubscribe) unsubscribe();
+  sessionStorage.removeItem('kr_admin_logged');
+  sessionStorage.removeItem('kr_admin_time');
+  location.reload();
+}
+
+// ============================================================
+// REAL-TIME FIRESTORE LISTENER
+// ============================================================
+function startRealtimeListener() {
+  if (!db) { toast('Firebase not configured! Check firebase-config.js', 'error'); return; }
+  if (unsubscribe) unsubscribe();
+  unsubscribe = db.collection('products')
+    .orderBy('uploadedAt', 'desc')
+    .onSnapshot(snap => {
+      allProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderAll();
+      updateStats();
+      updateLastUpdated();
+    }, err => {
+      console.error('Firestore error:', err);
+      toast('Firestore error — check Firebase setup', 'error');
+    });
+}
+
+function updateLastUpdated() {
+  const el = document.getElementById('last-updated');
+  if (el) el.textContent = 'Updated: ' + new Date().toLocaleTimeString();
+}
+
+// ============================================================
+// STATS
+// ============================================================
+function updateStats() {
+  const pub = allProducts.filter(p => !p.hidden).length;
+  const hid = allProducts.filter(p => p.hidden).length;
+  const vid = allProducts.filter(p => p.mediaType === 'video').length;
+  document.getElementById('st-prod').textContent = allProducts.length;
+  document.getElementById('st-pub').textContent = pub;
+  document.getElementById('st-hid').textContent = hid;
+  document.getElementById('st-vid').textContent = vid;
+}
+
+// ============================================================
+// RENDER GRID
+// ============================================================
+function renderAll() {
+  renderProducts('products-grid', getFiltered());
+  renderRecent();
+}
+
+function getFiltered() {
+  if (currentFilter === 'all') return allProducts;
+  if (currentFilter === 'hidden') return allProducts.filter(p => p.hidden);
+  return allProducts.filter(p => (p.category || '') === currentFilter);
+}
+
+function filterGrid(btn) {
+  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  renderProducts('products-grid', getFiltered());
+}
+
+function renderRecent() {
+  renderProducts('recent-grid', allProducts.slice(0, 6));
+}
+
+function renderProducts(gridId, products) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  if (!products.length) {
+    grid.innerHTML = `<div class="empty-state"><i class="fas fa-ghost"></i>No products here yet.</div>`;
+    return;
+  }
+  grid.innerHTML = products.map(p => productCard(p)).join('');
+}
+
+function productCard(p) {
+  const thumb = p.mediaType === 'video'
+    ? `<div class="ig-thumb-wrap"><video class="ig-thumb-video" src="${p.mediaUrl}" muted playsinline preload="metadata"></video><div class="ig-play-icon"><i class="fas fa-play-circle"></i></div></div>`
+    : `<img class="ig-thumb" src="${p.mediaUrl}" alt="${p.title}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'200\\'><rect width=\\'200\\' height=\\'200\\' fill=\\'%231c1c28\\'/><text y=\\'110\\' x=\\'100\\' text-anchor=\\'middle\\' fill=\\'%236b6b8a\\' font-size=\\'40\\'>🖼</text></svg>'">`;
+  const stockClass = p.stock === 'outofstock' ? 'out-stock' : 'in-stock';
+  const stockLabel = p.stock === 'outofstock' ? '❌ Out of Stock' : '✅ In Stock';
+  const dated = p.uploadedAt ? new Date(p.uploadedAt.seconds ? p.uploadedAt.seconds * 1000 : p.uploadedAt).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'2-digit'}) : '—';
+  return `
+  <div class="ig-card ${p.hidden ? 'hidden-prod' : ''}" id="card-${p.id}">
+    ${thumb}
+    <div class="ig-card-body">
+      ${p.badge ? `<span style="font-size:.68rem;font-weight:700;background:rgba(168,85,247,0.2);color:var(--accent);padding:.15rem .5rem;border-radius:4px;margin-bottom:.35rem;display:inline-block">${p.badge}</span>` : ''}
+      <div class="ig-card-title">${p.title || 'Untitled'}</div>
+      <div class="ig-card-price">₹${Number(p.price || 0).toLocaleString('en-IN')}</div>
+      <span class="ig-card-stock ${stockClass}">${stockLabel}</span>
+      <div class="ig-card-meta">
+        <span class="ig-card-date">${dated}</span>
+        <span class="ig-card-cat">${p.category || 'other'}</span>
+      </div>
+    </div>
+    <div class="ig-actions">
+      <button class="act-btn act-edit" onclick="openEdit('${p.id}')"><i class="fas fa-pen"></i> Edit</button>
+      <button class="act-btn act-hide" onclick="toggleHide('${p.id}',${!!p.hidden})">${p.hidden ? '<i class="fas fa-eye"></i> Show' : '<i class="fas fa-eye-slash"></i> Hide'}</button>
+      <button class="act-btn act-del" onclick="deleteProduct('${p.id}','${(p.mediaUrl||'').replace(/'/g,'')}')"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// UPLOAD SYSTEM
+// ============================================================
+function onDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag'); }
+function onDragLeave() { document.getElementById('upload-zone').classList.remove('drag'); }
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f) selectFile(f);
+}
+function onFileSelect(e) { const f = e.target.files[0]; if (f) selectFile(f); }
+
+function selectFile(f) {
+  if (f.size > 50 * 1024 * 1024) { toast('File too large — max 50MB', 'error'); return; }
+  uploadFile = f;
+  const isVideo = f.type.startsWith('video/');
+  const wrap = document.getElementById('preview-wrap');
+  if (isVideo) {
+    wrap.innerHTML = `<video class="preview-media" src="${URL.createObjectURL(f)}" controls></video>`;
+  } else {
+    wrap.innerHTML = `<img class="preview-media" src="${URL.createObjectURL(f)}">`;
+  }
+  document.getElementById('preview-box').style.display = 'block';
+  document.getElementById('upload-zone').style.display = 'none';
+}
+
+function cancelUpload() {
+  uploadFile = null;
+  document.getElementById('preview-box').style.display = 'none';
+  document.getElementById('upload-zone').style.display = 'block';
+  document.getElementById('upload-input').value = '';
+  document.getElementById('prog-wrap').style.display = 'none';
+  document.getElementById('prog-label').style.display = 'none';
+  ['f-title','f-price','f-desc','f-tags'].forEach(id => document.getElementById(id).value = '');
+}
+
+async function publishProduct() {
+  if (!db || !storage) { toast('Firebase not initialised', 'error'); return; }
+  if (!uploadFile) { toast('Select a file first', 'error'); return; }
+  const title = document.getElementById('f-title').value.trim();
+  const price  = parseFloat(document.getElementById('f-price').value) || 0;
+  if (!title) { toast('Product title is required', 'error'); return; }
+
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+  document.getElementById('prog-wrap').style.display = 'block';
+  document.getElementById('prog-label').style.display = 'block';
+
+  try {
+    const ext      = uploadFile.name.split('.').pop().toLowerCase();
+    const filename = `products/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+    const ref      = storage.ref(filename);
+    const task     = ref.put(uploadFile);
+
+    task.on('state_changed', snap => {
+      const pct = Math.round(snap.bytesTransferred / snap.totalBytes * 100);
+      document.getElementById('prog-bar').style.width = pct + '%';
+      document.getElementById('prog-label').textContent = `Uploading… ${pct}%`;
+    });
+
+    await task;
+    const mediaUrl = await ref.getDownloadURL();
+
+    const isVideo = uploadFile.type.startsWith('video/');
+    const tags = document.getElementById('f-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+
+    await db.collection('products').add({
+      title,
+      price,
+      category: document.getElementById('f-cat').value,
+      stock:    document.getElementById('f-stock').value,
+      badge:    document.getElementById('f-badge').value || null,
+      description: document.getElementById('f-desc').value.trim(),
+      tags,
+      mediaUrl,
+      mediaType: isVideo ? 'video' : 'image',
+      hidden: false,
+      uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    toast('✅ Product published — live on website!', 'success');
+    cancelUpload();
+    nav('products');
+  } catch (err) {
+    console.error(err);
+    toast('Upload failed: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-rocket"></i> Publish Live';
+    document.getElementById('prog-wrap').style.display = 'none';
+    document.getElementById('prog-label').style.display = 'none';
+  }
+}
+
+// ============================================================
+// EDIT PRODUCT
+// ============================================================
+function openEdit(id) {
+  const p = allProducts.find(x => x.id === id);
+  if (!p) return;
+  editingId = id;
+  const wrap = document.getElementById('edit-preview-wrap');
+  if (p.mediaType === 'video') {
+    wrap.innerHTML = `<video class="modal-preview" src="${p.mediaUrl}" controls></video>`;
+  } else {
+    wrap.innerHTML = `<img class="modal-preview" src="${p.mediaUrl}" alt="${p.title}">`;
+  }
+  document.getElementById('e-title').value = p.title || '';
+  document.getElementById('e-price').value = p.price || '';
+  document.getElementById('e-cat').value   = p.category || 'silk';
+  document.getElementById('e-stock').value = p.stock || 'instock';
+  document.getElementById('e-badge').value = p.badge || '';
+  document.getElementById('e-tags').value  = (p.tags || []).join(', ');
+  document.getElementById('e-desc').value  = p.description || '';
+  document.getElementById('edit-modal').classList.add('open');
+}
+
+async function saveEdit() {
+  if (!editingId || !db) return;
+  const title = document.getElementById('e-title').value.trim();
+  if (!title) { toast('Title is required', 'error'); return; }
+  try {
+    await db.collection('products').doc(editingId).update({
+      title,
+      price:       parseFloat(document.getElementById('e-price').value) || 0,
+      category:    document.getElementById('e-cat').value,
+      stock:       document.getElementById('e-stock').value,
+      badge:       document.getElementById('e-badge').value || null,
+      tags:        document.getElementById('e-tags').value.split(',').map(t=>t.trim()).filter(Boolean),
+      description: document.getElementById('e-desc').value.trim(),
+    });
+    toast('Product updated!', 'success');
+    closeModal();
+  } catch(err) {
+    toast('Error: ' + err.message, 'error');
+  }
+}
+
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('open');
+  editingId = null;
+}
+
+// ============================================================
+// HIDE / DELETE
+// ============================================================
+async function toggleHide(id, currentlyHidden) {
+  if (!db) return;
+  try {
+    await db.collection('products').doc(id).update({ hidden: !currentlyHidden });
+    toast(currentlyHidden ? 'Product visible on site!' : 'Product hidden from site.', 'success');
+  } catch(err) {
+    toast('Error: ' + err.message, 'error');
+  }
+}
+
+async function deleteProduct(id, mediaUrl) {
+  if (!confirm('Delete this product permanently? This cannot be undone.')) return;
+  if (!db) return;
+  try {
+    await db.collection('products').doc(id).delete();
+    if (mediaUrl && storage) {
+      try { await storage.refFromURL(mediaUrl).delete(); } catch(e) { /* ignore */ }
+    }
+    toast('Product deleted from live site.', 'success');
+  } catch(err) {
+    toast('Error: ' + err.message, 'error');
+  }
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function nav(section) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('section-' + section).classList.add('active');
+  document.getElementById('nav-' + section)?.classList.add('active');
+  const icons = { overview:'fa-chart-line', products:'fa-grip', upload:'fa-cloud-upload-alt' };
+  const names = { overview:'Overview', products:'Products', upload:'Upload New Product' };
+  document.getElementById('tb-title').innerHTML =
+    `<i class="fas ${icons[section]||'fa-cog'}" style="color:var(--accent);margin-right:.5rem"></i>${names[section]||section}`;
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+let toastTimer;
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = type; el.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.style.display = 'none', 3500);
+}
+
+// Close modal on overlay click
+document.getElementById('edit-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>

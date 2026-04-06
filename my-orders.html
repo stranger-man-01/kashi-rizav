@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders — Kashi Rivaz</title>
+    <meta name="description" content="Track your Kashi Rivaz saree orders — view payment status, delivery updates and order history.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0610 0%, #1a0820 60%, #0d0515 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* HEADER */
+        .mo-header {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .mo-header img { height: 50px; object-fit: contain; }
+        .mo-header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #f0c040;
+        }
+        .mo-header-links {
+            margin-left: auto;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .mo-header-links a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .mo-header-links a:hover { color: #f0c040; }
+
+        /* PAGE BODY */
+        .mo-wrap {
+            max-width: 860px;
+            margin: 2rem auto 5rem;
+            padding: 0 1rem;
+        }
+
+        /* HERO */
+        .mo-hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .mo-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #f0c040;
+            margin-bottom: 0.4rem;
+        }
+        .mo-hero p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* SEARCH BAR */
+        .mo-search-bar {
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .mo-search-bar input {
+            flex: 1;
+            min-width: 180px;
+            background: rgba(255,255,255,0.07);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            font-size: 0.9rem;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .mo-search-bar input::placeholder { color: rgba(255,255,255,0.3); }
+        .mo-search-bar input:focus { border-color: #f0c040; }
+        .mo-search-bar .mo-search-hint {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+        }
+        .btn-find {
+            background: linear-gradient(135deg, #f0c040, #d4a422);
+            color: #1a0820;
+            border: none;
+            border-radius: 10px;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-find:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(240,192,64,0.3); }
+
+        /* ORDER CARD */
+        .order-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.25s;
+        }
+        .order-card:hover { border-color: rgba(240,192,64,0.3); }
+
+        /* Card Header */
+        .oc-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .oc-order-id {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.25rem;
+        }
+        .oc-order-id span {
+            font-family: monospace;
+            color: #f0c040;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .oc-date {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .oc-total {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #f0c040;
+        }
+        .oc-total-lbl {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+            text-align: right;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .s-pending  { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .s-confirmed{ background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+        .s-shipped  { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+        .s-delivered{ background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+        .s-cancelled{ background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+        /* Items list */
+        .oc-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 1.1rem;
+        }
+        .oc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .oc-item img {
+            width: 48px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .oc-item-name {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            flex: 1;
+        }
+        .oc-item-qty { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+        .oc-item-price { font-size: 0.88rem; font-weight: 700; color: #f0c040; flex-shrink: 0; }
+
+        /* Delivery Tracker */
+        .del-tracker {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.5rem 0.5rem 0;
+            margin-bottom: 1rem;
+        }
+        .del-tracker::before {
+            content: '';
+            position: absolute;
+            top: 22px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 2px;
+        }
+        .del-tracker-fill {
+            position: absolute;
+            top: 22px;
+            left: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, #f0c040, #d4a422);
+            border-radius: 2px;
+            transition: width 0.8s ease;
+        }
+        .dt-step { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .dt-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 15px;
+            transition: all 0.4s;
+        }
+        .dt-step.done .dt-dot {
+            background: #f0c040;
+            border-color: #f0c040;
+            box-shadow: 0 0 12px rgba(240,192,64,0.5);
+        }
+        .dt-step.active .dt-dot {
+            background: linear-gradient(135deg,#8B1538,#c02050);
+            border-color: #8B1538;
+            box-shadow: 0 0 16px rgba(139,21,56,0.6);
+            animation: stepPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes stepPulse {
+            0%,100% { box-shadow: 0 0 10px rgba(139,21,56,0.5); }
+            50%      { box-shadow: 0 0 22px rgba(139,21,56,0.3), 0 0 8px rgba(192,32,80,0.4); }
+        }
+        .dt-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.3); font-weight: 600; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.3px; }
+        .dt-step.done .dt-lbl   { color: #f0c040; }
+        .dt-step.active .dt-lbl { color: #f9a8d4; }
+
+        /* Payment info row */
+        .oc-pay-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .oc-pay-row .tag {
+            background: rgba(240,192,64,0.1);
+            border: 1px solid rgba(240,192,64,0.25);
+            color: #f0c040;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* Address row */
+        .oc-address {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+        }
+        .oc-address i { color: #8B1538; margin-top: 2px; flex-shrink: 0; }
+
+        /* Action buttons */
+        .oc-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .btn-wa-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg,#25D366,#1da851);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.55rem 1.1rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-wa-sm:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,211,102,0.35); }
+        .btn-outline-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            padding: 0.55rem 1.1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-outline-sm:hover { border-color: #f0c040; color: #f0c040; }
+
+        /* Empty / Not found state */
+        .mo-empty {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .mo-empty i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: rgba(240,192,64,0.3);
+        }
+        .mo-empty h3 { font-size: 1.15rem; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+        .mo-empty p  { font-size: 0.85rem; }
+
+        /* Trust strip */
+        .mo-trust {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+        }
+        .trust-item i { color: #69cd77; font-size: 0.9rem; }
+
+        /* Whatsapp support floating button */
+        .wa-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg,#25D366,#1da851);
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+            text-decoration: none;
+            z-index: 999;
+            transition: all 0.2s;
+        }
+        .wa-float:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+
+        @media (max-width: 600px) {
+            .mo-header { padding: 0.65rem 1rem; }
+            .mo-wrap { margin: 1rem auto 4rem; }
+            .mo-hero h1 { font-size: 1.5rem; }
+            .oc-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="mo-header">
+    <a href="index.html"><img src="images/kashi rivaz.png" alt="Kashi Rivaz"></a>
+    <span class="mo-header-title">📦 My Orders</span>
+    <nav class="mo-header-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="shop.html"><i class="fas fa-shopping-bag"></i> Shop</a>
+        <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    </nav>
+</header>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/918081429100?text=Hi!%20I%20need%20help%20with%20my%20order%20on%20Kashi%20Rivaz." target="_blank" title="WhatsApp Support">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- MAIN -->
+<div class="mo-wrap">
+    <div class="mo-hero">
+        <h1>📦 My Orders</h1>
+        <p>Track your Kashi Rivaz orders — from payment confirmation to your doorstep.</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="mo-search-bar">
+        <input type="text" id="search-inp" placeholder="Search by Order ID or your name…" autocomplete="off">
+        <button class="btn-find" onclick="searchOrders()"><i class="fas fa-search"></i> Find</button>
+        <span class="mo-search-hint" style="width:100%;margin-top:0.25rem">
+            <i class="fas fa-info-circle"></i> Your Order ID was sent to your WhatsApp after checkout (e.g. <b>ORD-1742563928</b>)
+        </span>
+    </div>
+
+    <!-- ORDERS LIST -->
+    <div id="orders-list"></div>
+
+    <!-- TRUST STRIP -->
+    <div class="mo-trust">
+        <div class="trust-item"><i class="fas fa-shield-alt"></i> Secure Payments</div>
+        <div class="trust-item"><i class="fas fa-truck"></i> Free Delivery in India</div>
+        <div class="trust-item"><i class="fas fa-undo"></i> 7-Day Returns</div>
+        <div class="trust-item"><i class="fas fa-award"></i> 100% Authentic Sarees</div>
+        <div class="trust-item"><i class="fab fa-whatsapp"></i> WhatsApp Support: 80814 29100</div>
+    </div>
+</div>
+
+<script src="js/userData.js"></script>
+<script src="js/database.js"></script>
+<script src="js/api.js"></script>
+<script src="js/products.js"></script>
+<script>
+// ═══════════════════════════════════
+// STEPS CONFIG
+// ═══════════════════════════════════
+const STEPS = [
+    { key:'pending',   icon:'🕐', label:'Order\nReceived' },
+    { key:'confirmed', icon:'✅', label:'Payment\nVerified' },
+    { key:'shipped',   icon:'📦', label:'Shipped' },
+    { key:'out',       icon:'🚚', label:'Out for\nDelivery' },
+    { key:'delivered', icon:'🎉', label:'Delivered' }
+];
+const STATUS_ORDER = ['pending','confirmed','shipped','out','delivered'];
+
+function statusIndex(status) {
+    const s = (status||'').toLowerCase();
+    if (s === 'pending')   return 0;
+    if (s === 'confirmed') return 1;
+    if (s === 'shipped')   return 2;
+    if (s === 'out_for_delivery' || s === 'out') return 3;
+    if (s === 'delivered') return 4;
+    if (s === 'cancelled') return -1;
+    return 0;
+}
+
+function badgeClass(status) {
+    const s = (status||'').toLowerCase();
+    if (s === 'pending')   return 's-pending';
+    if (s === 'confirmed') return 's-confirmed';
+    if (s === 'shipped')   return 's-shipped';
+    if (s === 'delivered') return 's-delivered';
+    if (s === 'cancelled') return 's-cancelled';
+    return 's-pending';
+}
+
+function statusLabel(status) {
+    const s = (status||'').toLowerCase();
+    const map = {
+        pending:'⏳ Pending Confirmation',
+        confirmed:'✅ Payment Confirmed',
+        shipped:'📦 Shipped',
+        out_for_delivery:'🚚 Out for Delivery',
+        delivered:'🎉 Delivered',
+        cancelled:'❌ Cancelled',
+        refunded:'💸 Refunded'
+    };
+    return map[s] || status || 'Unknown';
+}
+
+function statusMsg(status) {
+    const s = (status||'').toLowerCase();
+    const map = {
+        pending:   '⏳ Your payment is being verified. This usually takes a few hours. We\'ll notify you on WhatsApp once confirmed!',
+        confirmed: '✅ Your payment has been received and verified. We are packing your saree now.',
+        shipped:   '📦 Your order is packed and handed over to the courier. Track it on WhatsApp.',
+        out_for_delivery: '🚚 Your delivery is out! The delivery partner will arrive today.',
+        delivered: '🎉 Your saree has been delivered! We hope you love it. Share your experience with us!',
+        cancelled: '❌ This order was cancelled. If you paid, a refund will be processed within 3–5 business days.',
+        refunded:  '💸 Refund has been initiated. Please allow 3–5 business days for the amount to reflect.'
+    };
+    return map[s] || 'Your order is being processed.';
+}
+
+function fmtDate(d) {
+    if (!d) return '—';
+    const dt = new Date(d);
+    return isNaN(dt) ? d : dt.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+
+// ═══════════════════════════════════
+// RENDER TRACKER
+// ═══════════════════════════════════
+function renderTracker(status) {
+    const idx = statusIndex(status);
+    if (idx < 0) {
+        return `<div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:0.75rem 1rem;font-size:0.82rem;color:#f87171;margin-bottom:1rem;">
+            ❌ This order has been <b>cancelled</b>. If you paid, a refund will be processed within 3–5 business days.
+        </div>`;
+    }
+    const pct = idx === 0 ? 0 : Math.min(100, (idx / (STEPS.length - 1)) * 100);
+    
+    let stepsHtml = STEPS.map((step, i) => {
+        let cls = '';
+        if (i < idx) cls = 'done';
+        else if (i === idx) cls = 'active';
+        return `<div class="dt-step ${cls}">
+            <div class="dt-dot">${i < idx ? '✓' : step.icon}</div>
+            <div class="dt-lbl">${step.label.replace('\n','<br>')}</div>
+        </div>`;
+    }).join('');
+
+    return `<div class="del-tracker">
+        <div class="del-tracker-fill" style="width:calc(${pct}% * (100% - 48px) / 100 + 24px - 24px); width:${pct > 0 ? `calc(${pct}% * (100vw - 100px) / 100)` : '0px'}"></div>
+        ${stepsHtml}
+    </div>`;
+}
+
+// ═══════════════════════════════════
+// RENDER ONE ORDER CARD
+// ═══════════════════════════════════
+function renderOrderCard(order) {
+    const items = Array.isArray(order.items) ? order.items : [];
+    const statusIdx = statusIndex(order.status);
+    const pct = statusIdx < 0 ? 0 : Math.min(100, (statusIdx / (STEPS.length - 1)) * 100);
+
+    // Item rows
+    const itemsHtml = items.length ? items.map(item => {
+        const price  = parseFloat(item.price) || 0;
+        const qty    = parseInt(item.quantity) || 1;
+        const src    = item.image || 'images/sa-1.jpg';
+        return `<div class="oc-item">
+            <img src="${src}" alt="${item.name || 'Product'}" onerror="this.style.display='none'">
+            <div style="flex:1;min-width:0">
+                <div class="oc-item-name">${item.name || 'Saree'}</div>
+                <div class="oc-item-qty">Qty: ${qty}</div>
+            </div>
+            <div class="oc-item-price">₹${(price*qty).toLocaleString('en-IN')}</div>
+        </div>`;
+    }).join('') : `<div style="font-size:0.82rem;color:rgba(255,255,255,0.3);padding:0.25rem 0">No item details available</div>`;
+
+    // Address
+    const shipping = order.shipping || order.address || {};
+    const addr = shipping.fullAddress || [
+        shipping.house, shipping.street, shipping.landmark,
+        shipping.city, shipping.state, shipping.postalCode
+    ].filter(Boolean).join(', ') || order.address || '—';
+
+    // UTR/transaction
+    const utr = order.transactionId || order.utr || '';
+    const payMethod = (order.paymentMethod || 'UPI').toUpperCase();
+
+    // WhatsApp support link
+    const msgText = encodeURIComponent(
+        `Hello Kashi Rivaz! 🙏\n\nI need an update on my order.\n\n*Order ID:* ${order.orderId}\n*Name:* ${order.customerName || 'Customer'}\n*Status I see:* ${order.status || 'Pending'}\n\nPlease let me know the latest update. Thank you!`
+    );
+    const supportLink = `https://wa.me/918081429100?text=${msgText}`;
+
+    // Delivery date estimate (7–10 day window — show max of 10 days)
+    const orderDate   = order.createdAt ? new Date(order.createdAt) : new Date();
+    const expectedDel = new Date(orderDate.getTime() + 10 * 24 * 60 * 60 * 1000);
+    const delStr      = expectedDel.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+
+    // Tracker steps HTML
+    const stepsHtml = STEPS.map((step, i) => {
+        let cls = '';
+        if (i < statusIdx) cls = 'done';
+        else if (i === statusIdx) cls = 'active';
+        return `<div class="dt-step ${cls}">
+            <div class="dt-dot">${i < statusIdx ? '✓' : step.icon}</div>
+            <div class="dt-lbl">${step.label.replace('\n','<br>')}</div>
+        </div>`;
+    }).join('');
+    const fillWidth = pct;
+
+    return `
+    <div class="order-card" id="oc-${order.orderId}">
+        <!-- HEADER ROW -->
+        <div class="oc-header">
+            <div>
+                <div class="oc-order-id">Order ID: <span>${order.orderId}</span></div>
+                <div class="oc-date"><i class="fas fa-calendar-alt"></i> Placed: ${fmtDate(order.createdAt)}</div>
+                <div style="margin-top:0.5rem">
+                    <span class="status-badge ${badgeClass(order.status)}">${statusLabel(order.status)}</span>
+                </div>
+            </div>
+            <div style="text-align:right">
+                <div class="oc-total-lbl">TOTAL PAID</div>
+                <div class="oc-total">₹${(order.total||0).toLocaleString('en-IN')}</div>
+                ${order.status !== 'cancelled' ? `<div style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-top:4px">Est. delivery by ${delStr}</div>` : ''}
+            </div>
+        </div>
+
+        <!-- STATUS MESSAGE -->
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.82rem;color:rgba(255,255,255,0.6);">
+            ${statusMsg(order.status)}
+        </div>
+
+        <!-- DELIVERY TRACKER -->
+        ${order.status !== 'cancelled' ? `
+        <div class="del-tracker">
+            <div class="del-tracker-fill" style="width:${fillWidth > 0 ? `calc(${fillWidth}% - ${fillWidth > 50 ? '0px' : '12px'})` : '0'}"></div>
+            ${stepsHtml}
+        </div>` : ''}
+
+        <!-- ORDER ITEMS -->
+        <div class="oc-items">${itemsHtml}</div>
+
+        <!-- PAYMENT INFO -->
+        <div class="oc-pay-row">
+            <i class="fas fa-credit-card" style="color:#f0c040"></i>
+            <span>Payment:</span>
+            <span class="tag">${payMethod}</span>
+            ${utr ? `<span>UTR/Ref: <b style="color:rgba(255,255,255,0.7)">${utr}</b></span>` : ''}
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="oc-address">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>${addr}</span>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="oc-actions">
+            <a class="btn-wa-sm" href="${supportLink}" target="_blank">
+                <i class="fab fa-whatsapp"></i> Track on WhatsApp
+            </a>
+            <button class="btn-outline-sm" onclick="copyOrderId('${order.orderId}',this)">
+                <i class="fas fa-copy"></i> Copy Order ID
+            </button>
+            ${order.status === 'delivered' ? `
+            <a class="btn-outline-sm" href="https://wa.me/918081429100?text=${encodeURIComponent(`Hi Kashi Rivaz! I'd like to share my feedback about order ${order.orderId}. `)}" target="_blank">
+                <i class="fas fa-star"></i> Leave Review
+            </a>` : ''}
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════
+// LOAD & DISPLAY ORDERS
+// ═══════════════════════════════════
+let allOrders = [];
+
+async function loadOrders() {
+    const list = document.getElementById('orders-list');
+    list.innerHTML = `<div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.3)"><i class="fas fa-spinner fa-spin" style="font-size:2rem;margin-bottom:1rem;display:block;color:rgba(240,192,64,0.4)"></i>Loading your orders…</div>`;
+
+    // Try server first, then localStorage
+    try {
+        const resp = await fetch('/api/orders', {
+            headers: { 'X-Admin-Key': 'KR_Admin_Secret_K9x2pLmQ8vRnWt4j' },
+            signal: AbortSignal.timeout(4000)
+        });
+        const data = await resp.json();
+        if (data && data.success && data.orders) {
+            allOrders = data.orders;
+        } else {
+            throw new Error('No server data');
+        }
+    } catch (e) {
+        // Fallback: localStorage
+        const db = JSON.parse(localStorage.getItem('shivanshSareeDB') || '{}');
+        allOrders = db.orders || [];
+    }
+
+    // Also check currentUser to filter their orders
+    let currentUser = null;
+    try { currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null'); } catch {}
+
+    // If logged-in user, show only their orders by default
+    let displayOrders = allOrders;
+    if (currentUser && currentUser.id) {
+        displayOrders = allOrders.filter(o => String(o.customerId) === String(currentUser.id) || o.customerName === currentUser.firstName + ' ' + currentUser.lastName);
+    }
+
+    renderList(displayOrders);
+}
+
+function renderList(orders) {
+    const list = document.getElementById('orders-list');
+    if (!orders || !orders.length) {
+        list.innerHTML = `<div class="mo-empty">
+            <i class="fas fa-box-open"></i>
+            <h3>No orders found</h3>
+            <p>If you placed an order, search by your Order ID above.<br>
+            Order ID is in the WhatsApp message you received after checkout.</p>
+            <p style="margin-top:1rem">
+                <a href="shop.html" style="color:#f0c040;text-decoration:none;font-weight:600">
+                    🛍️ Start Shopping
+                </a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="https://wa.me/918081429100?text=Hi!%20I%20need%20help%20with%20my%20order." target="_blank"
+                   style="color:#25D366;text-decoration:none;font-weight:600">
+                    <i class="fab fa-whatsapp"></i> Contact Support
+                </a>
+            </p>
+        </div>`;
+        return;
+    }
+    // Sort newest first
+    const sorted = [...orders].sort((a,b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
+    list.innerHTML = sorted.map(renderOrderCard).join('');
+}
+
+function searchOrders() {
+    const q = document.getElementById('search-inp').value.trim().toLowerCase();
+    if (!q) { renderList(allOrders); return; }
+    const results = allOrders.filter(o =>
+        (o.orderId || '').toLowerCase().includes(q) ||
+        (o.customerName || '').toLowerCase().includes(q) ||
+        (o.shipping && (o.shipping.city || '').toLowerCase().includes(q))
+    );
+    renderList(results);
+}
+
+function copyOrderId(id, btn) {
+    navigator.clipboard.writeText(id).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => btn.innerHTML = orig, 1800);
+    });
+}
+
+// Allow Enter key on search
+document.getElementById('search-inp').addEventListener('keydown', e => {
+    if (e.key === 'Enter') searchOrders();
+});
+
+// Load on DOM ready
+document.addEventListener('DOMContentLoaded', loadOrders);
+if (document.readyState !== 'loading') loadOrders();
+</script>
+
+<script src="js/cms-bar.js"></script>
+</body>
+</html>

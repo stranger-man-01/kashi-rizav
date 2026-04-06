@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Kashi Rivaz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Razorpay Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0610 0%, #1a0820 50%, #0d0515 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* ── TOP HEADER ── */
+        .pay-header {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .pay-header img { height: 52px; object-fit: contain; }
+        .pay-header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #f0c040;
+            margin-left: 0.5rem;
+        }
+        .pay-header-back {
+            margin-left: auto;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+        .pay-header-back:hover { color: #f0c040; }
+
+        /* ── PROGRESS STEPS ── */
+        .pay-steps {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 1.5rem 1rem 0;
+        }
+        .pay-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step-bubble {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 2px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        .step-bubble.done { background: #f0c040; border-color: #f0c040; color: #1a0820; }
+        .step-bubble.active { background: linear-gradient(135deg,#8B1538,#c02050); border-color: #8B1538; color: #fff; box-shadow: 0 0 16px rgba(139,21,56,0.5); }
+        .step-text { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+        .step-text.active { color: #f0c040; font-weight: 600; }
+        .step-line { width: 60px; height: 2px; background: rgba(255,255,255,0.12); margin: 0 0.3rem; }
+        .step-line.done { background: #f0c040; }
+
+        /* ── MAIN LAYOUT ── */
+        .pay-wrap {
+            max-width: 1100px;
+            margin: 1.5rem auto 4rem;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+        }
+
+        /* ── GLASS CARD ── */
+        .glass-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .glass-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #f0c040;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(240,192,64,0.2);
+        }
+
+        /* ── FORM FIELDS ── */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-grid.full { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group.span2 { grid-column: 1 / -1; }
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group label .req { color: #f0c040; margin-left: 2px; }
+        .form-group input,
+        .form-group select {
+            background: rgba(255,255,255,0.07);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.7rem 0.9rem;
+            font-size: 0.9rem;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        .form-group select option { background: #1a0820; color: #fff; }
+        .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #f0c040;
+            background: rgba(240,192,64,0.06);
+            box-shadow: 0 0 0 3px rgba(240,192,64,0.1);
+        }
+        .form-group input.error { border-color: #ff6b6b; }
+
+        /* ── PAYMENT METHODS ── */
+        .pay-methods { display: flex; flex-direction: column; gap: 0.75rem; }
+        .pay-method-opt {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .pay-method-opt:hover { border-color: rgba(240,192,64,0.4); background: rgba(240,192,64,0.04); }
+        .pay-method-opt.selected { border-color: #f0c040; background: rgba(240,192,64,0.08); box-shadow: 0 0 20px rgba(240,192,64,0.12); }
+        .pay-method-opt input[type=radio] { accent-color: #f0c040; width: 17px; height: 17px; }
+        .pay-method-info h4 { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 2px; }
+        .pay-method-info p { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+        .pay-method-icon { font-size: 1.4rem; width: 36px; text-align: center; }
+
+        /* UPI expand box */
+        .upi-expand {
+            display: none;
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(67,160,71,0.3);
+        }
+        .upi-expand.show { display: block; }
+        .upi-id-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(67,160,71,0.1);
+            border: 1.5px solid rgba(67,160,71,0.4);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .upi-id-val { font-size: 1.05rem; font-weight: 700; color: #69cd77; letter-spacing: 0.5px; }
+        .copy-btn {
+            background: rgba(67,160,71,0.2);
+            border: 1px solid #43a047;
+            color: #69cd77;
+            padding: 4px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover { background: rgba(67,160,71,0.35); }
+        .qr-img-wrap { text-align: center; margin: 0.75rem 0; }
+        .qr-img-wrap img { max-width: 200px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+
+        /* UTR box */
+        .utr-field {
+            margin-top: 0.75rem;
+            background: rgba(255,193,7,0.07);
+            border: 1.5px solid rgba(255,193,7,0.3);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .utr-field label { font-size: 0.75rem; font-weight: 600; color: #ffc107; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.5rem; }
+        .utr-field input {
+            background: rgba(255,255,255,0.07);
+            border: 1.5px solid rgba(255,193,7,0.3);
+            border-radius: 8px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            color: #fff;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+        .utr-field input:focus { border-color: #ffc107; box-shadow: 0 0 0 3px rgba(255,193,7,0.12); }
+
+        /* ── ORDER SUMMARY (RIGHT COL) ── */
+        .order-summary-card { position: sticky; top: 90px; }
+        .order-total-banner {
+            background: linear-gradient(135deg, #8B1538, #c02050);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+        .order-total-banner .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 6px; }
+        .order-total-banner .amt { font-size: 2.4rem; font-weight: 800; color: #f0c040; }
+        .order-items-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
+        .oi-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .oi-row:last-child { border-bottom: none; }
+        .oi-img { width: 52px; height: 65px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .oi-name { flex: 1; font-size: 0.83rem; color: rgba(255,255,255,0.85); line-height: 1.3; }
+        .oi-qty { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+        .oi-price { font-size: 0.9rem; font-weight: 700; color: #f0c040; flex-shrink: 0; }
+        .summary-rows { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.85rem; }
+        .s-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: rgba(255,255,255,0.6); padding: 0.3rem 0; }
+        .s-row.total { font-size: 1.05rem; font-weight: 700; color: #fff; border-top: 1px solid rgba(255,255,255,0.12); margin-top: 0.5rem; padding-top: 0.75rem; }
+        .s-row.saving { color: #69cd77; }
+
+        /* Trust badges */
+        .trust-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+        .trust-chip { display: flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+        .trust-chip i { color: #69cd77; }
+
+        /* ── PLACE ORDER BUTTON ── */
+        .btn-place-order {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f0c040, #d4a422);
+            color: #1a0820;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            letter-spacing: 0.3px;
+        }
+        .btn-place-order:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,192,64,0.35); }
+        .btn-place-order:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* ── LOADING OVERLAY ── */
+        .pay-loading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,3,18,0.92);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .pay-loading.show { display: flex; }
+        .pay-spinner {
+            width: 56px; height: 56px;
+            border: 4px solid rgba(240,192,64,0.15);
+            border-top-color: #f0c040;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .pay-loading p { font-size: 1rem; color: rgba(255,255,255,0.7); }
+
+        /* ── ORDER CONFIRMED SCREEN ── */
+        #confirmed-screen {
+            display: none;
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem;
+        }
+        #confirmed-screen.show { display: block; }
+        .confirm-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        .confirm-icon {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg,#43a047,#66bb6a);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 42px;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 6px 24px rgba(67,160,71,0.45);
+            animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+        }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .confirm-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: #f0c040; margin-bottom: 0.5rem; }
+        .confirm-sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 1rem; }
+        .confirm-order-id {
+            display: inline-block;
+            background: rgba(240,192,64,0.1);
+            border: 1.5px solid rgba(240,192,64,0.4);
+            color: #f0c040;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 24px;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* delivery tracker */
+        .del-track {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            padding: 0 10px;
+            margin: 1.25rem 0;
+        }
+        .del-track::before {
+            content: '';
+            position: absolute;
+            top: 18px; left: 30px; right: 30px;
+            height: 3px;
+            background: linear-gradient(to right, #43a047 20%, rgba(255,255,255,0.1) 20%);
+        }
+        .del-step { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .del-icon {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 16px;
+        }
+        .del-step.done .del-icon { background: #43a047; border-color: #43a047; }
+        .del-step.active .del-icon {
+            background: linear-gradient(135deg,#8B1538,#c02050);
+            border-color: #8B1538;
+            box-shadow: 0 0 12px rgba(139,21,56,0.5);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 0 12px rgba(139,21,56,0.5); }
+            50% { box-shadow: 0 0 24px rgba(139,21,56,0.3); }
+        }
+        .del-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.45); font-weight: 600; line-height: 1.3; }
+        .del-step.done .del-lbl { color: #69cd77; }
+        .del-step.active .del-lbl { color: #f0c040; }
+
+        /* WhatsApp button on confirm */
+        .wa-confirm-btns { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+        .btn-wa {
+            display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            padding: 0.85rem 1.5rem;
+            background: linear-gradient(135deg,#25D366,#1da851);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s;
+            width: 100%;
+        }
+        .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+        .btn-wa.outline {
+            background: transparent;
+            border: 2px solid #25D366;
+            color: #25D366;
+        }
+        .btn-wa.outline:hover { background: rgba(37,211,102,0.1); box-shadow: 0 4px 16px rgba(37,211,102,0.2); }
+
+        .btn-continue {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.7rem 2rem;
+            background: linear-gradient(135deg,#8B1538,#c02050);
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.25s;
+        }
+        .btn-continue:hover { box-shadow: 0 4px 16px rgba(139,21,56,0.4); transform: translateY(-1px); }
+
+        /* ── SECURITY BADGE ── */
+        .secure-badge {
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+            font-size: 0.75rem; color: rgba(255,255,255,0.35);
+            margin-top: 0.6rem;
+        }
+        .secure-badge i { color: #69cd77; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .pay-wrap { grid-template-columns: 1fr; }
+            .order-summary-card { position: static; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 500px) {
+            .pay-header { padding: 0.65rem 1rem; }
+            .glass-card { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="pay-header">
+    <a href="index.html"><img src="images/kashi rivaz.png" alt="Kashi Rivaz"></a>
+    <span class="pay-header-title">Secure Checkout</span>
+    <a href="cart.html" class="pay-header-back"><i class="fas fa-chevron-left"></i> Back to Cart</a>
+</header>
+
+<!-- ═══ STEPS ═══ -->
+<div class="pay-steps">
+    <div class="pay-step">
+        <div class="step-bubble done"><i class="fas fa-check"></i></div>
+        <div class="step-text">Cart</div>
+    </div>
+    <div class="step-line done"></div>
+    <div class="pay-step">
+        <div class="step-bubble active">2</div>
+        <div class="step-text active">Details & Pay</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="pay-step">
+        <div class="step-bubble">3</div>
+        <div class="step-text">Confirmed</div>
+    </div>
+</div>
+
+<!-- ═══ LOADING OVERLAY ═══ -->
+<div class="pay-loading" id="pay-loading">
+    <div class="pay-spinner"></div>
+    <p>Placing your order…</p>
+</div>
+
+<!-- ═══ ORDER CONFIRMED SCREEN ═══ -->
+<div id="confirmed-screen">
+    <div class="confirm-card">
+        <div class="confirm-icon">✓</div>
+        <div class="confirm-title">Order Confirmed! 🎉</div>
+        <div class="confirm-sub">Thank you! Your Kashi Rivaz saree is on its way.</div>
+        <div class="confirm-order-id" id="conf-order-id">Order ID: —</div>
+
+        <div class="del-track">
+            <div class="del-step done">
+                <div class="del-icon">✓</div>
+                <div class="del-lbl">Confirmed</div>
+            </div>
+            <div class="del-step active">
+                <div class="del-icon">📦</div>
+                <div class="del-lbl">Being Packed</div>
+            </div>
+            <div class="del-step">
+                <div class="del-icon">🚚</div>
+                <div class="del-lbl">Shipped</div>
+            </div>
+            <div class="del-step">
+                <div class="del-icon">🏠</div>
+                <div class="del-lbl">Out for Delivery</div>
+            </div>
+            <div class="del-step">
+                <div class="del-icon">🎉</div>
+                <div class="del-lbl">Delivered</div>
+            </div>
+        </div>
+
+        <div style="background:rgba(67,160,71,0.1);border:1px solid rgba(67,160,71,0.3);border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:left;">
+            <strong style="color:#69cd77;">🚀 Expected Delivery:</strong> within 7–10 days<br>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">We'll contact you on WhatsApp for updates.</span>
+        </div>
+
+        <div class="wa-confirm-btns">
+            <a id="wa-user-link" href="#" target="_blank" class="btn-wa">
+                <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i>
+                Send My Order Details on WhatsApp
+            </a>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.35);">Tap above to share your order confirmation with yourself on WhatsApp</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:0.6rem;margin-top:0.75rem;">
+            <a href="shop.html" class="btn-continue" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                🛍️ Continue Shopping
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ MAIN FORM ═══ -->
+<div class="pay-wrap" id="pay-wrap">
+
+    <!-- LEFT COLUMN -->
+    <div class="pay-left">
+
+        <!-- Customer Details -->
+        <div class="glass-card">
+            <h2><i class="fas fa-user-circle" style="color:#f0c040;"></i> Your Details</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>First Name <span class="req">*</span></label>
+                    <input type="text" id="f-fname" placeholder="Priya">
+                </div>
+                <div class="form-group">
+                    <label>Last Name <span class="req">*</span></label>
+                    <input type="text" id="f-lname" placeholder="Sharma">
+                </div>
+                <div class="form-group">
+                    <label>Primary Contact No. <span class="req">*</span></label>
+                    <input type="tel" id="f-phone1" placeholder="+91 98765 43210">
+                </div>
+                <div class="form-group">
+                    <label>Alternate Contact No.</label>
+                    <input type="tel" id="f-phone2" placeholder="+91 99999 00000 (optional)">
+                </div>
+                <div class="form-group span2">
+                    <label>WhatsApp Number <span class="req">*</span></label>
+                    <input type="tel" id="f-whatsapp" placeholder="+91 98765 43210 (for order updates)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Delivery Address -->
+        <div class="glass-card">
+            <h2><i class="fas fa-map-marker-alt" style="color:#f0c040;"></i> Delivery Address</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>House / Flat No. <span class="req">*</span></label>
+                    <input type="text" id="f-house" placeholder="e.g. 12, Flat 3B">
+                </div>
+                <div class="form-group">
+                    <label>Street / Colony / Area <span class="req">*</span></label>
+                    <input type="text" id="f-street" placeholder="e.g. MG Road, Shyam Nagar">
+                </div>
+                <div class="form-group">
+                    <label>Landmark / Nearby Place</label>
+                    <input type="text" id="f-landmark" placeholder="e.g. Near Bus Stand">
+                </div>
+                <div class="form-group">
+                    <label>City <span class="req">*</span></label>
+                    <input type="text" id="f-city" placeholder="e.g. Varanasi">
+                </div>
+                <div class="form-group">
+                    <label>State <span class="req">*</span></label>
+                    <input type="text" id="f-state" placeholder="e.g. Uttar Pradesh">
+                </div>
+                <div class="form-group">
+                    <label>PIN Code <span class="req">*</span></label>
+                    <input type="text" id="f-pin" placeholder="e.g. 221001" maxlength="6">
+                </div>
+                <div class="form-group span2">
+                    <label>Country <span class="req">*</span></label>
+                    <select id="f-country">
+                        <option value="India">🇮🇳 India</option>
+                        <option value="USA">🇺🇸 United States</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                        <option value="UAE">🇦🇪 UAE</option>
+                        <option value="Singapore">🇸🇬 Singapore</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety / Additional Info -->
+        <div class="glass-card">
+            <h2><i class="fas fa-shield-alt" style="color:#f0c040;"></i> Safety & Additional Info</h2>
+            <div class="form-grid">
+                <div class="form-group span2">
+                    <label>Special Delivery Instructions (optional)</label>
+                    <input type="text" id="f-instructions" placeholder="e.g. Call before delivery / Leave at reception">
+                </div>
+                <div class="form-group span2">
+                    <label>Address Type</label>
+                    <select id="f-addr-type">
+                        <option value="Home">🏠 Home</option>
+                        <option value="Office">🏢 Office / Work</option>
+                        <option value="Other">📍 Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="glass-card">
+            <h2><i class="fas fa-credit-card" style="color:#f0c040;"></i> Payment Method</h2>
+
+            <!-- Razorpay All-in-One Badge -->
+            <div style="background:linear-gradient(135deg,rgba(32,109,222,0.15),rgba(32,109,222,0.06));border:1.5px solid rgba(32,109,222,0.4);border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1rem;text-align:center;">
+                <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(32,109,222,0.2);border:1px solid rgba(32,109,222,0.5);padding:0.3rem 1rem;border-radius:999px;font-size:0.75rem;font-weight:700;color:#6ea8fe;margin-bottom:0.75rem;letter-spacing:0.5px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#6ea8fe"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                    SECURED BY RAZORPAY
+                </div>
+                <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">All Payment Methods in One Click</div>
+                <div style="display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.6rem;">
+                    <span style="background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;font-size:0.72rem;color:rgba(255,255,255,0.8);">📲 UPI</span>
+                    <span style="background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;font-size:0.72rem;color:rgba(255,255,255,0.8);">💳 Cards</span>
+                    <span style="background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;font-size:0.72rem;color:rgba(255,255,255,0.8);">🏦 Net Banking</span>
+                    <span style="background:rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;font-size:0.72rem;color:rgba(255,255,255,0.8);">👛 Wallets</span>
+                </div>
+            </div>
+
+            <!-- Amount Display -->
+            <div style="background:linear-gradient(135deg,rgba(240,192,64,0.15),rgba(240,192,64,0.07));border:2px solid rgba(240,192,64,0.5);border-radius:14px;padding:1rem 1.25rem;text-align:center;margin-bottom:0.75rem;">
+                <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">💰 Total Amount to Pay</div>
+                <div style="font-size:2.2rem;font-weight:800;color:#f0c040;letter-spacing:1px;">₹<span id="upi-amount-display">—</span></div>
+                <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px;">Shipping FREE · 100% Secure</div>
+            </div>
+
+            <div style="background:rgba(37,211,102,0.07);border:1px solid rgba(37,211,102,0.2);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.5rem;align-items:center;">
+                <i class="fas fa-lock" style="color:#25D366;font-size:1rem;"></i>
+                <span style="font-size:0.78rem;color:rgba(255,255,255,0.6);">Bank-grade 256-bit SSL encryption · Powered by Razorpay</span>
+            </div>
+        </div>
+
+        <!-- Place Order (mobile) -->
+        <div id="mobile-cta" style="display:none;">
+            <button class="btn-place-order" onclick="placeOrder()">
+                <i class="fas fa-lock"></i> Place Order Securely
+            </button>
+            <div class="secure-badge"><i class="fas fa-shield-alt"></i> Safe & Secure Payments</div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Order Summary -->
+    <div class="order-summary-card">
+        <div class="order-total-banner">
+            <div class="lbl">✦ TOTAL AMOUNT TO PAY</div>
+            <div class="amt">₹<span id="disp-total">0</span></div>
+            <div style="font-size:0.7rem;opacity:0.7;margin-top:4px;">Prices as listed on our shop</div>
+        </div>
+
+        <div class="glass-card" style="margin-bottom:0;">
+            <h2><i class="fas fa-shopping-bag" style="color:#f0c040;"></i> Your Order</h2>
+            <div class="order-items-list" id="oi-list"></div>
+
+            <div class="summary-rows">
+                <div class="s-row"><span>Subtotal</span><span id="s-sub">₹0</span></div>
+                <div class="s-row saving"><span>Discount (20%)</span><span id="s-disc">- ₹0</span></div>
+                <div class="s-row"><span>Shipping</span><span style="color:#69cd77;">FREE</span></div>
+                <div class="s-row total"><span>Total</span><span id="s-total">₹0</span></div>
+            </div>
+
+            <button class="btn-place-order" id="desktop-cta" onclick="placeOrder()">
+                <i class="fas fa-lock"></i> Place Order Securely
+            </button>
+            <div class="secure-badge"><i class="fas fa-shield-alt"></i> Safe & Secure Payments</div>
+
+            <div class="trust-row">
+                <span class="trust-chip"><i class="fas fa-undo"></i> 7-day returns</span>
+                <span class="trust-chip"><i class="fas fa-truck"></i> Free delivery</span>
+                <span class="trust-chip"><i class="fas fa-award"></i> 100% authentic</span>
+            </div>
+        </div>
+    </div>
+
+</div><!-- end pay-wrap -->
+
+<!-- ═══ FOOTER (simple) ═══ -->
+<footer style="background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.07);text-align:center;padding:1.5rem 1rem;font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:2rem;">
+    © 2026 Kashi Rivaz — Premium Banarasi Sarees | Varanasi, U.P. | +91 80814 29100
+</footer>
+
+<!-- Scripts -->
+<script src="js/userData.js"></script>
+<script src="js/database.js"></script>
+<script src="js/api.js"></script>
+<script src="js/script.js"></script>
+<script>
+// ══════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════
+const OWNER_WHATSAPP = '918081429100'; // owner's WhatsApp number
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let selectedMethod = null;
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function () {
+    // ── CRITICAL FIX: Ensure 'cart' is populated before rendering ──
+    // script.js may not have loaded the cart yet, so always read from localStorage directly
+    if (!cart || cart.length === 0) {
+        try {
+            const raw = localStorage.getItem('shoppingCart');
+            const parsed = raw ? JSON.parse(raw) : [];
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                cart = parsed;
+            }
+        } catch (e) { /* ignore */ }
+    }
+    if (typeof loadCart === 'function') loadCart();
+    // Re-check after loadCart in case it populated from localStorage
+    if (!cart || cart.length === 0) {
+        try {
+            const raw = localStorage.getItem('shoppingCart');
+            const parsed = raw ? JSON.parse(raw) : [];
+            if (Array.isArray(parsed) && parsed.length > 0) cart = parsed;
+        } catch (e) { /* ignore */ }
+    }
+    renderOrderSummary();
+    updateCartUI();
+    prefillFromUser();
+    showMobileCTA();
+});
+
+function showMobileCTA() {
+    const mCTA = document.getElementById('mobile-cta');
+    if (window.innerWidth <= 860 && mCTA) mCTA.style.display = 'block';
+}
+window.addEventListener('resize', showMobileCTA);
+
+// ── Pre-fill details from logged-in user if available ──
+function prefillFromUser() {
+    const raw = localStorage.getItem('currentUser');
+    if (!raw) return;
+    try {
+        const u = JSON.parse(raw);
+        if (u.firstName) document.getElementById('f-fname').value = u.firstName;
+        if (u.lastName)  document.getElementById('f-lname').value  = u.lastName;
+        if (u.phone)     { document.getElementById('f-phone1').value = u.phone; document.getElementById('f-whatsapp').value = u.phone; }
+        if (u.address)   document.getElementById('f-street').value  = u.address;
+        if (u.city)      document.getElementById('f-city').value    = u.city;
+    } catch(e) {}
+}
+
+// ══════════════════════════════════════════
+// ORDER SUMMARY RENDER
+// ══════════════════════════════════════════
+function parsePrice(v) {
+    if (typeof v === 'number' && !isNaN(v)) return v;
+    return parseFloat(String(v||'').replace(/[^\d.]/g,'')) || 0;
+}
+
+function renderOrderSummary() {
+    const list = document.getElementById('oi-list');
+    if (!list) return;
+
+    if (!cart || cart.length === 0) {
+        list.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.85rem;text-align:center;padding:1rem 0;">Your cart is empty</p>';
+        return;
+    }
+
+    let sub = 0;
+    let html = '';
+    cart.forEach(item => {
+        const price = parsePrice(item.price);
+        const qty   = parseInt(item.quantity) || 1;
+        const total = price * qty;
+        sub += total;
+        html += `
+        <div class="oi-row">
+            <img class="oi-img" src="${item.image||'images/sa-1.jpg'}" alt="${item.name}" onerror="this.style.display='none'">
+            <div style="flex:1;min-width:0;">
+                <div class="oi-name">${item.name}</div>
+                <div class="oi-qty">Qty: ${qty}</div>
+            </div>
+            <div class="oi-price">₹${total.toLocaleString('en-IN')}</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+
+    const mrpTotal = Math.round(sub * 1.2);
+    const disc     = mrpTotal - sub;
+
+    document.getElementById('s-sub').textContent   = '₹' + mrpTotal.toLocaleString('en-IN');
+    document.getElementById('s-disc').textContent  = '- ₹' + disc.toLocaleString('en-IN');
+    document.getElementById('s-total').textContent = '₹' + sub.toLocaleString('en-IN');
+    document.getElementById('disp-total').textContent = sub.toLocaleString('en-IN');
+    localStorage.setItem('paymentTotal', sub);
+
+    // ── Update the UPI amount callout so user sees exact amount ──
+    const fmtAmt = sub.toLocaleString('en-IN');
+    const upiAmtEl = document.getElementById('upi-amount-display');
+    const upiInlineEl = document.getElementById('upi-amount-inline');
+    if (upiAmtEl) upiAmtEl.textContent = fmtAmt;
+    if (upiInlineEl) upiInlineEl.textContent = fmtAmt;
+}
+
+// ══════════════════════════════════════════
+// VALIDATION (form fields only)
+// ══════════════════════════════════════════
+function getVal(id) { return (document.getElementById(id)||{}).value?.trim() || ''; }
+function markError(id) {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('error'); el.focus(); }
+}
+function clearErrors() {
+    document.querySelectorAll('input.error, select.error').forEach(el => el.classList.remove('error'));
+}
+
+function validateForm() {
+    clearErrors();
+    const checks = [
+        ['f-fname',  'Please enter your first name'],
+        ['f-lname',  'Please enter your last name'],
+        ['f-phone1', 'Please enter your primary contact number'],
+        ['f-whatsapp','Please enter your WhatsApp number'],
+        ['f-house',  'Please enter your house / flat number'],
+        ['f-street', 'Please enter your street / area'],
+        ['f-city',   'Please enter your city'],
+        ['f-state',  'Please enter your state'],
+        ['f-pin',    'Please enter your PIN code'],
+    ];
+    for (const [id, msg] of checks) {
+        if (!getVal(id)) { alert('❌ ' + msg); markError(id); return false; }
+    }
+    if (!cart || cart.length === 0) { alert('❌ Your cart is empty!'); return false; }
+    return true;
+}
+
+// ══════════════════════════════════════════
+// RAZORPAY PAYMENT — MAIN ENTRY POINT
+// ══════════════════════════════════════════
+async function placeOrder() {
+    if (!validateForm()) return;
+
+    const fname    = getVal('f-fname');
+    const lname    = getVal('f-lname');
+    const phone1   = getVal('f-phone1');
+    const waNum    = getVal('f-whatsapp').replace(/[^0-9]/g, '');
+    const house    = getVal('f-house');
+    const street   = getVal('f-street');
+    const landmark = getVal('f-landmark');
+    const city     = getVal('f-city');
+    const state    = getVal('f-state');
+    const pin      = getVal('f-pin');
+    const country  = getVal('f-country');
+    const addrType = getVal('f-addr-type');
+    const instruc  = getVal('f-instructions');
+
+    const fullName = fname + ' ' + lname;
+    const fullAddr = [house, street, landmark, city, state, pin, country].filter(Boolean).join(', ');
+    const total    = parseFloat(localStorage.getItem('paymentTotal')) || 0;
+    const payUser  = JSON.parse(localStorage.getItem('currentUser') || 'null');
+
+    // Step 1 — Ask server to create a Razorpay order (gets back an order ID)
+    document.getElementById('pay-loading').classList.add('show');
+    document.getElementById('pay-wrap').style.display = 'none';
+
+    let rzpOrder;
+    try {
+        const resp = await fetch('/api/create-razorpay-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: Math.round(total * 100) })  // paise
+        });
+        rzpOrder = await resp.json();
+    } catch (e) {
+        document.getElementById('pay-loading').classList.remove('show');
+        document.getElementById('pay-wrap').style.display = '';
+        alert('❌ Could not connect to payment server. Please check your internet and try again.');
+        return;
+    }
+
+    if (!rzpOrder || !rzpOrder.success) {
+        document.getElementById('pay-loading').classList.remove('show');
+        document.getElementById('pay-wrap').style.display = '';
+        alert('❌ ' + (rzpOrder?.message || 'Payment setup failed. Please try again.'));
+        return;
+    }
+
+    // Step 2 — Hide loader, open the Razorpay checkout popup
+    document.getElementById('pay-loading').classList.remove('show');
+
+    const orderData = {
+        userId:         payUser ? payUser.id : null,
+        customerName:   fullName,
+        customerEmail:  payUser ? (payUser.email || '') : '',
+        customerPhone:  phone1,
+        address: { house, street, landmark, city, state, postalCode: pin, country, addrType, instructions: instruc, fullAddress: fullAddr },
+        items:          cart,
+        subtotal:       total,
+        total:          total,
+        paymentMethod:  'Razorpay'
+    };
+
+    const options = {
+        key:          rzpOrder.key_id,
+        amount:       rzpOrder.amount,       // paise
+        currency:     rzpOrder.currency,
+        name:         'Kashi Rivaz',
+        description:  'Premium Banarasi Sarees',
+        image:        '/images/kashi rivaz.png',
+        order_id:     rzpOrder.id,
+        theme:        { color: '#8B1538' },
+        prefill: {
+            name:    fullName,
+            contact: phone1,
+            email:   payUser ? (payUser.email || '') : ''
+        },
+        notes: {
+            address: fullAddr,
+            order_items: cart.length + ' item(s)'
+        },
+
+        // ── Called when payment is SUCCESSFUL ──
+        handler: async function (response) {
+            document.getElementById('pay-loading').classList.add('show');
+            document.getElementById('pay-wrap').style.display = 'none';
+
+            try {
+                const verifyResp = await fetch('/api/verify-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        razorpay_order_id:   response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature:  response.razorpay_signature,
+                        orderData
+                    })
+                });
+                const verifyResult = await verifyResp.json();
+
+                document.getElementById('pay-loading').classList.remove('show');
+
+                if (verifyResult && verifyResult.success) {
+                    // Clear cart
+                    cart = [];
+                    if (typeof saveCart === 'function') saveCart();
+                    saveOrderLocally(verifyResult.orderId, fullName, phone1, fullAddr, total, response.razorpay_payment_id);
+                    showConfirmed(verifyResult.orderId, fullName, waNum, phone1, fullAddr, total);
+                } else {
+                    document.getElementById('pay-wrap').style.display = '';
+                    alert('⚠️ Payment received but order verification failed: ' + (verifyResult?.message || 'Unknown error') + '\n\nPlease contact us with Payment ID: ' + response.razorpay_payment_id);
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('pay-loading').classList.remove('show');
+                document.getElementById('pay-wrap').style.display = '';
+                alert('⚠️ Payment was made but we could not confirm your order.\nPlease note your Razorpay Payment ID: ' + response.razorpay_payment_id + '\nContact us at +91 80814 29100');
+            }
+        },
+
+        // ── Called when user closes the popup without paying ──
+        modal: {
+            ondismiss: function () {
+                document.getElementById('pay-wrap').style.display = '';
+                document.getElementById('pay-loading').classList.remove('show');
+            }
+        }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function (response) {
+        document.getElementById('pay-wrap').style.display = '';
+        document.getElementById('pay-loading').classList.remove('show');
+        alert('❌ Payment failed: ' + (response.error?.description || 'Unknown error') + '. Please try again.');
+    });
+    rzp.open();
+}
+
+// ══════════════════════════════════════════
+// SAVE ORDER LOCALLY (offline backup)
+// ══════════════════════════════════════════
+function saveOrderLocally(orderId, name, phone, address, total, utr) {
+    try {
+        const db = JSON.parse(localStorage.getItem('shivanshSareeDB') || '{"customers":[],"orders":[]}');
+        if (!Array.isArray(db.orders)) db.orders = [];
+        // Avoid duplicates
+        if (db.orders.find(o => o.orderId === orderId)) return;
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        db.orders.push({
+            orderId,
+            customerId: currentUser ? currentUser.id : null,
+            customerName: name,
+            customerPhone: phone,
+            total,
+            status: 'pending',
+            paymentMethod: selectedMethod ? selectedMethod.toUpperCase() : 'UPI',
+            transactionId: utr || '',
+            address: { fullAddress: address },
+            shipping: { fullAddress: address, phone },
+            items: (JSON.parse(localStorage.getItem('shoppingCart') || '[]')),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        });
+        localStorage.setItem('shivanshSareeDB', JSON.stringify(db));
+    } catch(e) { console.warn('Could not save order locally', e); }
+}
+
+// ══════════════════════════════════════════
+// SHOW CONFIRMED SCREEN + WHATSAPP LINKS
+// ══════════════════════════════════════════
+function showConfirmed(orderId, name, waNum, phone, address, total) {
+    document.getElementById('pay-wrap').style.display  = 'none';
+    document.getElementById('pay-loading').classList.remove('show');
+
+    const screen = document.getElementById('confirmed-screen');
+    screen.classList.add('show');
+    document.getElementById('conf-order-id').textContent = 'Order ID: ' + orderId;
+
+    // Build order items text for WhatsApp
+    const itemsText = (cart && cart.length ? cart : JSON.parse(localStorage.getItem('shoppingCart')||'[]'))
+        .map(i => `• ${i.name} × ${i.quantity||1} = ₹${(parsePrice(i.price)*(i.quantity||1)).toLocaleString('en-IN')}`)
+        .join('\n');
+
+    const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+    // ── WhatsApp message for CUSTOMER ──
+    const customerMsg = encodeURIComponent(
+`🎉 *Order Confirmed — Kashi Rivaz!*
+
+Hi ${name}, your order has been placed successfully. 🙏
+
+*Order ID:* ${orderId}
+*Date:* ${now} IST
+
+*Items Ordered:*
+${itemsText}
+
+*Total Paid:* ₹${total.toLocaleString('en-IN')}
+*Payment:* ${(selectedMethod||'UPI').toUpperCase()}
+
+*Delivery Address:*
+${address}
+
+Expected delivery: 7–10 days.
+For queries, call/WhatsApp: +91 80814 29100
+
+Thank you for shopping with Kashi Rivaz! 🛍️✨`
+    );
+
+    // ── WhatsApp message for OWNER ──
+    const ownerMsg = encodeURIComponent(
+`🛒 *New Order Received — Kashi Rivaz!*
+
+*Order ID:* ${orderId}
+*Date:* ${now} IST
+
+*Customer:* ${name}
+*Phone:* ${phone}
+*WhatsApp:* +${waNum}
+
+*Items:*
+${itemsText}
+
+*Total:* ₹${total.toLocaleString('en-IN')}
+*Payment:* ${(selectedMethod||'UPI').toUpperCase()}
+
+*Delivery Address:*
+${address}
+
+Please process this order. ✅`
+    );
+
+    // Customer WhatsApp link (send to their own number)
+    const custWaNum = waNum.startsWith('91') ? waNum : '91' + waNum;
+    document.getElementById('wa-user-link').href = `https://wa.me/${custWaNum}?text=${customerMsg}`;
+
+    // Auto-ping owner on WhatsApp (open in background after 500ms)
+    setTimeout(() => {
+        const ownerWin = window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${ownerMsg}`, '_blank');
+        // If blocked, add manual button
+        if (!ownerWin) {
+            const waBox = document.querySelector('.wa-confirm-btns');
+            if (waBox) {
+                const ownerBtn = document.createElement('a');
+                ownerBtn.href = `https://wa.me/${OWNER_WHATSAPP}?text=${ownerMsg}`;
+                ownerBtn.target = '_blank';
+                ownerBtn.className = 'btn-wa outline';
+                ownerBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size:1.1rem;"></i> Notify Owner (WhatsApp)';
+                waBox.appendChild(ownerBtn);
+            }
+        }
+    }, 800);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+    <!-- CMS Bar (Admin Live Editing) -->
+    <script src="js/cms-bar.js"></script>
+</body>
+</html>
