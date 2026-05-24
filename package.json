@@ -1,155 +1,55 @@
 {
-    "name": "@types/node",
-    "version": "25.5.0",
-    "description": "TypeScript definitions for node",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
-    "license": "MIT",
-    "contributors": [
-        {
-            "name": "Microsoft TypeScript",
-            "githubUsername": "Microsoft",
-            "url": "https://github.com/Microsoft"
-        },
-        {
-            "name": "Alberto Schiabel",
-            "githubUsername": "jkomyno",
-            "url": "https://github.com/jkomyno"
-        },
-        {
-            "name": "Andrew Makarov",
-            "githubUsername": "r3nya",
-            "url": "https://github.com/r3nya"
-        },
-        {
-            "name": "Benjamin Toueg",
-            "githubUsername": "btoueg",
-            "url": "https://github.com/btoueg"
-        },
-        {
-            "name": "David Junger",
-            "githubUsername": "touffy",
-            "url": "https://github.com/touffy"
-        },
-        {
-            "name": "Mohsen Azimi",
-            "githubUsername": "mohsen1",
-            "url": "https://github.com/mohsen1"
-        },
-        {
-            "name": "Nikita Galkin",
-            "githubUsername": "galkin",
-            "url": "https://github.com/galkin"
-        },
-        {
-            "name": "Sebastian Silbermann",
-            "githubUsername": "eps1lon",
-            "url": "https://github.com/eps1lon"
-        },
-        {
-            "name": "Wilco Bakker",
-            "githubUsername": "WilcoBakker",
-            "url": "https://github.com/WilcoBakker"
-        },
-        {
-            "name": "Marcin Kopacz",
-            "githubUsername": "chyzwar",
-            "url": "https://github.com/chyzwar"
-        },
-        {
-            "name": "Trivikram Kamat",
-            "githubUsername": "trivikr",
-            "url": "https://github.com/trivikr"
-        },
-        {
-            "name": "Junxiao Shi",
-            "githubUsername": "yoursunny",
-            "url": "https://github.com/yoursunny"
-        },
-        {
-            "name": "Ilia Baryshnikov",
-            "githubUsername": "qwelias",
-            "url": "https://github.com/qwelias"
-        },
-        {
-            "name": "ExE Boss",
-            "githubUsername": "ExE-Boss",
-            "url": "https://github.com/ExE-Boss"
-        },
-        {
-            "name": "Piotr Błażejewicz",
-            "githubUsername": "peterblazejewicz",
-            "url": "https://github.com/peterblazejewicz"
-        },
-        {
-            "name": "Anna Henningsen",
-            "githubUsername": "addaleax",
-            "url": "https://github.com/addaleax"
-        },
-        {
-            "name": "Victor Perin",
-            "githubUsername": "victorperin",
-            "url": "https://github.com/victorperin"
-        },
-        {
-            "name": "NodeJS Contributors",
-            "githubUsername": "NodeJS",
-            "url": "https://github.com/NodeJS"
-        },
-        {
-            "name": "Linus Unnebäck",
-            "githubUsername": "LinusU",
-            "url": "https://github.com/LinusU"
-        },
-        {
-            "name": "wafuwafu13",
-            "githubUsername": "wafuwafu13",
-            "url": "https://github.com/wafuwafu13"
-        },
-        {
-            "name": "Matteo Collina",
-            "githubUsername": "mcollina",
-            "url": "https://github.com/mcollina"
-        },
-        {
-            "name": "Dmitry Semigradsky",
-            "githubUsername": "Semigradsky",
-            "url": "https://github.com/Semigradsky"
-        },
-        {
-            "name": "René",
-            "githubUsername": "Renegade334",
-            "url": "https://github.com/Renegade334"
-        },
-        {
-            "name": "Yagiz Nizipli",
-            "githubUsername": "anonrig",
-            "url": "https://github.com/anonrig"
-        }
-    ],
-    "main": "",
-    "types": "index.d.ts",
-    "typesVersions": {
-        "<=5.6": {
-            "*": [
-                "ts5.6/*"
-            ]
-        },
-        "<=5.7": {
-            "*": [
-                "ts5.7/*"
-            ]
-        }
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
-        "directory": "types/node"
-    },
-    "scripts": {},
-    "dependencies": {
-        "undici-types": "~7.18.0"
-    },
-    "peerDependencies": {},
-    "typesPublisherContentHash": "4b6968335abe1dc64bd6086fd546d6e9c50f986c37d49de8073f4ed1c900057c",
-    "typeScriptVersion": "5.2"
+  "name": "body-parser",
+  "description": "Node.js body parsing middleware",
+  "version": "1.20.4",
+  "contributors": [
+    "Douglas Christopher Wilson <doug@somethingdoug.com>",
+    "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)"
+  ],
+  "license": "MIT",
+  "repository": "expressjs/body-parser",
+  "dependencies": {
+    "bytes": "~3.1.2",
+    "content-type": "~1.0.5",
+    "debug": "2.6.9",
+    "depd": "2.0.0",
+    "destroy": "~1.2.0",
+    "http-errors": "~2.0.1",
+    "iconv-lite": "~0.4.24",
+    "on-finished": "~2.4.1",
+    "qs": "~6.14.0",
+    "raw-body": "~2.5.3",
+    "type-is": "~1.6.18",
+    "unpipe": "~1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.34.0",
+    "eslint-config-standard": "14.1.1",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-markdown": "3.0.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-standard": "4.1.0",
+    "methods": "1.1.2",
+    "mocha": "10.2.0",
+    "nyc": "15.1.0",
+    "safe-buffer": "5.2.1",
+    "supertest": "6.3.3"
+  },
+  "files": [
+    "lib/",
+    "LICENSE",
+    "HISTORY.md",
+    "index.js"
+  ],
+  "engines": {
+    "node": ">= 0.8",
+    "npm": "1.2.8000 || >= 1.4.16"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha --require test/support/env --reporter spec --check-leaks --bail test/",
+    "test-ci": "nyc --reporter=lcov --reporter=text npm test",
+    "test-cov": "nyc --reporter=html --reporter=text npm test"
+  }
 }
