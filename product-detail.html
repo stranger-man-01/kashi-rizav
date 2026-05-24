@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Kashi Rivaz</title>
+    <meta name="description" content="Premium Banarasi sarees handcrafted by skilled artisans from Varanasi, India.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --burgundy: #8B1538;
+            --burgundy-dark: #5a0d24;
+            --gold: #D4AF37;
+            --gold-light: #f4e4b0;
+            --navy: #1a1a2e;
+            --cream: #FFF8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #F9F4EF;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* —— BREADCRUMB —— */
+        .pd-crumb {
+            padding: 0.85rem 5%;
+            font-size: 0.83rem;
+            color: #888;
+            background: white;
+            border-bottom: 1px solid #f0e8e0;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .pd-crumb a {
+            color: var(--burgundy);
+            font-weight: 600;
+        }
+
+        .pd-crumb a:hover {
+            text-decoration: underline;
+        }
+
+        .pd-crumb i {
+            font-size: 0.65rem;
+            color: #bbb;
+        }
+
+        /* —— HERO SPLIT —— */
+        .pd-hero {
+            display: grid;
+            grid-template-columns: 52% 1fr;
+            min-height: calc(100vh - 80px);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* —— LEFT: Image panel —— */
+        .pd-img-panel {
+            position: relative;
+            background: #1a0a10;
+            overflow: hidden;
+        }
+
+        .pd-img-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.88;
+            transition: opacity 0.4s, transform 8s ease;
+            transform: scale(1);
+        }
+
+        .pd-img-panel:hover img {
+            opacity: 0.95;
+            transform: scale(1.04);
+        }
+
+        /* Badge overlay on image */
+        .pd-badge-overlay {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pd-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(10px);
+        }
+
+        .pill-new {
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+        }
+
+        .pill-hot {
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+        }
+
+        .pill-sale {
+            background: rgba(139, 21, 56, 0.9);
+            color: white;
+        }
+
+        .pill-trending {
+            background: rgba(212, 175, 55, 0.92);
+            color: #1a0a10;
+        }
+
+        .pill-craft {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Inspirational text overlaid on image bottom */
+        .pd-img-quote {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem 2rem 2rem;
+            background: linear-gradient(transparent, rgba(26, 10, 16, 0.9));
+            color: white;
+        }
+
+        .pd-img-quote .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-style: italic;
+            color: var(--gold-light);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        .pd-img-quote .sub-tagline {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* —— RIGHT: Info panel —— */
+        .pd-info-panel {
+            background: white;
+            padding: 3rem 2.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 80px);
+        }
+
+        /* Brand */
+        .pd-brand-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .pd-brand-logo {
+            width: 28px;
+            height: 28px;
+            background: var(--burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+        }
+
+        .pd-brand-name {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Product name */
+        .pd-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            color: var(--navy);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        /* Hook line */
+        .pd-hook {
+            font-size: 0.95rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pd-hook::before {
+            content: '—';
+            color: var(--gold);
+        }
+
+        /* Rating */
+        .pd-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .pd-stars .star.filled {
+            color: #f59e0b;
+        }
+
+        .pd-stars .star.half {
+            color: #f59e0b;
+            opacity: 0.5;
+        }
+
+        .pd-stars .star {
+            color: #ddd;
+        }
+
+        .pd-stars {
+            font-size: 1.1rem;
+        }
+
+        .pd-reviews-text {
+            font-size: 0.82rem;
+            color: #888;
+        }
+
+        .pd-stock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.28rem 0.75rem;
+            background: #ecfdf5;
+            color: #065f46;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .pd-limited {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.28rem 0.75rem;
+            background: #fff7ed;
+            color: #c2410c;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Price */
+        .pd-price-block {
+            background: linear-gradient(135deg, #fef2f2, #fff8f0);
+            border: 1px solid #fde8d8;
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .pd-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--burgundy);
+        }
+
+        .pd-price-sub {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .pd-free-ship {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+        }
+
+        .pd-free-ship span:first-child {
+            font-size: 0.75rem;
+            color: #10b981;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .pd-free-ship span:last-child {
+            font-size: 0.7rem;
+            color: #999;
+        }
+
+        /* Description */
+        .pd-desc {
+            font-size: 0.93rem;
+            line-height: 1.9;
+            color: #555;
+        }
+
+        /* Marketing hooks strip */
+        .pd-hooks {
+            background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .pd-hook-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            color: white;
+        }
+
+        .pd-hook-item i {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .pd-hook-item strong {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .pd-hook-item small {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* Specs */
+        .pd-specs {
+            border: 1px solid #f0e8e0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .pd-specs-head {
+            padding: 0.75rem 1.2rem;
+            background: #fdf8f4;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0e8e0;
+        }
+
+        .pd-spec-row {
+            display: flex;
+            padding: 0.65rem 1.2rem;
+            border-bottom: 1px solid #fdf4ef;
+            font-size: 0.875rem;
+        }
+
+        .pd-spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .pd-spec-row .sk {
+            width: 110px;
+            flex-shrink: 0;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .pd-spec-row .sv {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* Qty row */
+        .pd-qty-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .pd-qty {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e8ddd6;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .pd-qty button {
+            width: 40px;
+            height: 44px;
+            background: #fdf8f4;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--burgundy);
+            font-weight: 700;
+            transition: 0.18s;
+        }
+
+        .pd-qty button:hover {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .pd-qty span {
+            width: 46px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--navy);
+        }
+
+        .pd-btn-cart {
+            flex: 1;
+            min-width: 170px;
+            padding: 0.95rem 1.5rem;
+            background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            font-family: inherit;
+            transition: 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pd-btn-cart::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .pd-btn-cart:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .pd-btn-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(139, 21, 56, 0.4);
+        }
+
+        .pd-btn-cart.added {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .pd-btn-wa {
+            padding: 0.95rem 1.2rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            transition: 0.2s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .pd-btn-wa:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Trust strip */
+        .pd-trust {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .pd-trust-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.75rem;
+            background: #fdf8f4;
+            border: 1px solid #f0e8e0;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .pd-trust-chip i {
+            color: var(--burgundy);
+        }
+
+        /* —— FULL WIDTH MARKETING SECTION —— */
+        .pd-marketing {
+            background: linear-gradient(135deg, var(--navy) 0%, #2d1b2e 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .pd-marketing .gold-line {
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0 auto 1.5rem;
+            border-radius: 2px;
+        }
+
+        .pd-marketing h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            margin-bottom: 1rem;
+            line-height: 1.25;
+            /* ensure heading text is bright on dark gradient */
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .pd-marketing h2 em {
+            /* make emphasized portion stand out better against dark background */
+            color: var(--gold-light);
+            font-style: normal;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .pd-marketing .sub {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 620px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+        }
+
+        .pd-marketing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .pd-mcard {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.75rem 1.25rem;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .pd-mcard:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .pd-mcard i {
+            font-size: 2rem;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .pd-mcard strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+            color: white;
+        }
+
+        .pd-mcard p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.6;
+        }
+
+        /* —— RELATED —— */
+        .pd-related {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3.5rem 5%;
+        }
+
+        .pd-related-head {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .pd-related-head h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+
+        .pd-related-head::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .pd-rel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pd-rel-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .pd-rel-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .pd-rel-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .pd-rel-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .pd-rel-info {
+            padding: 0.9rem 1rem;
+        }
+
+        .pd-rel-info h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--navy);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.3rem;
+        }
+
+        .pd-rel-info span {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--burgundy);
+        }
+
+        /* Not found */
+        .pd-not-found {
+            text-align: center;
+            padding: 8rem 2rem;
+            color: #aaa;
+        }
+
+        .pd-not-found i {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .pd-not-found h2 {
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .pd-hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .pd-img-panel {
+                height: auto !important;
+                min-height: 50vw;
+            }
+
+            /* Show full portrait image on mobile — no cropping */
+            .pd-img-panel>img:first-of-type {
+                width: 100%;
+                height: auto !important;
+                max-height: none !important;
+                object-fit: contain !important;
+                background: #1a0a10;
+                opacity: 1;
+                cursor: zoom-in;
+                display: block;
+            }
+
+            .pd-img-panel.has-video>img:first-of-type {
+                height: auto !important;
+                min-height: unset !important;
+                max-height: none !important;
+                aspect-ratio: 3/4;
+                object-fit: cover !important;
+            }
+
+            .pd-info-panel {
+                max-height: none;
+                overflow: visible;
+                padding: 2rem 1.5rem;
+            }
+
+            .pd-hooks {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* —— TAP-TO-EXPAND HINT (mobile only) —— */
+        .pd-tap-hint {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .pd-tab-hint {
+                display: block;
+            }
+
+            .pd-tap-hint {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                position: absolute;
+                bottom: 0.8rem;
+                right: 0.8rem;
+                background: rgba(0, 0, 0, 0.55);
+                color: white;
+                font-size: 0.7rem;
+                padding: 0.3rem 0.7rem;
+                border-radius: 999px;
+                backdrop-filter: blur(6px);
+                pointer-events: none;
+                z-index: 5;
+            }
+        }
+
+        /* —— FULLSCREEN LIGHTBOX —— */
+        .pd-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.97);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            touch-action: manipulation;
+            animation: lbFadeIn 0.25s ease;
+        }
+
+        .pd-lightbox.open {
+            display: flex;
+        }
+
+        @keyframes lbFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .pd-lightbox img {
+            max-width: 100vw;
+            max-height: 92vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            user-select: none;
+            animation: lbZoomIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes lbZoomIn {
+            from {
+                transform: scale(0.88);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .pd-lightbox-close {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+            backdrop-filter: blur(8px);
+            transition: 0.2s;
+        }
+
+        .pd-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .pd-lightbox-label {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .pd-qty-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .pd-btn-cart {
+                min-width: unset;
+            }
+
+            .pd-free-ship {
+                align-items: flex-start;
+            }
+        }
+
+        /* —— IMAGE + VIDEO STACKED PANEL —— */
+        .pd-img-panel.has-video {
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pd-img-panel.has-video img {
+            width: 100%;
+            height: 55%;
+            min-height: 320px;
+            flex-shrink: 0;
+            object-fit: cover;
+            opacity: 0.88;
+            transition: opacity 0.4s;
+        }
+
+        .pd-img-panel.has-video:hover img {
+            opacity: 0.95;
+        }
+
+        .pd-video-section {
+            flex-shrink: 0;
+            position: relative;
+            background: #0c0007;
+        }
+
+        .pd-video-label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.92);
+            color: #1a0a10;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+
+        .pd-video-section video {
+            width: 100%;
+            display: block;
+            max-height: 360px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 900px) {
+            .pd-img-panel.has-video img {
+                height: 55vw;
+                min-height: 220px;
+            }
+
+            .pd-img-panel.has-video {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <section id="header">
+        <a href="index.html"><img src="images/kashi rivaz.png" class="logo" alt="Kashi Rivaz Logo"
+                style="height:60px;width:auto;"></a>
+        <nav>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a class="cart-icon" href="cart.html" aria-label="View cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
+                <li id="user-menu" style="position:relative;">
+                    <a id="user-link" href="auth.html" class="user-nav-link">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="user-name-text">Login</span>
+                    </a>
+                    <div id="user-dropdown" class="user-dropdown" style="display:none;">
+                        <a href="customer-profile.html"><i class="fas fa-id-card"></i> My Profile</a>
+                        <a href="#" onclick="handleLogout(); return false;"><i class="fas fa-sign-out-alt"></i>
+                            Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <button id="menu-btn" class="menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="pd-crumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="shop.html">Shop</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="pd-crumb-name" style="color:#333;">Product</span>
+    </div>
+
+    <!-- —— MAIN CONTENT (JS renders here) —— -->
+    <div id="pd-main"></div>
+
+    <!-- WhatsApp float -->
+    <a href="https://wa.me/918081429100" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="pd-lightbox" id="pd-lightbox" onclick="closeLightbox(event)">
+        <button class="pd-lightbox-close" onclick="closeLightbox()" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="" id="pd-lightbox-img" alt="Product Image">
+        <div class="pd-lightbox-label">Tap anywhere to close</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/userData.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        // — Lightbox functions —
+        function openLightbox(src, alt) {
+            const lb = document.getElementById('pd-lightbox');
+            const img = document.getElementById('pd-lightbox-img');
+            img.src = src;
+            img.alt = alt || 'Product Image';
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            // Swipe down to close
+            let startY = 0;
+            lb.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true, once: true });
+            lb.addEventListener('touchend', e => {
+                if (e.changedTouches[0].clientY - startY > 80) closeLightbox();
+            }, { passive: true, once: true });
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target !== e.currentTarget && !e.target.classList.contains('pd-lightbox-close') && !e.target.closest('.pd-lightbox-close')) return;
+            const lb = document.getElementById('pd-lightbox');
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ESC key to close
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        let qty = 1;
+
+        // — Marketing hook lines per category —
+        const HOOKS = {
+            silk: [
+                "Woven by hand. Worn with pride. Stories in every thread.",
+                "The finest Banarasi silk — a tradition that outlasts time.",
+                "Where ancient looms meet modern elegance."
+            ],
+            georgette: [
+                "Floats like a dream. Turns heads like a statement.",
+                "Modern grace with a hint of festive magic.",
+                "The saree that moves with you — and stops the room."
+            ],
+            cotton: [
+                "Breathe easy. Look effortlessly beautiful.",
+                "Handloom heritage, everyday comfort.",
+                "Crafted for the woman who values both style and ease."
+            ]
+        };
+
+        function getHook(category) {
+            const arr = HOOKS[category] || HOOKS.silk;
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function getProductId() {
+            return parseInt(new URLSearchParams(window.location.search).get('id'));
+        }
+
+        function generateStars(r) {
+            let s = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(r)) s += '<span class="star filled">—</span>';
+                else if (i === Math.ceil(r) && r % 1 !== 0) s += '<span class="star half">—</span>';
+                else s += '<span class="star">—</span>';
+            }
+            return s;
+        }
+
+        function changeQty(d) {
+            qty = Math.max(1, qty + d);
+            document.getElementById('pd-qty-val').textContent = qty;
+        }
+
+        function pdAddToCart() {
+            const id = getProductId();
+            const p = (window.productCatalog || []).find(x => x.id === id);
+            if (!p) return;
+            const btn = document.getElementById('pd-add-btn');
+            for (let i = 0; i < qty; i++) addToCart(p.id, p.name, p.price, p.image, i === qty - 1 ? btn : null);
+            btn.classList.add('added');
+            btn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+            }, 2200);
+        }
+
+        function render() {
+            const id = getProductId();
+            const p = (window.productCatalog || []).find(x => x.id === id);
+
+            if (!p) {
+                document.getElementById('pd-main').innerHTML = `
+            <div class="pd-not-found">
+                <i class="fas fa-search-minus"></i>
+                <h2>Product Not Found</h2>
+                <p style="margin-bottom:1.5rem">We couldn't find the saree you're looking for.</p>
+                <a href="shop.html" style="display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;background:linear-gradient(135deg,#8B1538,#5a0d24);color:white;border-radius:10px;font-weight:700;text-decoration:none">
+                    <i class="fas fa-arrow-left"></i> Back to Shop
+                </a>
+            </div>`;
+                return;
+            }
+
+            document.title = p.name + ' — Kashi Rivaz';
+            document.getElementById('pd-crumb-name').textContent = p.name;
+
+            const waMsg = encodeURIComponent(
+                `Namaste! I'm interested in the "${p.name}" (₹${p.price.toLocaleString('en-IN')}). Please share availability.`
+            );
+
+            const pillHtml = p.badge
+                ? `<span class="pd-badge-pill pill-${p.badge.toLowerCase()}"><i class="fas fa-tag"></i> ${p.badge}</span>`
+                : '';
+
+            document.getElementById('pd-main').innerHTML = `
+
+        <!-- —— HERO SPLIT —— -->
+        <div class="pd-hero">
+
+            <!-- LEFT: Image (+ optional Video) -->
+            <div class="pd-img-panel${p.video ? ' has-video' : ''}">
+                <img src="${p.image}" alt="${p.name}" onclick="openLightbox('${p.image}','${p.name}')" style="cursor:zoom-in;">
+                <div class="pd-badge-overlay">
+                    ${pillHtml}
+                    <span class="pd-badge-pill pill-craft"><i class="fas fa-hand-sparkles"></i> — Handcrafted in Varanasi</span>
+                </div>
+                <span class="pd-tap-hint"><i class="fas fa-expand-alt" style="font-size:0.65rem"></i> Tap to expand</span>
+                ${!p.video ? `<div class="pd-img-quote">
+                    <div class="tagline">"${getHook(p.category)}"</div>
+                    <div class="sub-tagline">— Kashi Rivaz, Varanasi since 2005</div>
+                </div>` : ''}
+                ${p.video ? `
+                <div class="pd-video-section">
+                    <div class="pd-video-label"><i class="fas fa-film"></i> Brand Video</div>
+                    <video
+                        src="${p.video}"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        controls
+                        poster="${p.image}"
+                    ></video>
+                </div>` : ''}
+            </div>
+
+            <!-- RIGHT: Info -->
+            <div class="pd-info-panel">
+
+                <div class="pd-brand-row">
+                    <div class="pd-brand-logo"><i class="fas fa-feather-alt"></i></div>
+                    <span class="pd-brand-name">${p.brand}</span>
+                </div>
+
+                <h1 class="pd-name">${p.name}</h1>
+
+                <div class="pd-hook">One of India's most celebrated Banarasi weaves</div>
+
+                <div class="pd-rating-row">
+                    <div class="pd-stars">${generateStars(p.rating)}</div>
+                    <span class="pd-reviews-text">${p.rating} — ${p.reviews} verified reviews</span>
+                    <span class="pd-stock-badge"><i class="fas fa-check-circle"></i> In Stock</span>
+                    <span class="pd-limited"><i class="fas fa-fire"></i> High Demand</span>
+                </div>
+
+                <div class="pd-price-block">
+                    <div>
+                        <div class="pd-price">₹${p.price.toLocaleString('en-IN')}</div>
+                        <div class="pd-price-sub">Inclusive of all taxes</div>
+                    </div>
+                    <div class="pd-free-ship">
+                        <span><i class="fas fa-truck"></i> Free Delivery</span>
+                        <span>Ships within 2—4 days</span>
+                    </div>
+                </div>
+
+                <p class="pd-desc">${p.description}</p>
+
+                <!-- Marketing hooks strip -->
+                <div class="pd-hooks">
+                    <div class="pd-hook-item">
+                        <i class="fas fa-gem"></i>
+                        <div>
+                            <strong>Heirloom Quality</strong>
+                            <small>Built to be passed down generations</small>
+                        </div>
+                    </div>
+                    <div class="pd-hook-item">
+                        <i class="fas fa-hands"></i>
+                        <div>
+                            <strong>Handwoven Artistry</strong>
+                            <small>Crafted by master weavers of Varanasi</small>
+                        </div>
+                    </div>
+                    <div class="pd-hook-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <strong>Premium Certified</strong>
+                            <small>100% authentic fabric guarantee</small>
+                        </div>
+                    </div>
+                    <div class="pd-hook-item">
+                        <i class="fas fa-undo"></i>
+                        <div>
+                            <strong>Easy Returns</strong>
+                            <small>7-day hassle-free return policy</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specs -->
+                <div class="pd-specs">
+                    <div class="pd-specs-head">Product Details</div>
+                    <div class="pd-spec-row"><span class="sk">Colour</span>   <span class="sv">${p.colour || '—'}</span></div>
+                    <div class="pd-spec-row"><span class="sk">Material</span> <span class="sv">${p.material || '—'}</span></div>
+                    <div class="pd-spec-row"><span class="sk">Occasion</span> <span class="sv">${p.occasion || '—'}</span></div>
+                    <div class="pd-spec-row"><span class="sk">Care</span>     <span class="sv">${p.care || '—'}</span></div>
+                    <div class="pd-spec-row"><span class="sk">Origin</span>   <span class="sv">Varanasi, Uttar Pradesh</span></div>
+                </div>
+
+                <!-- Qty + CTA -->
+                <div class="pd-qty-row">
+                    <div class="pd-qty">
+                        <button onclick="changeQty(-1)">—</button>
+                        <span id="pd-qty-val">1</span>
+                        <button onclick="changeQty(1)">+</button>
+                    </div>
+                    <button class="pd-btn-cart" id="pd-add-btn" onclick="pdAddToCart()">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <a class="pd-btn-wa" href="https://wa.me/918081429100?text=${waMsg}" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Enquire
+                    </a>
+                </div>
+
+                <!-- Trust chips -->
+                <div class="pd-trust">
+                    <span class="pd-trust-chip"><i class="fas fa-shield-alt"></i> 100% Authentic</span>
+                    <span class="pd-trust-chip"><i class="fas fa-lock"></i> Secure Payment</span>
+                    <span class="pd-trust-chip"><i class="fas fa-certificate"></i> Quality Certified</span>
+                    <span class="pd-trust-chip"><i class="fas fa-headset"></i> 24/7 Support</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- —— MARKETING STRIP —— -->
+        <div class="pd-marketing">
+            <div class="gold-line"></div>
+            <h2>
+                More than a saree —<br>
+                it's a piece of <em>living heritage</em>
+            </h2>
+            <p class="sub">
+                Every Kashi Rivaz is woven on a traditional handloom in the ancient lanes of Varanasi.
+                Behind every thread is a weaver's lifetime of skill, a family's legacy, and India's 
+                greatest textile tradition kept alive.
+            </p>
+            <div class="pd-marketing-cards">
+                <div class="pd-mcard">
+                    <i class="fas fa-award"></i>
+                    <strong>500+ Years of Craft</strong>
+                    <p>Banarasi weaving is a UNESCO-recognised intangible cultural heritage of humanity.</p>
+                </div>
+                <div class="pd-mcard">
+                    <i class="fas fa-users"></i>
+                    <strong>10,000+ Happy Customers</strong>
+                    <p>From brides to grandmothers — our sarees have graced every occasion with grace.</p>
+                </div>
+                <div class="pd-mcard">
+                    <i class="fas fa-seedling"></i>
+                    <strong>Ethically Made</strong>
+                    <p>We pay our weavers fairly and support sustainable loom practices in Varanasi.</p>
+                </div>
+                <div class="pd-mcard">
+                    <i class="fas fa-gift"></i>
+                    <strong>Gift-Ready Packaging</strong>
+                    <p>Every saree ships in premium packaging — perfect as a gift for any occasion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- —— RELATED —— -->
+        <div class="pd-related">
+            <div class="pd-related-head">
+                <h2><i class="fas fa-heart" style="font-size:1.1rem;color:var(--burgundy)"></i> &nbsp;You May Also Love</h2>
+            </div>
+            <div class="pd-rel-grid" id="pd-rel-grid"></div>
+        </div>
+
+    `;
+
+            // Related products
+            const related = (window.productCatalog || [])
+                .filter(x => x.id !== p.id && x.category === p.category)
+                .slice(0, 4);
+
+            const relGrid = document.getElementById('pd-rel-grid');
+            if (relGrid) {
+                relGrid.innerHTML = related.length
+                    ? related.map(r => `
+                <a href="product-detail.html?id=${r.id}" class="pd-rel-card">
+                    <img src="${r.image}" alt="${r.name}" loading="lazy">
+                    <div class="pd-rel-info">
+                        <h4>${r.name}</h4>
+                        <span>₹${r.price.toLocaleString('en-IN')}</span>
+                    </div>
+                </a>`).join('')
+                    : '<p style="color:#aaa;grid-column:1/-1">No related products found.</p>';
+            }
+        }
+
+        render();
+    </script>
+
+    <!-- —— MOBILE BOTTOM NAV —— -->
+    <style>
+        .pd-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e8e8e8;
+            z-index: 9000;
+            padding: 0.4rem 0;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .pd-bottom-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+
+        .pd-bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            font-size: 0.65rem;
+            color: #666;
+            text-decoration: none;
+            padding: 0.3rem 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .pd-bottom-nav a:hover {
+            color: #8B1538;
+        }
+
+        .pd-bottom-nav a i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .pd-bottom-nav {
+                display: block;
+            }
+
+            /* Give bottom padding so content doesn't hide behind the nav */
+            .pd-related {
+                padding-bottom: 6rem !important;
+            }
+        }
+    </style>
+    <nav class="pd-bottom-nav">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-th-large"></i> Shop</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li><a href="auth.html"><i class="fas fa-user"></i> Account</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- CMS Bar (Admin Live Editing) -->
+    <script src="js/cms-bar.js"></script>
+</body>
+
+</html>

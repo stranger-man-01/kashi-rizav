@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - Kashi Rivaz</title>
+    <meta name="description"
+        content="Login or register to your Kashi Rivaz account to track orders and manage your profile.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="auth-page">
+        <!-- Left branding panel -->
+        <div class="auth-brand-panel">
+            <a href="index.html" class="auth-logo">
+                <img src="images/kashi rivaz.png" alt="Kashi Rivaz">
+            </a>
+            <div class="auth-brand-content">
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your orders, wishlist, and exclusive member offers.</p>
+                <ul class="auth-perks">
+                    <li><i class="fas fa-check-circle"></i> Track your orders in real-time</li>
+                    <li><i class="fas fa-check-circle"></i> Save your favourite sarees</li>
+                    <li><i class="fas fa-check-circle"></i> Exclusive member discounts</li>
+                    <li><i class="fas fa-check-circle"></i> Priority customer support</li>
+                </ul>
+            </div>
+            <a href="index.html" class="auth-back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="auth-form-panel">
+            <div class="auth-box">
+
+                <!-- Tab Switchers -->
+                <div class="auth-tabs">
+                    <button id="tab-login" class="auth-tab active" onclick="showTab('login')">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button id="tab-register" class="auth-tab" onclick="showTab('register')">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </div>
+
+                <!-- ===== LOGIN FORM ===== -->
+                <div id="login-form">
+                    <div id="login-error" class="auth-alert auth-alert-error hidden"></div>
+                    <div id="login-success" class="auth-alert auth-alert-success hidden"></div>
+                    <form onsubmit="handleLogin(event)" novalidate>
+
+                        <div class="form-group">
+                            <label for="login-email">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input type="email" id="login-email" placeholder="your@email.com" required
+                                autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <div class="password-wrap">
+                                <input type="password" id="login-password" placeholder="Your password" required
+                                    autocomplete="current-password">
+                                <button type="button" class="toggle-pass"
+                                    onclick="togglePassword('login-password', this)"
+                                    aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ===== REGISTER FORM ===== -->
+                <div id="register-form" class="hidden">
+                    <div id="register-error" class="auth-alert auth-alert-error hidden"></div>
+                    <div id="register-success" class="auth-alert auth-alert-success hidden"></div>
+                    <form onsubmit="handleRegister(event)" novalidate>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-fname">
+                                    <i class="fas fa-user"></i> First Name
+                                </label>
+                                <input type="text" id="reg-fname" placeholder="First name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-lname">Last Name</label>
+                                <input type="text" id="reg-lname" placeholder="Last name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input type="email" id="reg-email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-password">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <div class="password-wrap">
+                                <input type="password" id="reg-password" placeholder="Min. 6 characters" required
+                                    minlength="6">
+                                <button type="button" class="toggle-pass" onclick="togglePassword('reg-password', this)"
+                                    aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-phone">
+                                <i class="fas fa-phone"></i> Phone Number
+                            </label>
+                            <input type="tel" id="reg-phone" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-address">
+                                <i class="fas fa-map-marker-alt"></i> Delivery Address
+                            </label>
+                            <input type="text" id="reg-address" placeholder="Full address" required>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                </div>
+
+            </div><!-- /.auth-box -->
+        </div><!-- /.auth-form-panel -->
+    </div><!-- /.auth-page -->
+
+    <script src="js/userData.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        function showTab(tab) {
+            document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+            document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+            document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+        }
+
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function showAuthAlert(id, message, shake = false) {
+            const el = document.getElementById(id);
+            el.textContent = message;
+            el.classList.remove('hidden');
+            if (shake) {
+                el.closest('form')?.classList.add('shake');
+                setTimeout(() => el.closest('form')?.classList.remove('shake'), 600);
+            }
+        }
+
+        function hideAuthAlert(id) {
+            document.getElementById(id)?.classList.add('hidden');
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            hideAuthAlert('login-error');
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            const btn = event.target.querySelector('.submit-btn') || event.submitter;
+            if (btn) { btn.disabled = true; btn.textContent = 'Logging in...'; }
+
+            const result = await apiLogin(email, password);
+
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login'; }
+
+            if (result && result.success) {
+                // Store user (server returns .user, localStorage fallback returns .customer)
+                const user = result.user || result.customer;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                document.getElementById('login-success').textContent = 'Login successful! Redirecting———';
+                document.getElementById('login-success').classList.remove('hidden');
+                setTimeout(() => window.location.href = 'index.html', 1200);
+            } else {
+                showAuthAlert('login-error', (result && result.message) || 'Login failed. Please try again.', true);
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            hideAuthAlert('register-error');
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const firstName = document.getElementById('reg-fname').value.trim();
+            const lastName = document.getElementById('reg-lname').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const address = document.getElementById('reg-address').value.trim();
+
+            if (password.length < 6) {
+                showAuthAlert('register-error', 'Password must be at least 6 characters.', true);
+                return;
+            }
+
+            const btn = event.target.querySelector('.submit-btn') || event.submitter;
+            if (btn) { btn.disabled = true; btn.textContent = 'Creating account...'; }
+
+            const result = await apiRegister(firstName, lastName, email, phone, password, address);
+
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account'; }
+
+            if (result && result.success) {
+                // Get user object from registration result.
+                // Server returns result.user, localStorage fallback returns result.customer.
+                let user = result.user || result.customer || null;
+
+                // If no user object in result (e.g. server only returned success+id),
+                // do a fresh login to get the full user object.
+                if (!user) {
+                    const loginResult = await apiLogin(email, password);
+                    user = (loginResult && (loginResult.user || loginResult.customer)) || null;
+                }
+
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+
+                document.getElementById('register-success').textContent = 'Account created! Redirecting\u2015\u2015\u2015';
+                document.getElementById('register-success').classList.remove('hidden');
+                setTimeout(() => window.location.href = 'index.html', 1200);
+            } else {
+                showAuthAlert('register-error', (result && result.message) || 'Registration failed.', true);
+            }
+        }
+    </script>
+
+    <!-- CMS Bar (Admin Live Editing) -->
+    <script src="js/cms-bar.js"></script>
+</body>
+
+</html>

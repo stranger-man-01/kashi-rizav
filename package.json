@@ -1,0 +1,19 @@
+{
+  "name": "shivansh-saree-server",
+  "version": "1.0.0",
+  "description": "Backend server for Kashi Rivaz e-commerce website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "db:setup": "mysql -u root -p < setup-db.sql"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "mysql2": "^3.9.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "nodemailer": "^6.9.13"
+  }
+}
