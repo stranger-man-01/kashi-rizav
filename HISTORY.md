@@ -1,87 +1,56 @@
-2.0.2 / 2025-06-06
+1.2.1 / 2019-05-10
 ==================
 
-  * Migrate to `String.prototype.slice()`
+  * Improve error when `str` is not a string
 
-2.0.1 / 2021-01-03
+1.2.0 / 2016-06-01
 ==================
 
-  * Fix returning values from `Object.prototype`
+  * Add `combine` option to combine overlapping ranges
 
-2.0.0 / 2020-04-19
+1.1.0 / 2016-05-13
 ==================
 
-  * Drop support for Node.js 0.6
-  * Fix messaging casing of `418 I'm a Teapot`
-  * Remove code 306
-  * Remove `status[code]` exports; use `status.message[code]`
-  * Remove `status[msg]` exports; use `status.code[msg]`
-  * Rename `425 Unordered Collection` to standard `425 Too Early`
-  * Rename `STATUS_CODES` export to `message`
-  * Return status message for `statuses(code)` when given code
+  * Fix incorrectly returning -1 when there is at least one valid range
+  * perf: remove internal function
 
-1.5.0 / 2018-03-27
+1.0.3 / 2015-10-29
 ==================
 
-  * Add `103 Early Hints`
-
-1.4.0 / 2017-10-20
-==================
-
-  * Add `STATUS_CODES` export
-
-1.3.1 / 2016-11-11
-==================
-
-  * Fix return type in JSDoc
-
-1.3.0 / 2016-05-17
-==================
-
-  * Add `421 Misdirected Request`
   * perf: enable strict mode
 
-1.2.1 / 2015-02-01
+1.0.2 / 2014-09-08
 ==================
 
-  * Fix message for status 451
-    - `451 Unavailable For Legal Reasons`
+  * Support Node.js 0.6
 
-1.2.0 / 2014-09-28
+1.0.1 / 2014-09-07
 ==================
 
-  * Add `208 Already Repored`
-  * Add `226 IM Used`
-  * Add `306 (Unused)`
-  * Add `415 Unable For Legal Reasons`
-  * Add `508 Loop Detected`
+  * Move repository to jshttp
 
-1.1.1 / 2014-09-24
+1.0.0 / 2013-12-11
 ==================
 
-  * Add missing 308 to `codes.json`
+  * Add repository to package.json
+  * Add MIT license
 
-1.1.0 / 2014-09-21
+0.0.4 / 2012-06-17
 ==================
 
-  * Add `codes.json` for universal support
+  * Change ret -1 for unsatisfiable and -2 when invalid
 
-1.0.4 / 2014-08-20
+0.0.3 / 2012-06-17
 ==================
 
-  * Package cleanup
+  * Fix last-byte-pos default to len - 1
 
-1.0.3 / 2014-06-08
+0.0.2 / 2012-06-14
 ==================
 
-  * Add 308 to `.redirect` category
+  * Add `.type`
 
-1.0.2 / 2014-03-13
-==================
-
-  * Add `.retry` category
-
-1.0.1 / 2014-03-12
+0.0.1 / 2012-06-11
 ==================
 
   * Initial release
