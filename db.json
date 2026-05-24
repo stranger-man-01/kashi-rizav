@@ -1,0 +1,18 @@
+{
+    "customers": [
+        {
+            "id": 1,
+            "firstName": "Sample",
+            "lastName": "User",
+            "email": "demo@shivansh.com",
+            "phone": "9000000000",
+            "password": "demo1234",
+            "cart": [],
+            "orders": [],
+            "totalOrders": 0,
+            "totalSpent": 0,
+            "createdAt": "2026-02-19T00:00:00.000Z"
+        }
+    ],
+    "orders": []
+}
